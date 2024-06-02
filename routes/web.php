@@ -1,7 +1,13 @@
 <?php
 
+use App\Http\Controllers\AromaController;
+use App\Http\Controllers\CondicionVentaController;
+use App\Http\Controllers\MarcaController;
+use App\Http\Controllers\MetodoPagoController;
+use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\ProveedorController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductController;
+//use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +20,16 @@ use App\Http\Controllers\ProductController;
 |
 */
 
+//Route::Post('create-user', UserController::Class); //Ruta externa a middleware auth
+
 Route::get('/', function () {
     return view('welcome');
 });
-Route::resource('products', ProductController::class);
+
+//Ingresar estas rutas al middleware auth
+Route::resource('productos', ProductoController::class);
+Route::resource('aromas', AromaController::class);
+Route::resource('marcas', MarcaController::class);
+Route::resource('proveedores', ProveedorController::class)->parameters(['proveedores' => 'proveedor']); //////?????????ruta bug que requiere ser redeclarada por las convenciones.
+Route::resource('metodos-de-pagos', MetodoPagoController::class);
+Route::resource('condiciones-de-ventas', CondicionVentaController::class);
