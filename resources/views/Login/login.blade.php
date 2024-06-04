@@ -36,7 +36,7 @@
             </div>
             <a href="" class="d-flex justify-content-end text-secondary">Olvidaste la contraseña?</a>
         </div>
-       <span></span>
+
     </form>
       </div>
     </div>
