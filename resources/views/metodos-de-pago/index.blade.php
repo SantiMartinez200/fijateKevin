@@ -25,6 +25,7 @@
             </tr>
           </thead>
           <tbody>
+            
             @forelse ($metodo_pagos as $metodo)
         <tr>
           <td>{{ $metodo->nombre }}</td>
@@ -49,10 +50,10 @@
           </form>
           </td>
         </tr>
-      @empty
+        @empty
     <td colspan="6">
       <span class="text-danger">
-      <strong>No Product Found!</strong>
+      <strong>No hay métodos de pago!</strong>
       </span>
     </td>
   @endforelse

@@ -32,29 +32,29 @@ class MetodoPagoController extends Controller
   /**
    * Display the specified resource.
    */
-  public function show(MetodoPago $metodo): View
+  public function show(MetodoPago $metodo_pago): View
   {
     return view('metodos-de-pago.show', [
-      'metodo' => $metodo
+      'metodo' => $metodo_pago
     ]);
   }
 
   /**
    * Show the form for editing the specified resource.
    */
-  public function edit(MetodoPago $metodo): View
+  public function edit(MetodoPago $metodo_pago): View
   {
     return view('metodos-de-pago.edit', [
-      'metodo' => $metodo
+      'metodo' => $metodo_pago
     ]);
   }
 
   /**
    * Update the specified resource in storage.
    */
-  public function update(UpdateMetodoPagoRequest $request, MetodoPago $metodo): RedirectResponse
+  public function update(UpdateMetodoPagoRequest $request, MetodoPago $metodo_pago): RedirectResponse
   {
-    $metodo->update($request->all());
+    $metodo_pago->update($request->all());
     return redirect()->back()
       ->withSuccess('Has modificado un método de pago correctamente.');
   }
@@ -62,9 +62,9 @@ class MetodoPagoController extends Controller
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(MetodoPago $metodo): RedirectResponse
+  public function destroy(MetodoPago $metodo_pago): RedirectResponse
   {
-    $metodo->delete();
+    $metodo_pago->delete();
     return redirect()->route('metodo_pagos.index')
       ->with('warning', 'Has eliminado el método de pago.');
   }

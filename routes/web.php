@@ -31,5 +31,5 @@ Route::resource('productos', ProductoController::class);
 Route::resource('aromas', AromaController::class);
 Route::resource('marcas', MarcaController::class);
 Route::resource('proveedores', ProveedorController::class)->parameters(['proveedores' => 'proveedor']); //////?????????ruta bug que requiere ser redeclarada por las convenciones.
-Route::resource('metodo_pagos', MetodoPagoController::class);
+Route::resource('metodo_pagos', MetodoPagoController::class)->parameters(['metodo_pagos' =>'metodo_pago']);
 Route::resource('condiciones-de-ventas', CondicionVentaController::class);
