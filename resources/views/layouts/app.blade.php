@@ -73,7 +73,7 @@
               <a href="{{route('aromas.index')}}">Aromas</a>
             </li>
             <li>
-              <a href="{{route('metodos-de-pago.index')}}">Métodos de Pago</a>
+              <a href="{{route('metodo_pagos.index')}}">Métodos de Pago</a>
             </li>
             <li>
               <a href="{{route('condiciones-de-ventas.index')}}">Formas de Venta</a>

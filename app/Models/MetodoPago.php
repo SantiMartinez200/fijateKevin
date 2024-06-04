@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class MetodoPago extends Model
 {
+  protected $table = 'metodo_pagos';
+  protected $fillable = [
+    'nombre'
+  ];
     use HasFactory;
   public function metodoPagoEnVenta(): HasMany
   {
