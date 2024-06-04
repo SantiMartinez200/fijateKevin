@@ -18,6 +18,7 @@
   <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
     integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
     crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -25,47 +26,70 @@
     <!-- Sidebar  -->
     <nav id="sidebar">
       <div class="sidebar-header">
-        <h3>Bootstrap Sidebar</h3>
+        <h3>Sistema TribalEssence</h3>
       </div>
 
       <ul class="list-unstyled components">
-        <p>Dummy Heading</p>
+        <p>((Incluir usuario logueado aquí))</p>
         <li class="active">
-          <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+          <a href="#cajaSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Caja</a>
+          <ul class="collapse list-unstyled" id="cajaSubmenu">
+            <li>
+              <a href="#">Operar</a>
+            </li>
+            <li>
+              <a href="#">Registros de caja</a>
+            </li>
+          </ul>
+        </li>
+        <li></li>
+        <li class="active">
+          <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Panel General</a>
           <ul class="collapse list-unstyled" id="homeSubmenu">
             <li>
-              <a href="#">Home 1</a>
+              <a href="#">Datos</a>
             </li>
             <li>
-              <a href="#">Home 2</a>
+              <a href="#">Ingresar Mercaderías</a>
             </li>
             <li>
-              <a href="#">Home 3</a>
+              <a href="#">Vender Mercaderías</a>
             </li>
           </ul>
         </li>
         <li>
-          <a href="#">About</a>
-        </li>
-        <li>
-          <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+          <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Registros</a>
           <ul class="collapse list-unstyled" id="pageSubmenu">
             <li>
-              <a href="#">Page 1</a>
+              <a href="{{route('proveedores.index')}}">Proveedores</a>
             </li>
             <li>
-              <a href="#">Page 2</a>
+              <a href="{{route('marcas.index')}}">Marcas</a>
             </li>
             <li>
-              <a href="#">Page 3</a>
+              <a href="{{route('productos.index')}}">Productos</a>
+            </li>
+            <li>
+              <a href="{{route('aromas.index')}}">Aromas</a>
+            </li>
+            <li>
+              <a href="{{route('metodos-de-pago.index')}}">Métodos de Pago</a>
+            </li>
+            <li>
+              <a href="{{route('condiciones-de-ventas.index')}}">Formas de Venta</a>
             </li>
           </ul>
         </li>
         <li>
-          <a href="#">Portfolio</a>
-        </li>
-        <li>
-          <a href="#">Contact</a>
+          <a href="#sesionSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Sesión</a>
+          <ul class="collapse list-unstyled" id="sesionSubmenu">
+            <li>
+              <a href="#">Cerrar Sesión</a>
+            </li>
+            <li>
+              <a href="#">Cambiar de usuario</a>
+            </li>
+          </ul>
         </li>
       </ul>
     </nav>
@@ -78,7 +102,7 @@
 
           <button type="button" id="sidebarCollapse" class="btn btn-info">
             <i class="fas fa-align-left"></i>
-            <span>Toggle Sidebar</span>
+            <span>Barra Lateral</span>
           </button>
           <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"

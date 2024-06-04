@@ -1,16 +1,15 @@
 @extends('layouts.app')
-
 @section('content')
 
 <div class="row justify-content-center mt-3">
   <div class="col-md-8">
 
     <div class="card">
-      <div class="card-header">
+      <div class="card-header d-grid">
         <div class="float-start">
           Agregar Proveedor
         </div>
-        <div class="float-end">
+        <div class="d-flex justify-content-end">
           <a href="{{ route('proveedores.index') }}" class="btn btn-primary btn-sm">&larr; Volver</a>
         </div>
       </div>
@@ -29,7 +28,7 @@
             </div>
           </div>
 
-          
+
 
           <div class="mb-3 row">
             <input type="submit" class="col-md-3 offset-md-5 btn btn-primary" value="Agregar Proveedor">

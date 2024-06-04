@@ -33,7 +33,6 @@ class AromaController extends Controller
    */
   public function show(Aroma $aroma): View
   {
-    dd($aroma);
     return view('aromas.show', [
       'aroma' => $aroma
     ]);
