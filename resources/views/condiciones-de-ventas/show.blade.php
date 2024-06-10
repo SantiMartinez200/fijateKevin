@@ -7,52 +7,22 @@
         <div class="card">
             <div class="card-header">
                 <div class="float-start">
-                    Product Information
+                    Información de la Forma de Venta
                 </div>
                 <div class="float-end">
-                    <a href="{{ route('products.index') }}" class="btn btn-primary btn-sm">&larr; Back</a>
+                    <a href="{{ route('condiciones-de-ventas.index') }}" class="btn btn-primary btn-sm">&larr; Volver</a>
                 </div>
             </div>
             <div class="card-body">
 
-                    <div class="row">
-                        <label for="code" class="col-md-4 col-form-label text-md-end text-start"><strong>Code:</strong></label>
+                    <div class="row d-flex align-items-center">
+                        <label for="code" class="col-md-4 col-form-label text-md-end text-start"><strong>Condicion:</strong></label>
                         <div class="col-md-6" style="line-height: 35px;">
-                            {{ $product->code }}
+                            {{ $condiciones_de_venta->condicion }}
                         </div>
-                    </div>
-
-                    <div class="row">
-                        <label for="name" class="col-md-4 col-form-label text-md-end text-start"><strong>Name:</strong></label>
-                        <div class="col-md-6" style="line-height: 35px;">
-                            {{ $product->name }}
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <label for="quantity" class="col-md-4 col-form-label text-md-end text-start"><strong>Quantity:</strong></label>
-                        <div class="col-md-6" style="line-height: 35px;">
-                            {{ $product->quantity }}
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <label for="price" class="col-md-4 col-form-label text-md-end text-start"><strong>Price:</strong></label>
-                        <div class="col-md-6" style="line-height: 35px;">
-                            {{ $product->price }}
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <label for="description" class="col-md-4 col-form-label text-md-end text-start"><strong>Description:</strong></label>
-                        <div class="col-md-6" style="line-height: 35px;">
-                            {{ $product->description }}
-                        </div>
-                    </div>
-        
+                    </div>        
             </div>
         </div>
     </div>    
 </div>
-    
 @endsection

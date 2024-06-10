@@ -78,6 +78,9 @@
             <li>
               <a href="{{route('condiciones-de-ventas.index')}}">Formas de Venta</a>
             </li>
+              <li>
+                <a href="{{route('clientes.index')}}">Clientes</a>
+              </li>
           </ul>
         </li>
         <li>
@@ -85,9 +88,6 @@
           <ul class="collapse list-unstyled" id="sesionSubmenu">
             <li>
               <a href="{{route('condiciones-de-ventas.index')}}">Cerrar Sesión</a>
-            </li>
-            <li>
-              <a href="#">Cambiar de usuario</a>
             </li>
           </ul>
         </li>

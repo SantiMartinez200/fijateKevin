@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AromaController;
+use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\CondicionVentaController;
 use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\MetodoPagoController;
@@ -29,6 +30,7 @@ Route::get('/', function () {
 
 //Ingresar estas rutas al middleware auth
 Route::resource('productos', ProductoController::class);
+Route::resource('clientes', ClienteController::class);
 Route::resource('aromas', AromaController::class);
 Route::resource('marcas', MarcaController::class);
 Route::resource('proveedores', ProveedorController::class)->parameters(['proveedores' => 'proveedor']); //////?????????ruta bug que requiere ser redeclarada por las convenciones.

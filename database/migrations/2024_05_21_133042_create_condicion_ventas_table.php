@@ -10,9 +10,9 @@ return new class extends Migration {
    */
   public function up(): void
   {
-    Schema::create('condicion_ventas', function (Blueprint $table) {
+    Schema::create('condiciones_de_ventas', function (Blueprint $table) {
       $table->id();
-      $table->string('condicion_id');
+      $table->string('condicion');
       $table->timestamps();
     });
   }
@@ -22,6 +22,6 @@ return new class extends Migration {
    */
   public function down(): void
   {
-    Schema::dropIfExists('condicion_ventas');
+    Schema::dropIfExists('condiciones_de_ventas');
   }
 };
