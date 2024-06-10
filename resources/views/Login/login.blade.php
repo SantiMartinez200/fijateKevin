@@ -16,7 +16,7 @@
             Ingresar
           </div>
         </div>
-        <form action="{{}}" method="GET">
+        <form action="{{route('login.autenticacion')}}" method="post">
         <div class="card-body">
             @csrf
             <div class="mb-3 row">
@@ -28,7 +28,7 @@
             <div class="mb-3 row">
                 <label for="contraseña" class="col-md-4 col-form-label text-md-end text-start">Contraseña</label>
                 <div class="col-md-6">
-                  <input type="text" class="form-control" id="contraseña" name="contraseña">
+                  <input type="password" class="form-control" id="contraseña" name="contraseña">
                 </div>
               </div>
             <div class="mb-3 row">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -10,4 +11,19 @@ class LoginController extends Controller
         return view('login/login');
     }
 
+
+    public function autenticacion(Request $request){
+        $usuarios = User::all();
+        foreach ($usuarios as $usuario) {
+            if ($usuario->username == $request->input('usuario') && ($usuario->password == $request->input('contraseña') )){
+               return redirect('aromas');
+            }else{
+                return redirect('login');
+            }
+        }
+    }
+
+    public function cerrarSession(){
+        
+    }
 }

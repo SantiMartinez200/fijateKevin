@@ -84,7 +84,7 @@
           <a href="#sesionSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Sesión</a>
           <ul class="collapse list-unstyled" id="sesionSubmenu">
             <li>
-              <a href="#">Cerrar Sesión</a>
+              <a href="{{route('condiciones-de-ventas.index')}}">Cerrar Sesión</a>
             </li>
             <li>
               <a href="#">Cambiar de usuario</a>

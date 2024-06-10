@@ -6,6 +6,7 @@ use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\MetodoPagoController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProveedorController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 //use App\Http\Controllers\ProductController;
 
@@ -33,3 +34,6 @@ Route::resource('marcas', MarcaController::class);
 Route::resource('proveedores', ProveedorController::class)->parameters(['proveedores' => 'proveedor']); //////?????????ruta bug que requiere ser redeclarada por las convenciones.
 Route::resource('metodo_pagos', MetodoPagoController::class)->parameters(['metodo_pagos' =>'metodo_pago']);
 Route::resource('condiciones-de-ventas', CondicionVentaController::class);
+
+Route::get('login', [LoginController::class, 'vista']);
+Route::post('autenticacion', [LoginController::class, 'autenticacion'])->name('login.autenticacion');
