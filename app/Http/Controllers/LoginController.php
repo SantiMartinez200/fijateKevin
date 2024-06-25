@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -13,6 +14,8 @@ class LoginController extends Controller
 
 
     public function autenticacion(Request $request){
+
+     
         $usuarios = User::all();
         foreach ($usuarios as $usuario) {
             if ($usuario->username == $request->input('usuario') && ($usuario->password == $request->input('contraseña') )){

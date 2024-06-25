@@ -22,7 +22,7 @@ class StoreCondicionVentaRequest extends FormRequest
     public function rules(): array
     {
         return [
-           'condicion' =>'required|max:255|string|unique:condiciones_de_ventas,condicion',
+           'condicion' =>'required|max:255|string|unique:condicion_ventas,condicion',
         ];
     }
 }

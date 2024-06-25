@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class CondicionVenta extends Model
 {
-  protected $table = 'condiciones_de_ventas';
+  protected $table = 'condicion_ventas';
   protected $fillable = ['condicion'];
     use HasFactory;
     public function condicionProducto():HasMany{

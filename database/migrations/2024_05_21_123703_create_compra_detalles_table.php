@@ -13,8 +13,9 @@ return new class extends Migration {
     Schema::create('compra_detalles', function (Blueprint $table) {
       $table->id();
       $table->integer('compra_id');
-      $table->integer('producto_id');
+      $table->integer('marca_id');
       $table->integer('proveedor_id');
+      $table->integer('producto_id');
       $table->integer('aroma_id');
       $table->double('precio_costo');
       $table->integer('cantidad');
