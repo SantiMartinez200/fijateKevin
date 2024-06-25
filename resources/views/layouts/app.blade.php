@@ -50,7 +50,7 @@
               <a href="#">Datos</a>
             </li>
             <li>
-              <a href="#">Ingresar Mercaderías</a>
+              <a href="{{route('ingreso')}}">Ingresar Mercaderías</a>
             </li>
             <li>
               <a href="#">Vender Mercaderías</a>

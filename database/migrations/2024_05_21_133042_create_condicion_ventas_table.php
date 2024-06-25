@@ -10,7 +10,7 @@ return new class extends Migration {
    */
   public function up(): void
   {
-    Schema::create('condiciones_de_ventas', function (Blueprint $table) {
+    Schema::create('condicion_ventas', function (Blueprint $table) {
       $table->id();
       $table->string('condicion');
       $table->timestamps();

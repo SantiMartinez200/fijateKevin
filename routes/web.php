@@ -4,6 +4,7 @@ use App\Http\Controllers\AromaController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\CondicionVentaController;
 use App\Http\Controllers\MarcaController;
+use App\Http\Controllers\CompraDetalleController;
 use App\Http\Controllers\MetodoPagoController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProveedorController;
@@ -37,5 +38,7 @@ Route::resource('proveedores', ProveedorController::class)->parameters(['proveed
 Route::resource('metodo_pagos', MetodoPagoController::class)->parameters(['metodo_pagos' =>'metodo_pago']);
 Route::resource('condiciones-de-ventas', CondicionVentaController::class);
 
+
 Route::get('login', [LoginController::class, 'vista']);
+Route::get('ingreso',[CompraDetalleController::class,'getCompraData'])->name('ingreso');
 Route::post('autenticacion', [LoginController::class, 'autenticacion'])->name('login.autenticacion');
