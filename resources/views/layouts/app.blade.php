@@ -35,7 +35,7 @@
           <a href="#cajaSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Caja</a>
           <ul class="collapse list-unstyled" id="cajaSubmenu">
             <li>
-              <a href="#">Operar</a>
+              <a href="{{route('caja.index')}}">Operar</a>
             </li>
             <li>
               <a href="#">Registros de caja</a>

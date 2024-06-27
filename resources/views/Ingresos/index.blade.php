@@ -1,10 +1,17 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
+  @if ($message = Session::get('message'))
+    <div class="alert alert-success" role="alert">
+      {{ $message }}
+    </div>
+  @endif
  <div class="card mb-2 d-flex">
     <div class="card-header">Ingreso</div>
         <div class="card-body">
-            <form action="" class="form-control">
+            <form action="{{route('storeCompraData')}}" method="POST" class="form-control">
+              @csrf
+              @method('POST')
             <div>
             <label for="marca">Marca</label>
             <select name="marca_id" id="marca" class="form-control">
@@ -47,7 +54,9 @@
  <div class="card">
     <div class="card-header">Stock</div>
         <div class="card-body">
-
+          @if(isset($stocks))
+            
+          @endif
         </div>      
  </div>
 </div>

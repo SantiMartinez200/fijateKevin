@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Compra extends Model
 {
   use HasFactory;
+  protected $fillable = ['usuario_id', 'caja_id', 'total'];
   public function detalleCompra(): HasMany
   {
     return $this->hasMany(CompraDetalle::class);
