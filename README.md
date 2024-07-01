@@ -7,7 +7,6 @@ Node.js
 ## Pasos para la Instalación
 ### Paso 1: Instalar Laragon
 Descarga e instala Laragon desde [aquí.](https://laragon.org/)
-Asegúrate de tener la versión de PHP 8.1.10 instalada.
 
 ### Paso 2: Instalar Node.js
 Descarga e instala Node.js desde [aquí.](https://nodejs.org/en)
