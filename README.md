@@ -1,20 +1,44 @@
-# Simple Laravel 10 CRUD Application Tutorial
-Learn how to develop a simple Laravel 10 CRUD application
+#Guía de Instalación de la Aplicación
+##Requisitos Previos
+Laragon con PHP 8.1.10
+Node.js
 
-> The complete tutorial step by step guide is available on my blog. [Laravel 10 CRUD Application](https://www.allphptricks.com/simple-laravel-10-crud-application/)
+##Pasos para la Instalación
+###Paso 1: Instalar Laragon
+Descarga e instala Laragon desde [aquí.](https://laragon.org/)
+Asegúrate de tener la versión de PHP 8.1.10 instalada.
 
-## Blog
-https://www.allphptricks.com/
+###Paso 2: Instalar Node.js
+Descarga e instala Node.js desde [aquí.](https://nodejs.org/en)
+
+###Paso 3: Descargar la Aplicación
+Tienes dos opciones para obtener el código de la aplicación:
+
+##Abre una terminal y ejecuta el siguiente comando: git clone <URL_DEL_REPOSITORIO> C:\laragon\www\"nombre"
+###Paso 4: Instalar Dependencias con Composer
+Abre la terminal de Laragon.
+Navega hasta la carpeta de la aplicación: ``cd C:\laragon\www\"nombre"``
+Ejecuta el siguiente comando: "composer install"
+
+###Paso 5: Instalar los paquetes de dependencia de VITE
+Abre la terminal de Laragon.
+Navega hasta la carpeta de la aplicación: ```cd C:\laragon\www\"nombre"```
+Ejecuta el siguiente comando: *npm install*
+
+###Paso 6: Configurar el archivo ENV
+Dentro de la carpeta Students copia el archivo .env.example y pégalo en el mismo lugar.
+Renombra la copia a .env.
+Opcional: Cambiar el nombre de la base de datos
+En el archivo .env, en la línea que dice DB_DATABASE=, puedes poner el nombre que desees para la base de datos.
+
+###Paso 7: Iniciar los Servidores
+En tu terminal de preferencia, navega hasta la carpeta de la aplicación: cd C:\laragon\www\Students
+
+Ejecuta los siguientes comandos para iniciar los servidores: "php artisan serve", "npm run dev"
+
+###Paso 8: Acceder a la Aplicación
+Abre tu navegador web y ve a http://localhost:8000 para acceder a la aplicación.
 
 
-## Installation 
-Make sure that you have setup the environment properly. You will need minimum PHP 8.1, MySQL/MariaDB, and composer.
-
-1. Download the project (or clone using GIT)
-2. Copy `.env.example` into `.env` and configure your database credentials
-3. Go to the project's root directory using terminal window/command prompt
-4. Run `composer install`
-5. Set the application key by running `php artisan key:generate --ansi`
-6. Run migrations `php artisan migrate`
-7. Start local server by executing `php artisan serve`
-8. Visit here [http://127.0.0.1:8000/products](http://127.0.0.1:8000/products) to test the application
+> [!NOTE]
+> Respetar las versiones de las aplicaciones.
