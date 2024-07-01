@@ -18,11 +18,13 @@ Tienes dos opciones para obtener el código de la aplicación:
 ### Paso 4: Instalar Dependencias con Composer
 Abre la terminal de Laragon.
 Navega hasta la carpeta de la aplicación: ``cd C:\laragon\www\"nombre"``
+
 Ejecuta el siguiente comando: ``composer install``
 
 ### Paso 5: Instalar los paquetes de dependencia de VITE
 Abre la terminal de Laragon.
 Navega hasta la carpeta de la aplicación: ```cd C:\laragon\www\"nombre"```
+
 Ejecuta el siguiente comando: ``npm install``
 
 ### Paso 6: Configurar el archivo ENV
