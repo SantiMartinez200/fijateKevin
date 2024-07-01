@@ -28,10 +28,12 @@ Ejecuta el siguiente comando: ``npm install``
 
 ### Paso 6: Configurar el archivo ENV
 Dentro de la carpeta Students copia el archivo .env.example y pégalo en el mismo lugar.
+
 Renombra la copia a .env.
 
 ### Paso 7: Iniciar los Servidores
 En tu terminal de preferencia, navega hasta la carpeta de la aplicación: cd C:\laragon\www\"nombre"
+
 Ejecuta los siguientes comandos para iniciar los servidores: ``php artisan serve``, ``npm run dev``
 
 ### Paso 8: Acceder a la Aplicación
