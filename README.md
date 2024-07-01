@@ -7,38 +7,41 @@ Node.js
 Composser
 
 ## Pasos para la Instalación
-### Paso 1: Instalar Laragon
+### Paso 1: Instalar Composser
+Descarga e instalar Composser desde [aquí.](https://getcomposer.org/)
+
+### Paso 2: Instalar Laragon
 Descarga e instala Laragon desde [aquí.](https://laragon.org/)
 
-### Paso 2: Instalar Node.js
+### Paso 3: Instalar Node.js
 Descarga e instala Node.js desde [aquí.](https://nodejs.org/en)
 
-### Paso 3: Descargar la Aplicación
+### Paso 4: Descargar la Aplicación
 Tienes dos opciones para obtener el código de la aplicación:
 
-### Paso 4: Instalar Dependencias con Composer
+### Paso 5: Instalar Dependencias con Composer
 Abre la terminal de Laragon.
 Navega hasta la carpeta de la aplicación: ``cd C:\laragon\www\"nombre"``
 
 Ejecuta el siguiente comando: ``composer install``
 
-### Paso 5: Instalar los paquetes de dependencia de VITE
+### Paso 6: Instalar los paquetes de dependencia de VITE
 Abre la terminal de Laragon.
 Navega hasta la carpeta de la aplicación: ```cd C:\laragon\www\"nombre"```
 
 Ejecuta el siguiente comando: ``npm install``
 
-### Paso 6: Configurar el archivo ENV
+### Paso 7: Configurar el archivo ENV
 Dentro de la carpeta Students copia el archivo .env.example y pégalo en el mismo lugar.
 
 Renombra la copia a .env.
 
-### Paso 7: Iniciar los Servidores
+### Paso 8: Iniciar los Servidores
 En tu terminal de preferencia, navega hasta la carpeta de la aplicación: ``cd C:\laragon\www\"nombre"``
 
 Ejecuta los siguientes comandos para iniciar los servidores: ``php artisan serve``, ``npm run dev``
 
-### Paso 8: Acceder a la Aplicación
+### Paso 9: Acceder a la Aplicación
 Abre tu navegador web y ve a http://localhost:8000 para acceder a la aplicación.
 
 
