@@ -1,9 +1,7 @@
 # Guía de Instalación de la Aplicación
 ## Requisitos Previos
 Laragon con PHP 8.1.10
-
 Node.js
-
 Composser
 
 ## Pasos para la Instalación
