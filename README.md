@@ -4,6 +4,8 @@ Laragon con PHP 8.1.10
 
 Node.js
 
+Composser
+
 ## Pasos para la Instalación
 ### Paso 1: Instalar Laragon
 Descarga e instala Laragon desde [aquí.](https://laragon.org/)
