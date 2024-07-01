@@ -32,7 +32,7 @@ Navega hasta la carpeta de la aplicación: ```cd C:\laragon\www\"nombre"```
 Ejecuta el siguiente comando: ``npm install``
 
 ### Paso 7: Configurar el archivo ENV
-Dentro de la carpeta Students copia el archivo .env.example y pégalo en el mismo lugar.
+Dentro de la carpeta "nombre" copia el archivo .env.example y pégalo en el mismo lugar.
 
 Renombra la copia a .env.
 
