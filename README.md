@@ -32,7 +32,7 @@ Dentro de la carpeta Students copia el archivo .env.example y pégalo en el mism
 Renombra la copia a .env.
 
 ### Paso 7: Iniciar los Servidores
-En tu terminal de preferencia, navega hasta la carpeta de la aplicación: cd C:\laragon\www\"nombre"
+En tu terminal de preferencia, navega hasta la carpeta de la aplicación: ``cd C:\laragon\www\"nombre"``
 
 Ejecuta los siguientes comandos para iniciar los servidores: ``php artisan serve``, ``npm run dev``
 
