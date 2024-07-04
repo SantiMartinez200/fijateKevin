@@ -11,7 +11,8 @@ class CajaController extends Controller
 {
     public function index(): View
     {
-        return view('caja.index');
+        $movimientos = Caja::all();
+        return view('caja.index', compact('movimientos'));
     }
 
     public function create(): View
@@ -21,9 +22,10 @@ class CajaController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $caja = $request->all();
-        
+        Caja::create($caja);
 
-        return redirect('caja.index');
+        
+        return redirect('caja');
     }
 
     public function show(): View

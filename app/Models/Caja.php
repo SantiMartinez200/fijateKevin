@@ -12,8 +12,10 @@ class Caja extends Model
     use HasFactory;
     protected $fillable =[
       'usuario_id',
-      'monto_inicial',
-      'monto_final'
+      'monto',
+      'tipo',
+      'comentario',
+      'fecha'
     ];
     
   public function cajaHaber(): HasMany

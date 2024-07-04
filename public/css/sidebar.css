@@ -62,7 +62,10 @@ a:focus {
     background: #7386D5;
     color: #fff;
     transition: all 0.3s;
+
+    z-index: 1000;
 }
+
 
 #sidebar.active {
     margin-left: -250px;
@@ -87,6 +90,10 @@ a:focus {
     padding: 10px;
     font-size: 1.1em;
     display: block;
+    /*--------Lrpmqtp------------*/
+    color: #fff;
+    visibility: visible;
+    opacity: 1;
 }
 
 #sidebar ul li a:hover {
