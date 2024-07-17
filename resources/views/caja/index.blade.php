@@ -1,189 +1,182 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container mt-4">
-        <div class="card">
-            <div class="card-header">
-                <h2>Cajas</h2>
-            </div>
-            <div class="float-left ml-3 mt-2" >
-                <button type="button" class="btn btn-success btn-sm my-2 " data-toggle="modal"
-                    data-target="#modalAbrirCaja">
-                    <i class="bi bi-plus-circle"></i> Abrir Caja
-                </button>
-            </div>
-            <!-- Modal Abrir Caja-->
-            <div class="modal fade" id="modalAbrirCaja" tabindex="-1" role="dialog"
-                aria-labelledby="modalAbrirCajaLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="modalAbrirCajaLabel">Abrir Caja</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="{{ route('caja.store') }}" method="POST">
-                                @csrf
-                                <input type="hidden" name="usuario_id" value="{{ Auth::user()->id }}">
-
-                                <div class="form-group">
-                                    <label for="fecha">Fecha:</label>
-                                    <input type="date" class="form-control" id="created_at" name="created_at" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="estado">Tipo de Movimiento:</label>
-                                    <select class="form-control" id="estado" name="estado" required>
-                                        <option value="abierta">Apertura</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="tipo">Metodo de pago:</label>
-                                    <select class="form-control" id="metodo_pago_id" name="metodo_pago_id" required>
-                                        @foreach ($metodos as $metodo)
-                                        <option value="{{$metodo->id}}">{{$metodo->nombre}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="monto">Monto inicial:</label>
-                                    <input type="number" class="form-control" id="monto_inicial" name="monto_inicial" step="0.01"
-                                        required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="comentario">Comentario:</label>
-                                    <textarea class="form-control" id="comentario" name="comentario"></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Aplicar y Abrir</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Modal Generar Movimiento de Caja-->
-            <div class="modal fade" id="modalRegistrarMovimiento" tabindex="-1" role="dialog"
-                aria-labelledby="modalRegistrarMovimientoLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="modalRegistrarMovimientoLabel">Generar Movimiento</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="{{ route('caja.store') }}" method="POST">
-                                @csrf
-                                <input type="hidden" name="usuario_id" value="{{ Auth::user()->id }}">
-                                <div class="form-group">
-                                    <label for="fecha">Caja ID:</label>
-                                    <input type="number" class="form-control" id="caja_id" name="caja_id" required disabled="disabled">
-                                </div>
-                                <div class="form-group">
-                                    <label for="fecha">Fecha:</label>
-                                    <input type="date" class="form-control" id="created_at" name="created_at" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="estado">Tipo de Movimiento:</label>
-                                    <select class="form-control" id="estado" name="estado" required>
-                                        <option value="entrada">Entrada</option>
-                                        <option value="salida">Salida</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="tipo">Metodo de pago:</label>
-                                    <select class="form-control" id="metodo_pago_id" name="metodo_pago_id" required>
-                                        @foreach ($metodos as $metodo)
-                                        <option value="{{$metodo->id}}">{{$metodo->nombre}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="monto">Monto inicial:</label>
-                                    <input type="number" class="form-control" id="monto_inicial" name="monto_inicial" step="0.01"
-                                        required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="comentario">Comentario:</label>
-                                    <textarea class="form-control" id="comentario" name="comentario"></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Aplicar y Abrir</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <table class="table table-bordered mt-4">
-                    <thead>
-                        <tr>
-                            <th>Estado</th>
-                            <th>Metodo de Pago</th>
-                            <th>Fecha abierta</th>
-                            <th>Abierta por:</th>
-                            <th>Fecha Cierre</th>
-                            <th>Monto Inicial</th>
-                            <th>Monto Final</th>
-                            <th>Comentario</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($cajas as $caja)
-                            <tr>
-                                <td>{{ $caja->estado }}</td>
-                                <td>{{$caja->metodo_pago_id}}</td>
-                                <td>{{ $caja->created_at }}</td>
-                                <td>{{$caja->usuario_id}}</td>
-                                <td>{{$caja->fecha_cierre}}</td>
-                                <td>{{ $caja->monto_inicial }}</td>
-                                <td>{{ $caja->monto_final }}</td>
-                                <td>{{ $caja->comentario }}</td>
-                                <td>
-                                    <div class="btn-group" role="group" aria-label="Basic example"> <!-- basic example???? -->
-                                        <button type="button" class="btn btn-success" data-id="{{$caja->id}}" data-toggle="modal"
-                                        data-target="#modalRegistrarMovimiento">
-                                        Movimiento
-                                    </button>
-                                     <a href="{{ route('caja.edit', $caja->id) }}" class="btn btn-primary">Editar</a>
-                                     <a href="{{ route('caja.destroy', $caja->id) }}" class="btn btn-danger">Eliminar</a>
-                                     <a href="{{ route('caja.destroy', $caja->id) }}" class="btn btn-warning">Cerrar</a>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header">
+      <h2>Cajas</h2>
     </div>
-    <!-- Bootstrap JS y jQuery CDN -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
-        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous">
-    </script>
-    <script>
-        let botones = document.querySelectorAll('[data-target="#modalRegistrarMovimiento"]');
-        botones.forEach(btn => {
-        btn.addEventListener('click', function() {
-        // Obtener columnas desde TR padre:
-        let tds = this.closest('tr').querySelectorAll('td');
-        // Obtener ID desde el botón
-        let id = this.dataset.id;
-        // Obtener datos por contenido de TD:
-        let nombre = tds[0].innerText;
-        let cedula = tds[1].innerText;
-        let fecha = tds[6].innerText;
-        // Asignar datos a ventana modal:
-        document.querySelector('#caja_id').value = id;
-        document.querySelector('#estudiante').value = nombre;
-        document.querySelector('#cedula').value = cedula;
-        console.log('abrir modal');
-        $('#modalRegistrarMovimiento').modal();
+    <div class="float-left ml-3 mt-2">
+      <button type="button" class="btn btn-success btn-sm my-2 " data-toggle="modal" data-target="#modalAbrirCaja">
+        <i class="bi bi-plus-circle"></i> Abrir Caja
+      </button>
+    </div>
+    <!-- Modal Abrir Caja-->
+    <div class="modal fade" id="modalAbrirCaja" tabindex="-1" role="dialog" aria-labelledby="modalAbrirCajaLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalAbrirCajaLabel">Abrir Caja</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="{{ route('caja.store') }}" method="POST">
+              @csrf
+              <input type="hidden" name="usuario_id" value="{{ Auth::user()->id }}">
+
+              <div class="form-group">
+                <label for="fecha">Fecha:</label>
+                <input type="date" class="form-control" id="created_at" name="created_at" required>
+              </div>
+              <div class="form-group">
+                <label for="estado">Tipo de Movimiento:</label>
+                <select class="form-control" id="estado" name="estado" required>
+                  <option value="abierta">Apertura</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="tipo">Metodo de pago:</label>
+                <select class="form-control" id="metodo_pago_id" name="metodo_pago_id" required>
+                  @foreach ($metodos as $metodo)
+            <option value="{{$metodo->id}}">{{$metodo->nombre}}</option>
+          @endforeach
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="monto">Monto inicial:</label>
+                <input type="number" class="form-control" id="monto_inicial" name="monto_inicial" step="0.01" required>
+              </div>
+              <div class="form-group">
+                <label for="comentario">Comentario:</label>
+                <textarea class="form-control" id="comentario" name="comentario"></textarea>
+              </div>
+              <button type="submit" id="modalCajaButton" class="btn btn-primary">Aplicar y Abrir</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal Generar Movimiento de Caja-->
+    <div class="modal fade" id="modalRegistrarMovimiento" tabindex="-1" role="dialog"
+      aria-labelledby="modalRegistrarMovimientoLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalRegistrarMovimientoLabel">Generar Movimiento</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="{{ route('caja.store') }}" method="POST">
+              @csrf
+              <input type="hidden" name="usuario_id" value="{{ Auth::user()->id }}">
+              <div class="form-group">
+                <label for="fecha">Caja ID:</label>
+                <input type="number" class="form-control" id="caja_id" name="caja_id" required disabled="disabled">
+              </div>
+              <div class="form-group">
+                <label for="fecha">Fecha:</label>
+                <input type="date" class="form-control" id="created_at" name="created_at" required>
+              </div>
+              <div class="form-group">
+                <label for="estado">Tipo de Movimiento:</label>
+                <select class="form-control" id="estado" name="estado" required>
+                  <option value="entrada">Entrada</option>
+                  <option value="salida">Salida</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="tipo">Metodo de pago:</label>
+                <select class="form-control" id="metodo_pago_id" name="metodo_pago_id" required>
+                  @foreach ($metodos as $metodo)
+            <option value="{{$metodo->id}}">{{$metodo->nombre}}</option>
+          @endforeach
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="monto">Monto inicial:</label>
+                <input type="number" class="form-control" id="monto_inicial" name="monto_inicial" step="0.01" required>
+              </div>
+              <div class="form-group">
+                <label for="comentario">Comentario:</label>
+                <textarea class="form-control" id="comentario" name="comentario"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Aplicar y Abrir</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <table class="table table-bordered mt-4">
+        <thead>
+          <tr>
+            <th>Estado</th>
+            <th>Metodo de Pago</th>
+            <th>Fecha abierta</th>
+            <th>Abierta por:</th>
+            <th>Fecha Cierre</th>
+            <th>Monto Inicial</th>
+            <th>Monto Final</th>
+            <th>Comentario</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach ($cajas as $caja)
+        <tr>
+        <td>{{$caja->estado }}</td>
+        <td>{{$caja->metodo_pago_id}}</td>
+        <td>{{$caja->created_at }}</td>
+        <td>{{$caja->usuario_id}}</td>
+        <td>{{$caja->fecha_cierre}}</td>
+        <td>{{$caja->monto_inicial }}</td>
+        <td>{{$caja->monto_final }}</td>
+        <td>{{$caja->comentario }}</td>
+        <td>
+          <div class="btn-group" role="group" aria-label="Basic example"> <!-- basic example???? -->
+          <button type="button" class="btn btn-success" data-id="{{$caja->id}}" data-toggle="modal"
+            data-target="#modalRegistrarMovimiento">
+            Movimiento
+          </button>
+          <a href="{{ route('caja.edit', $caja->id) }}" class="btn btn-primary">Editar</a>
+          <a href="{{ route('caja.destroy', $caja->id) }}" class="btn btn-danger">Eliminar</a>
+          <a href="{{ route('caja.destroy', $caja->id) }}" class="btn btn-warning">Cerrar</a>
+          </div>
+        </td>
+        </tr>
+      @endforeach
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- Bootstrap JS y jQuery CDN -->
+<script>
+  let botones = document.querySelectorAll('[data-target="#modalRegistrarMovimiento"]');
+  botones.forEach(btn => {
+    btn.addEventListener('click', function () {
+      // Obtener columnas desde TR padre:
+      let tds = this.closest('tr').querySelectorAll('td');
+      // Obtener ID desde el botón
+      let id = this.dataset.id;
+      // Obtener datos por contenido de TD:
+      //let nombre = tds[0].innerText;
+      //let cedula = tds[1].innerText;
+      //let fecha = tds[6].innerText;
+      // Asignar datos a ventana modal:
+      document.querySelector('#caja_id').value = id;
+      //document.querySelector('#estudiante').value = nombre;
+      document.querySelector('#cedula').value = cedula;
+      console.log('abrir modal');
+      $('#modalRegistrarMovimiento').modal();
     });
-});
-    </script>
+  });
+</script>
+
+
 @endsection

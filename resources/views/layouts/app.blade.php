@@ -42,7 +42,7 @@
                     <a href="#cajaSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Caja</a>
                     <ul class="collapse list-unstyled" id="cajaSubmenu">
                         <li><a href="{{ route('caja.index') }}">Operar</a></li>
-                        <li><a href="#">Registros de caja</a></li>
+                        <li><a href="{{route('movimientos')}}">Registros de caja</a></li>
                     </ul>
                 </li>
                 <li></li>
@@ -130,6 +130,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous">
     </script>
+    
 
     <script type="text/javascript">
         $(document).ready(function() {

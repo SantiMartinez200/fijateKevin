@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MovimientosCajaController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AromaController;
@@ -48,9 +49,7 @@ Route::post('storeCompraData', [CompraDetalleController::class, 'store'])->name(
 Route::get('login', [LoginController::class, 'vista']);
 Route::get('ingreso',[CompraDetalleController::class,'getCompraData'])->name('ingreso');
 Route::post('autenticacion', [LoginController::class, 'autenticacion'])->name('login.autenticacion');
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('movimientos', [MovimientosCajaController::class, 'index'])->name('movimientos');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
