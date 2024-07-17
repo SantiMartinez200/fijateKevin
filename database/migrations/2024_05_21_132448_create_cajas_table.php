@@ -12,11 +12,14 @@ return new class extends Migration {
   {
     Schema::create('cajas', function (Blueprint $table) {
       $table->id();
+      $table->string('estado');
       $table->integer('usuario_id');
+      $table->integer('metodo_pago_id')->nullable();
       $table->double('monto_inicial');
-      $table->double('monto_final');
+      $table->double('comentario')->nullable();
+      $table->double('monto_final')->nullable();
       $table->timestamps();
-      $table->dateTime('fecha_cierre');
+      $table->dateTime('fecha_cierre')->nullable();
     });
   }
 

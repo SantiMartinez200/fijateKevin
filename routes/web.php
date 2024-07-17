@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AromaController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\CondicionVentaController;
@@ -10,7 +12,7 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\CajaController;
 use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\LoginController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MovimientoController;
 //use App\Http\Controllers\ProductController;
 
 /*
@@ -46,3 +48,20 @@ Route::post('storeCompraData', [CompraDetalleController::class, 'store'])->name(
 Route::get('login', [LoginController::class, 'vista']);
 Route::get('ingreso',[CompraDetalleController::class,'getCompraData'])->name('ingreso');
 Route::post('autenticacion', [LoginController::class, 'autenticacion'])->name('login.autenticacion');
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
+
+
