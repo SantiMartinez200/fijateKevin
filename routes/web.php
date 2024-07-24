@@ -55,6 +55,7 @@ Route::post('autenticacion', [LoginController::class, 'autenticacion'])->name('l
 Route::get('movimientos', [MovimientosCajaController::class, 'index'])->name('movimientos');
 Route::get('caja/{id}/movimientos', [MovimientosCajaController::class, 'getMovimientos'])->name('caja.movimientos');
 Route::get('caja/{id}/monto', [MovimientosCajaController::class, 'getMonto']);
+Route::get('caja/{id}/cerrar', [CajaController::class, 'close'])->name('caja.close');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

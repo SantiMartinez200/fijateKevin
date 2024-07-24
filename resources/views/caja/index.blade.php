@@ -141,7 +141,7 @@
           </button>
           <a href="{{ route('caja.edit', $caja->id) }}" class="btn btn-primary">Editar</a>
           <a href="{{ route('caja.destroy', $caja->id) }}" class="btn btn-danger">Eliminar</a>
-          <a href="{{ route('caja.destroy', $caja->id) }}" class="btn btn-warning">Cerrar</a>
+          <a href="{{ route('caja.close', $caja->id) }}" class="btn btn-warning">Cerrar</a>
           </div>
         </td>
         </tr>

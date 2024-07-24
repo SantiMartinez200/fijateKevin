@@ -102,17 +102,19 @@
           fetch(`/caja/${id}/monto`)
             .then(response => response.json())
             .then(montos => {
-              let h5Monto = document.getElementById("h5Monto");
-              h5Monto.innerHTML = ``;
               console.log(montos);
-              h5Monto.classList.add("bg-dark");
-              h5Monto.classList.add("text-white");
-              h5Monto.innerText += " "+montos.monto_final;
 
               let h4Monto = document.getElementById("h4Inicial")
+              h4Monto.innerHTML = ``;
+              h4Monto.textContent = `Monto Inicial: ${montos.monto_inicial}`;
               h4Monto.classList.add("bg-dark");
               h4Monto.classList.add("text-white");
-              h4Monto.innerText += " "+montos.monto_inicial;
+
+              let h5Monto = document.getElementById("h5Monto");
+              h5Monto.innerHTML = ``;
+              h5Monto.classList.add("bg-dark");
+              h5Monto.classList.add("text-white");
+              h5Monto.textContent = `Monto final: ${montos.monto_final}`;
             });
           // Mostrar el modal
           $('#modalVerMovimiento').modal();

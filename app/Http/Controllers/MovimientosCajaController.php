@@ -31,14 +31,14 @@ class MovimientosCajaController extends Controller
     return response()->json(['movimientos' => $movimientosFormateados, 'datosAdicionales' => $datosAdicionales]);
   }
 
-  public function getMonto($id)
+  public static function getMonto($id)
   {
-    $caja = Caja::findOrFail($id);
-    $movimientosSum = DB::table('movimientos_caja')->sum('monto');
-    if($caja->monto_inicial <> 0 || $caja->monto_inicial <> null){
+    $caja = Caja::find($id);
+    $movimientosSum = DB::table('movimientos_caja')->where('caja_id', $id)->sum('monto');
+    if ($caja->monto_inicial > 0) {
       $movimientosSum += $caja->monto_inicial;
-      return response()->json(['monto_final'=>$movimientosSum,'monto_inicial'=>$caja->monto_inicial]);
-    }else{
+      return response()->json(['monto_final' => $movimientosSum, 'monto_inicial' => $caja->monto_inicial]);
+    } else {
       return response()->json(['monto_final' => $movimientosSum, 'monto_inicial' => $caja->monto_inicial]);
     }
   }
