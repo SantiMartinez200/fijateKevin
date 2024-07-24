@@ -77,6 +77,15 @@
           let h5 = document.getElementById("modalVerMovimientoLabel");
           h5.textContent = `Movimientos de la Caja del: ${data.datosAdicionales.caja_fecha}`;
           // Agregar cada movimiento como fila + dato
+          if (!data.movimientos.length) {
+            const textEmptyMovimientos = document.createElement('td');
+            const row = document.createElement('tr');
+            textEmptyMovimientos.textContent = "No hay movimientos para esta caja";
+            textEmptyMovimientos.classList.add("text-danger");
+            textEmptyMovimientos.colSpan = 4;
+            row.appendChild(textEmptyMovimientos);
+            movimientosTableBody.appendChild(row);
+          }
           data.movimientos.forEach(movimiento => {
             const row = document.createElement('tr');
 
@@ -94,6 +103,12 @@
 
             const tipoMovimiento = document.createElement('td');
             tipoMovimiento.textContent = movimiento.tipo_movimiento;
+            if (movimiento.tipo_movimiento === "E") {
+              tipoMovimiento.classList.add("text-success");
+              tipoMovimiento.classList.add("text-right");
+            } else {
+              tipoMovimiento.classList.add("text-danger");
+            }
             row.appendChild(tipoMovimiento);
 
             //agregarlas

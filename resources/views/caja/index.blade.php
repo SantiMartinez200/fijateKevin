@@ -108,7 +108,7 @@
       </div>
     </div>
     <div class="container">
-      <table class="table table-bordered mt-4">
+      <table class="table table-bordered mt-4" id="cajaTable">
         <thead>
           <tr>
             <th>Estado</th>
@@ -124,7 +124,7 @@
         </thead>
         <tbody>
           @foreach ($cajas as $caja)
-        <tr>
+        <tr id="registry">
         <td>{{$caja->estado }}</td>
         <td>{{$caja->metodo_pago_id}}</td>
         <td>{{$caja->created_at }}</td>
@@ -135,13 +135,14 @@
         <td>{{$caja->comentario }}</td>
         <td>
           <div class="btn-group" role="group" aria-label="Basic example"> <!-- basic example???? -->
-          <button type="button" class="btn btn-success" data-id="{{$caja->id}}" data-toggle="modal"
-            data-target="#modalRegistrarMovimiento">
+          <button id="movimiento" type="button" class="btn btn-success" data-id="{{$caja->id}}"
+            data-toggle="modal" data-target="#modalRegistrarMovimiento">
             Movimiento
           </button>
-          <a href="{{ route('caja.edit', $caja->id) }}" class="btn btn-primary">Editar</a>
+          <a href="{{ route('caja.edit', $caja->id) }}"><button id="edit"
+            class="btn btn-primary">Editar</button></a>
           <a href="{{ route('caja.destroy', $caja->id) }}" class="btn btn-danger">Eliminar</a>
-          <a href="{{ route('caja.close', $caja->id) }}" class="btn btn-warning">Cerrar</a>
+          <a href="{{ route('caja.close', $caja->id) }}" class="btn btn-warning" id="close">Cerrar</a>
           </div>
         </td>
         </tr>
@@ -152,8 +153,21 @@
   </div>
 </div>
 <script>
-  let botones = document.querySelectorAll('[data-target="#modalRegistrarMovimiento"]');
-  botones.forEach(btn => {
+  let botonModal = document.querySelectorAll('[data-target="#modalRegistrarMovimiento"]');
+  let botonMovimiento = document.getElementById('movimiento');
+  let botonEdit = document.getElementById('edit');
+  const table = document.getElementById('cajaTable');
+  const rows = table.querySelectorAll('tbody tr');
+  rows.forEach((row) => {
+    const cells = row.querySelectorAll('td');
+    const rowData = Array.from(cells).map(cell => cell.textContent.trim());
+    console.log(rowData[0]);
+    if (rowData[0] === 'cerrada') {
+      botonEdit.disabled = true;
+      botonMovimiento.disabled = true;
+    }
+  });
+  botonModal.forEach(btn => {
     btn.addEventListener('click', function () {
       // Obtener columnas desde TR padre:
       let tds = this.closest('tr').querySelectorAll('td');
@@ -171,5 +185,6 @@
       $('#modalRegistrarMovimiento').modal();
     });
   });
+
 </script>
 @endsection
