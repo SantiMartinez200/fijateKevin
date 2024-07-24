@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\MovimientosCajaController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RegistrosCajaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AromaController;
 use App\Http\Controllers\ClienteController;
@@ -44,12 +45,16 @@ Route::resource('condiciones-de-ventas', CondicionVentaController::class);
 Route::resource('caja', CajaController::class);
 
 Route::post('storeCompraData', [CompraDetalleController::class, 'store'])->name('storeCompraData');
-
+Route::post('storeMovimientoCaja', [MovimientosCajaController::class, 'store'])->name('storeMovimiento');
 
 Route::get('login', [LoginController::class, 'vista']);
 Route::get('ingreso',[CompraDetalleController::class,'getCompraData'])->name('ingreso');
 Route::post('autenticacion', [LoginController::class, 'autenticacion'])->name('login.autenticacion');
+
+
 Route::get('movimientos', [MovimientosCajaController::class, 'index'])->name('movimientos');
+Route::get('caja/{id}/movimientos', [MovimientosCajaController::class, 'getMovimientos'])->name('caja.movimientos');
+Route::get('caja/{id}/monto', [MovimientosCajaController::class, 'getMonto']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

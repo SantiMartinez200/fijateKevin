@@ -71,22 +71,18 @@
             </button>
           </div>
           <div class="modal-body">
-            <form action="{{ route('caja.store') }}" method="POST">
+            <form action="{{ route('storeMovimiento') }}" method="POST">
               @csrf
               <input type="hidden" name="usuario_id" value="{{ Auth::user()->id }}">
               <div class="form-group">
                 <label for="fecha">Caja ID:</label>
-                <input type="number" class="form-control" id="caja_id" name="caja_id" required disabled="disabled">
-              </div>
-              <div class="form-group">
-                <label for="fecha">Fecha:</label>
-                <input type="date" class="form-control" id="created_at" name="created_at" required>
+                <input type="number" class="form-control" id="caja_id" name="caja_id" required>
               </div>
               <div class="form-group">
                 <label for="estado">Tipo de Movimiento:</label>
-                <select class="form-control" id="estado" name="estado" required>
-                  <option value="entrada">Entrada</option>
-                  <option value="salida">Salida</option>
+                <select class="form-control" id="tipo_movmiento" name="tipo_movimiento" required>
+                  <option value="E">Entrada</option>
+                  <option value="S">Salida</option>
                 </select>
               </div>
               <div class="form-group">
@@ -98,12 +94,12 @@
                 </select>
               </div>
               <div class="form-group">
-                <label for="monto">Monto inicial:</label>
-                <input type="number" class="form-control" id="monto_inicial" name="monto_inicial" step="0.01" required>
+                <label for="monto">Monto Movimiento:</label>
+                <input type="number" class="form-control" id="monto" name="monto" step="0.01" required>
               </div>
               <div class="form-group">
-                <label for="comentario">Comentario:</label>
-                <textarea class="form-control" id="comentario" name="comentario"></textarea>
+                <label for="comentario">Descripcion:</label>
+                <textarea class="form-control" id="descripcion" name="descripcion"></textarea>
               </div>
               <button type="submit" class="btn btn-primary">Aplicar y Abrir</button>
             </form>
@@ -155,7 +151,6 @@
     </div>
   </div>
 </div>
-<!-- Bootstrap JS y jQuery CDN -->
 <script>
   let botones = document.querySelectorAll('[data-target="#modalRegistrarMovimiento"]');
   botones.forEach(btn => {
@@ -177,6 +172,4 @@
     });
   });
 </script>
-
-
 @endsection

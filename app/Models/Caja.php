@@ -14,13 +14,17 @@ class Caja extends Model
       'estado','usuario_id','metodo_pago_id','monto_inicial','comentario','monto_final','fecha_apertura','ultima_modificacion','fecha_cierre'
     ];
     
-  public function cajaHaber(): HasMany
-  {
-    return $this->hasMany(Compra::class);
-  }
-  public function cajaDebe(): HasMany
-  {
-    return $this->hasMany(Venta::class);
+  // public function cajaHaber(): HasMany
+  // {
+  //   return $this->hasMany(Compra::class);
+  // }
+  // public function cajaDebe(): HasMany
+  // {
+  //   return $this->hasMany(Venta::class);
+  // }
+
+  public function movimientos(): HasMany{
+    return $this->hasMany(MovimientosCaja::class);
   }
 
   public function usuarioCaja(): BelongsTo{

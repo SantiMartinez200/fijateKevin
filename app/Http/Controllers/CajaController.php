@@ -34,7 +34,7 @@ class CajaController extends Controller
                 $caja->fecha_cierre = 'N/D';
             }
         }
-        return view('caja.index', compact('cajas','metodos'));
+        return view('caja.index', compact('cajas',  'metodos'));
     }
 
     public function create(): View
