@@ -124,7 +124,7 @@
         </thead>
         <tbody>
           @foreach ($cajas as $caja)
-        <tr id="registry">
+        <tr>
         <td>{{$caja->estado }}</td>
         <td>{{$caja->metodo_pago_id}}</td>
         <td>{{$caja->created_at }}</td>
@@ -142,7 +142,8 @@
           <a href="{{ route('caja.edit', $caja->id) }}"><button id="edit"
             class="btn btn-primary">Editar</button></a>
           <a href="{{ route('caja.destroy', $caja->id) }}" class="btn btn-danger">Eliminar</a>
-          <a href="{{ route('caja.close', $caja->id) }}" class="btn btn-warning" id="close">Cerrar</a>
+          <a href="{{ route('caja.close', $caja->id) }}"><button class="btn btn-warning"
+            id="close">Cerrar</button></a>
           </div>
         </td>
         </tr>
@@ -153,30 +154,43 @@
   </div>
 </div>
 <script>
+  //--- Anotaciones para separar los scripts en archivos JS separados ---//
+  //podría quedar embebido? o separamos en otra function? se llamaría a si misma y se ejecutaría siempre? o cuando carga la página? reveer esto.
+  let botonMovimiento = document.querySelectorAll('#movimiento');
+  //console.log(botonMovimiento);
+  let botonEdit = document.querySelectorAll('#edit');
+  //console.log(botonEdit);
+  let botonCerrar = document.querySelectorAll('#close');
+  //console.log(botonCerrar);
+  var buttons = [botonMovimiento, botonEdit, botonCerrar];
   let botonModal = document.querySelectorAll('[data-target="#modalRegistrarMovimiento"]');
-  let botonMovimiento = document.getElementById('movimiento');
-  let botonEdit = document.getElementById('edit');
   const table = document.getElementById('cajaTable');
-  const rows = table.querySelectorAll('tbody tr');
-  rows.forEach((row) => {
-    const cells = row.querySelectorAll('td');
-    const rowData = Array.from(cells).map(cell => cell.textContent.trim());
-    console.log(rowData[0]);
-    if (rowData[0] === 'cerrada') {
-      botonEdit.disabled = true;
-      botonMovimiento.disabled = true;
+  const tbody = table.getElementsByTagName('tbody')[0];
+  const rows = tbody.querySelectorAll('tr');
+  console.log(buttons);
+  for (let r = 0; r < rows.length; r++) {
+    for (let i = 0; i < buttons.length; i++) {
+      for (let j = 0; j < buttons.length; j++) {
+        if (rows[r].children[0].textContent == 'cerrada') {
+          buttons[i][r].disabled = true;
+        }
+      }
     }
-  });
+  }
+    
+  
+  
+  //--------------------------------------------------//
+
+
+  //Esto debería ir en una function para abrir el modal con onclick().
+  //Ej: Function abrirModalMovimiento();
   botonModal.forEach(btn => {
     btn.addEventListener('click', function () {
       // Obtener columnas desde TR padre:
       let tds = this.closest('tr').querySelectorAll('td');
       // Obtener ID desde el botón
       let id = this.dataset.id;
-      // Obtener datos por contenido de TD:
-      //let nombre = tds[0].innerText;
-      //let cedula = tds[1].innerText;
-      //let fecha = tds[6].innerText;
       // Asignar datos a ventana modal:
       document.querySelector('#caja_id').value = id;
       //document.querySelector('#estudiante').value = nombre;
@@ -185,6 +199,6 @@
       $('#modalRegistrarMovimiento').modal();
     });
   });
-
+  //--------------------------------------------------//
 </script>
 @endsection
