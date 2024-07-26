@@ -11,7 +11,7 @@ use App\Models\Aroma;
 
 class CompraDetalleController extends Controller
 {
-  public function getCompraData()
+  public function getData()
   {
     $productos = Producto::all();
     $proveedores = Proveedor::all();
