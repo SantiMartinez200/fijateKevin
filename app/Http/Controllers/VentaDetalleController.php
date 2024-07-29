@@ -7,11 +7,13 @@ use App\Models\CompraDetalle;
 use App\Models\Marca;
 use App\Models\Producto;
 use App\Models\Proveedor;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class VentaDetalleController extends Controller
 {
-  public function index(){
+  public function index()
+  {
     $compras = CompraDetalle::all();
     return view('ventas.index', compact('compras'));
   }
@@ -22,26 +24,33 @@ class VentaDetalleController extends Controller
     $proveedores = Proveedor::all();
     $productos = Producto::all();
     $aromas = Aroma::all();
-      foreach ($marcas as $marca) {
-        if ($marca->id == $compra->marca_id) {
-          $compra->marca_id = $marca->nombre;
-        }
+    foreach ($marcas as $marca) {
+      if ($marca->id == $compra->marca_id) {
+        $compra->marca_id = $marca->nombre;
       }
-      foreach ($proveedores as $proveedor) {
-        if ($proveedor->id == $compra->proveedor_id) {
-          $compra->proveedor_id = $proveedor->nombre;
-        }
+    }
+    foreach ($proveedores as $proveedor) {
+      if ($proveedor->id == $compra->proveedor_id) {
+        $compra->proveedor_id = $proveedor->nombre;
       }
-      foreach ($productos as $producto) {
-        if ($producto->id == $compra->producto_id) {
-          $compra->producto_id = $producto->nombre;
-        }
+    }
+    foreach ($productos as $producto) {
+      if ($producto->id == $compra->producto_id) {
+        $compra->producto_id = $producto->nombre;
       }
-      foreach ($aromas as $aroma) {
-        if ($aroma->id == $compra->aroma_id) {
-          $compra->aroma_id = $aroma->nombre;
-        }
+    }
+    foreach ($aromas as $aroma) {
+      if ($aroma->id == $compra->aroma_id) {
+        $compra->aroma_id = $aroma->nombre;
       }
+    }
     return response()->json(['compra' => $compra]);
+  }
+
+  public function store(Request $request): RedirectResponse
+  {
+    $ventas = $request->all();
+    
+    dd($arrayRegistros);
   }
 }

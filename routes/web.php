@@ -54,7 +54,7 @@ Route::post('storeCompraData', [CompraDetalleController::class, 'store'])->name(
 Route::get('getCompraData/{id}', [VentaDetalleController::class, 'getCompraData'])->name('getCompra');
 Route::get('venta', [VentaDetalleController::class,'index'])->name('venta');
 Route::post('storeVentaData', [VentaDetalleController::class, 'store'])->name('storeVentaData');
-
+Route::post('storeVentaDetalle',[VentaDetalleController::class,'store'])->name('storeVentaDetalle');
 
 Route::get('login', [LoginController::class, 'vista']);
 Route::post('autenticacion', [LoginController::class, 'autenticacion'])->name('login.autenticacion');
