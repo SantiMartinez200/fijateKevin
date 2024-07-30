@@ -17,12 +17,8 @@ return new class extends Migration {
       $table->integer('proveedor_id');
       $table->integer('producto_id');
       $table->integer('aroma_id');
-      $table->integer('cliente_id')->nullable();
       $table->double('precio_costo');
       $table->integer('cantidad');
-      $table->double('total');
-      $table->double('descuento');
-      $table->double('total_pago');
       $table->timestamps();
     });
   }
