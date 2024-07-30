@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class VentaDetalle extends Model
 {
+  protected $table = "venta_detalles";
+  protected $fillable = ['venta_id', 'caja_id', 'cliente_id', 'producto_id', 'proveedor_id', 'aroma_id', 'cantidad', 'precio_costo','cantidad'];
   use HasFactory;
   public function venta(): BelongsTo //
   {

@@ -7,6 +7,7 @@ use App\Models\CompraDetalle;
 use App\Models\Marca;
 use App\Models\Producto;
 use App\Models\Proveedor;
+use App\Models\VentaDetalle;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -47,10 +48,39 @@ class VentaDetalleController extends Controller
     return response()->json(['compra' => $compra]);
   }
 
-  public function store(Request $request): RedirectResponse
+  public static function organizeVentas(Request $request)
   {
     $ventas = $request->all();
-    
-    dd($arrayRegistros);
+    $reorderedArray = [];
+    //dd($ventas);
+    for ($j = 0; $j < count($ventas['cantidad']); $j++) {
+      if ($ventas['cantidad'][$j] != 0) {
+        $reorderedArray[] = [
+          'proveedor_id' => $ventas['proveedor'][$j],
+          'marca_id' => $ventas['marca'][$j],
+          'producto_id' => $ventas['producto'][$j],
+          'aroma_id' => $ventas['aroma'][$j],
+          'cantidad' => $ventas['cantidad'][$j],
+          'precio_costo' => $ventas['precio'][$j],
+        ];
+      }
+    }
+    //dd($reorderedArray);
+    return $reorderedArray;
   }
+
+  public function store(Request $request)
+  {
+    $reorderedArray = self::organizeVentas($request);
+    //dd($reorderedArray);
+    $marcas = Marca::all();
+    $proveedores = Proveedor::all();
+    $productos = Producto::all();
+    $aromas = Aroma::all();
+    foreach ($reorderedArray as $value) {
+      $value = VentaDetalle::create($value);
+      return redirect()->route('ventas.index');
+    }
+  }
+
 }

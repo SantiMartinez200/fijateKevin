@@ -98,13 +98,16 @@
         <div class="form-group">
           <button type="button" class="btn btn-primary mr-2" onclick="agregarFila()">Agregar Fila</button>
           <input type="submit" value="Guardar" class="btn btn-success">
+          <div id="container">
+            <div class="d-flex align-items-center mt-2">
+              <label class="mt-2" for="total-compra" id="total-compraLabel" hidden>TOTAL: </label>
+              <input type="number" name="total-compra" id="total-compra" value=""
+                class="form-control form-control-sm w-25 ml-1" readonly hidden>
+            </div>
+          </div>
         </div>
       </form>
     </div>
-  </div>
- 
-  <div id="compra-details">
-
   </div>
   <script>
     document.getElementById('tbody').addEventListener('change', function (event) {
@@ -160,11 +163,15 @@
               });
 
               // Muestra el total general 
-              const compraDetailsDiv = document.getElementById('compra-details');
-              compraDetailsDiv.innerHTML = `
-                        <h3>Detalles de la Venta</h3>
-                        <p>TOTAL: ${totalGeneral}</p>
-                        `;
+              if (totalGeneral > 0) {
+                document.getElementById('total-compraLabel').hidden = false;
+                const compraDetailsInput = document.getElementById('total-compra');
+                compraDetailsInput.value = totalGeneral;
+                compraDetailsInput.hidden = false;
+              } else {
+                document.getElementById('total-compraLabel').hidden = true;
+                document.getElementById('total-compra').hidden = true;
+              }
             }
           })
           .catch(error => console.error('Error fetching data:', error));
