@@ -60,7 +60,7 @@
             <tr class="template-row">
               <td>
                 <button class="btn" onclick="eliminarFila(this)">
-                  <i class="bi bi-bag-x" style="font-size: 2rem; color: cornflowerblue;"></i>
+                  <i class="bi bi-bag-x" style="font-size: 2rem; color: red;"></i>
                 </button>
               </td>
               <td class="small-width">

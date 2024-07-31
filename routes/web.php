@@ -3,6 +3,7 @@
 use App\Http\Controllers\MovimientosCajaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegistrosCajaController;
+use App\Http\Controllers\StockController;
 use App\Http\Controllers\VentaDetalleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AromaController;
@@ -63,6 +64,8 @@ Route::get('movimientos', [MovimientosCajaController::class, 'index'])->name('mo
 Route::get('caja/{id}/movimientos', [MovimientosCajaController::class, 'getMovimientos'])->name('caja.movimientos');
 Route::get('caja/{id}/monto', [MovimientosCajaController::class, 'getMonto']);
 Route::get('caja/{id}/cerrar', [CajaController::class, 'close'])->name('caja.close');
+
+Route::get('stock', [StockController::class, 'index'])->name('stock');
 
 Route::get('/dashboard', function () {
   return view('dashboard');

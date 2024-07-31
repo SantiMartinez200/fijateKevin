@@ -13,6 +13,7 @@ return new class extends Migration {
     Schema::create('venta_detalles', function (Blueprint $table) {
       $table->id();
       $table->integer('venta_id');
+      $table->integer('compra_detalle_id');
       $table->integer('marca_id');
       $table->integer('proveedor_id');
       $table->integer('producto_id');

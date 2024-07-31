@@ -57,6 +57,7 @@ class VentaDetalleController extends Controller
     for ($j = 0; $j < count($ventas['cantidad']); $j++) {
       if ($ventas['cantidad'][$j] != 0) {
         $reorderedArray[] = [
+          'compra_detalle_id' => $ventas['compra-select'][$j],
           'proveedor_id' => $ventas['proveedor'][$j],
           'marca_id' => $ventas['marca'][$j],
           'producto_id' => $ventas['producto'][$j],
@@ -121,7 +122,7 @@ class VentaDetalleController extends Controller
       $value = VentaDetalle::create($value);
     }
 
-    return redirect()->route('venta');
+    return redirect()->route('venta')->withSuccess('Venta registrada');
   }
 
 }

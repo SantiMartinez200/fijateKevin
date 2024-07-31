@@ -51,6 +51,7 @@
             General</a>
           <ul class="collapse list-unstyled" id="homeSubmenu">
             <li><a href="#">Datos</a></li>
+            <li><a href="{{route('stock')}}">Stock</a></li>
           </ul>
         </li>
         <li>
@@ -84,7 +85,7 @@
     <div id="content">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-          <button type="button" id="sidebarCollapse" class="btn btn-info">
+          <button type="button" id="sidebarCollapse" class="btn btn-primary">
             <i class="fas fa-align-left"></i>
             <span>Barra Lateral</span>
           </button>
