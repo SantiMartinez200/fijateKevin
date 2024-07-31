@@ -115,7 +115,11 @@
       document.getElementById('tbody').addEventListener('change', function (event) {
         if (event.target && event.target.matches('select[name="compra-select[]"]')) {
           let id = event.target.value;
-          console.log("Valor seleccionado:", id);
+          document.getElementById('tbody').addEventListener('keydown', function (event) {
+            if (event.key === "-") {
+              event.preventDefault();
+            }
+          })
           fetch(`/getCompraData/${id}`)
             .then(response => {
               if (!response.ok) {
@@ -148,7 +152,7 @@
               // Cálculos
               document.getElementById('tbody').addEventListener('input', function (event) {
                 if (event.target && event.target.matches('input[name="cantidad[]"]')) {
-                  verificarCantidad();
+                  actualizarTotal();
                 }
               });
             })
@@ -157,51 +161,24 @@
       });
     }
     fetchURL();
-
-    function verificarCantidad() {
-      var bool = false;
+    function actualizarTotal() {
+      let totalGeneral = 0;
+      // Recorre todas las filas y suma los totales
       document.querySelectorAll('#tbody tr').forEach(row => {
         const cantidad = row.querySelector('input[name="cantidad[]"]').value;
-        if (cantidad < 0) {
-          bool = true;
-          break;
-          actualizarTotal(bool);
-        }else{
-          bool = false;
-          actualizarTotal(bool);
-        }
-      }
-      )
-    }
-
-    function actualizarTotal(bool) {
-      let totalGeneral = 0;
-      var handle = document.getElementById('handle');
-      var guardarButton = document.getElementById('guardar');
-      // Recorre todas las filas y suma los totales
-      if (bool == true){
-        handle.innerHTML = `Verifique las cantidades ingresadas`
-        handle.hidden = false;
-        guardarButton.disabled = true;
-      }else{
-        handle.hidden = true;
-        guardarButton.disabled = false;
-        document.querySelectorAll('#tbody tr').forEach(row => {
-          const cantidad = row.querySelector('input[name="cantidad[]"]').value;
-          const precio = row.querySelector('input[name="precio[]"]').value;
-          const subtotal = cantidad * precio;
-          totalGeneral += subtotal;
-        });
-        // Muestra el total general 
-        if (totalGeneral > 0) {
-          document.getElementById('total-compraLabel').hidden = false;
-          const compraDetailsInput = document.getElementById('total-compra');
-          compraDetailsInput.value = totalGeneral;
-          compraDetailsInput.hidden = false;
-        } else {
-          document.getElementById('total-compraLabel').hidden = true;
-          document.getElementById('total-compra').hidden = true;
-        }
+        const precio = row.querySelector('input[name="precio[]"]').value;
+        const subtotal = cantidad * precio;
+        totalGeneral += subtotal;
+      });
+      // Muestra el total general 
+      if (totalGeneral > 0) {
+        document.getElementById('total-compraLabel').hidden = false;
+        const compraDetailsInput = document.getElementById('total-compra');
+        compraDetailsInput.value = totalGeneral;
+        compraDetailsInput.hidden = false;
+      } else {
+        document.getElementById('total-compraLabel').hidden = true;
+        document.getElementById('total-compra').hidden = true;
       }
     }
     function agregarFila() {
