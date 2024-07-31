@@ -134,15 +134,15 @@
         <td>{{$caja->monto_final }}</td>
         <td>{{$caja->comentario }}</td>
         <td>
-          <div class="btn-group" role="group" aria-label="Basic example"> <!-- basic example???? -->
-          <button id="movimiento" type="button" class="btn btn-success" data-id="{{$caja->id}}"
+          <div class="btn-group " role="group" aria-label="Basic example"> <!-- basic example???? -->
+          <button id="movimiento" type="button" class="btn btn-success btn-movimiento{{$caja->id}}" data-id="{{$caja->id}}"
             data-toggle="modal" data-target="#modalRegistrarMovimiento">
             Movimiento
           </button>
           <a href="{{ route('caja.edit', $caja->id) }}"><button id="edit"
-            class="btn btn-primary">Editar</button></a>
+            class="btn btn-primary btn-edit{{$caja->id}}">Editar</button></a>
           <a href="{{ route('caja.destroy', $caja->id) }}" class="btn btn-danger">Eliminar</a>
-          <a href="{{ route('caja.close', $caja->id) }}"><button class="btn btn-warning"
+          <a href="{{ route('caja.close', $caja->id) }}"><button class="btn btn-warning btn-close{{$caja->id}}"
             id="close">Cerrar</button></a>
           </div>
         </td>
@@ -154,31 +154,23 @@
   </div>
 </div>
 <script>
-  //--- Anotaciones para separar los scripts en archivos JS separados ---//
-  //podría quedar embebido? o separamos en otra function? se llamaría a si misma y se ejecutaría siempre? o cuando carga la página? reveer esto.
-  let botonMovimiento = document.querySelectorAll('#movimiento');
-  //console.log(botonMovimiento);
-  let botonEdit = document.querySelectorAll('#edit');
-  //console.log(botonEdit);
-  let botonCerrar = document.querySelectorAll('#close');
-  //console.log(botonCerrar);
-  var buttons = [botonMovimiento, botonEdit, botonCerrar];
   let botonModal = document.querySelectorAll('[data-target="#modalRegistrarMovimiento"]');
-  const table = document.getElementById('cajaTable');
-  const tbody = table.getElementsByTagName('tbody')[0];
-  const rows = tbody.querySelectorAll('tr');
-  console.log(buttons);
-  for (let r = 0; r < rows.length; r++) {
-    for (let i = 0; i < buttons.length; i++) {
-      for (let j = 0; j < buttons.length; j++) {
-        if (rows[r].children[0].textContent == 'cerrada') {
-          buttons[i][r].disabled = true;
-        }
-      }
-    }
-  }
-    
+
   
+  const cajas = @json($cajas);
+  cajas.forEach(caja => {
+    if (caja.estado == 'cerrada') {
+        console.log(caja.estado);
+        let btnMovimiento = document.querySelector(`.btn-movimiento${caja.id}`);
+        let btnEdit = document.querySelector(`.btn-edit${caja.id}`);
+        let btnCerrar = document.querySelector(`.btn-close${caja.id}`);
+
+        btnMovimiento.disabled = true;
+        btnEdit.disabled = true;
+        btnCerrar.disabled = true;
+    }
+   
+  });
   
   //--------------------------------------------------//
 
