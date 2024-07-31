@@ -39,6 +39,7 @@ class StockController extends Controller
         }
       }
     }
+    
     return $compraDetalles;
   }
 

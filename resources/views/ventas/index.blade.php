@@ -72,33 +72,34 @@
                 </select>
               </td>
               <td class="min-width">
-                <input type="text" name="proveedor[]" class="form-control form-control-sm">
+                <input type="text" name="proveedor[]" class="form-control form-control-sm" readonly>
               </td>
               <td class="min-width">
-                <input type="text" name="marca[]" class="form-control form-control-sm">
+                <input type="text" name="marca[]" class="form-control form-control-sm" readonly>
               </td>
               <td class="min-width">
-                <input type="text" name="producto[]" class="form-control form-control-sm">
+                <input type="text" name="producto[]" class="form-control form-control-sm" readonly>
               </td>
               <td class="min-width">
-                <input type="text" name="aroma[]" class="form-control form-control-sm">
+                <input type="text" name="aroma[]" class="form-control form-control-sm" readonly>
               </td>
               <td class="small-width">
-                <input type="number" name="stock[]" class="form-control form-control-sm">
+                <input type="number" name="stock[]" class="form-control form-control-sm" readonly>
               </td>
               <td class="min-width">
                 <input type="number" name="precio[]" class="form-control form-control-sm">
               </td>
               <td class="small-width">
-                <input type="number" name="cantidad[]" class="form-control form-control-sm">
+                <input type="number" name="cantidad[]" class="form-control form-control-sm" pattern="^[0-9]" min="1">
               </td>
             </tr>
           </tbody>
         </table>
         <div class="form-group">
+          <p id="handle" hidden></p>
           <button type="button" class="btn btn-primary mr-2" onclick="agregarFila()">Agregar Fila</button>
-          <input type="submit" value="Guardar" class="btn btn-success">
-          <div id="container">
+          <input type="submit" value="Guardar" class="btn btn-success" id="guardar">
+          <div class="container" id="handle">
             <div class="d-flex align-items-center mt-2">
               <label class="mt-2" for="total-compra" id="total-compraLabel" hidden>TOTAL: </label>
               <input type="number" name="total-compra" id="total-compra" value=""
@@ -110,75 +111,99 @@
     </div>
   </div>
   <script>
-    document.getElementById('tbody').addEventListener('change', function (event) {
-      if (event.target && event.target.matches('select[name="compra-select[]"]')) {
-        let id = event.target.value;
-        console.log("Valor seleccionado:", id);
-        fetch(`/getCompraData/${id}`)
-          .then(response => {
-            if (!response.ok) {
-              throw new Error(`Error en la solicitud: ${response.status}`);
-            }
-            return response.json();
-          })
-          .then(data => {
-            const compraDetails = data.compra;
-            const currentRow = event.target.closest('tr'); // Encuentra la fila actual
-
-            const proveedor = currentRow.querySelector('input[name="proveedor[]"]');
-            proveedor.value = compraDetails.proveedor_id;
-
-            const marca = currentRow.querySelector('input[name="marca[]"]');
-            marca.value = compraDetails.marca_id;
-
-            const producto = currentRow.querySelector('input[name="producto[]"]');
-            producto.value = compraDetails.producto_id;
-
-            const aroma = currentRow.querySelector('input[name="aroma[]"]');
-            aroma.value = compraDetails.aroma_id;
-
-            const stock = currentRow.querySelector('input[name="stock[]"]');
-            stock.value = compraDetails.cantidad;
-
-            const precio = currentRow.querySelector('input[name="precio[]"]');
-            precio.value = compraDetails.precio_costo;
-
-            // Cálculos
-            document.getElementById('tbody').addEventListener('input', function (event) {
-              if (event.target && event.target.matches('input[name="cantidad[]"]')) {
-                actualizarTotal();
+    function fetchURL() {
+      document.getElementById('tbody').addEventListener('change', function (event) {
+        if (event.target && event.target.matches('select[name="compra-select[]"]')) {
+          let id = event.target.value;
+          console.log("Valor seleccionado:", id);
+          fetch(`/getCompraData/${id}`)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error(`Error en la solicitud: ${response.status}`);
               }
-            });
+              return response.json();
+            })
+            .then(data => {
+              const compraDetails = data.compra;
+              const currentRow = event.target.closest('tr'); // Encuentra la fila actual
 
-            function actualizarTotal() {
-              let totalGeneral = 0;
+              const proveedor = currentRow.querySelector('input[name="proveedor[]"]');
+              proveedor.value = compraDetails.proveedor_id;
 
-              // Recorre todas las filas y suma los totales
-              document.querySelectorAll('#tbody tr').forEach(row => {
-                const cantidad = row.querySelector('input[name="cantidad[]"]').value;
-                const precio = row.querySelector('input[name="precio[]"]').value;
-                const subtotal = cantidad * precio;
-                // Agrega el subtotal al total general
-                totalGeneral += subtotal;
+              const marca = currentRow.querySelector('input[name="marca[]"]');
+              marca.value = compraDetails.marca_id;
+
+              const producto = currentRow.querySelector('input[name="producto[]"]');
+              producto.value = compraDetails.producto_id;
+
+              const aroma = currentRow.querySelector('input[name="aroma[]"]');
+              aroma.value = compraDetails.aroma_id;
+
+              const stock = currentRow.querySelector('input[name="stock[]"]');
+              stock.value = compraDetails.cantidad;
+
+              const precio = currentRow.querySelector('input[name="precio[]"]');
+              precio.value = compraDetails.precio_costo;
+
+              // Cálculos
+              document.getElementById('tbody').addEventListener('input', function (event) {
+                if (event.target && event.target.matches('input[name="cantidad[]"]')) {
+                  verificarCantidad();
+                }
               });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+        }
+      });
+    }
+    fetchURL();
 
-              // Muestra el total general 
-              if (totalGeneral > 0) {
-                document.getElementById('total-compraLabel').hidden = false;
-                const compraDetailsInput = document.getElementById('total-compra');
-                compraDetailsInput.value = totalGeneral;
-                compraDetailsInput.hidden = false;
-              } else {
-                document.getElementById('total-compraLabel').hidden = true;
-                document.getElementById('total-compra').hidden = true;
-              }
-            }
-          })
-          .catch(error => console.error('Error fetching data:', error));
+    function verificarCantidad() {
+      var bool = false;
+      document.querySelectorAll('#tbody tr').forEach(row => {
+        const cantidad = row.querySelector('input[name="cantidad[]"]').value;
+        if (cantidad < 0) {
+          bool = true;
+          break;
+          actualizarTotal(bool);
+        }else{
+          bool = false;
+          actualizarTotal(bool);
+        }
       }
-    });
+      )
+    }
 
-
+    function actualizarTotal(bool) {
+      let totalGeneral = 0;
+      var handle = document.getElementById('handle');
+      var guardarButton = document.getElementById('guardar');
+      // Recorre todas las filas y suma los totales
+      if (bool == true){
+        handle.innerHTML = `Verifique las cantidades ingresadas`
+        handle.hidden = false;
+        guardarButton.disabled = true;
+      }else{
+        handle.hidden = true;
+        guardarButton.disabled = false;
+        document.querySelectorAll('#tbody tr').forEach(row => {
+          const cantidad = row.querySelector('input[name="cantidad[]"]').value;
+          const precio = row.querySelector('input[name="precio[]"]').value;
+          const subtotal = cantidad * precio;
+          totalGeneral += subtotal;
+        });
+        // Muestra el total general 
+        if (totalGeneral > 0) {
+          document.getElementById('total-compraLabel').hidden = false;
+          const compraDetailsInput = document.getElementById('total-compra');
+          compraDetailsInput.value = totalGeneral;
+          compraDetailsInput.hidden = false;
+        } else {
+          document.getElementById('total-compraLabel').hidden = true;
+          document.getElementById('total-compra').hidden = true;
+        }
+      }
+    }
     function agregarFila() {
       // Obtén la fila de plantilla
       var templateRow = document.querySelector('.template-row');
