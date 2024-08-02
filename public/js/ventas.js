@@ -67,7 +67,8 @@ function fetchURL() {
                                         'input[name="cantidad[]"]'
                                     )
                                 ) {
-                                    consoelar();
+                                    console.log("c");
+                                    verificarCantidad();
                                 }
                             });
                     })
@@ -127,22 +128,19 @@ function eliminarFila(button) {
     }
 }
 
-function consoelar() {
+function verificarCantidad() {
     let rows = document.querySelectorAll("#tbody tr");
     rows.forEach((row) => {
         // Obtener inputs de cantidad&stock
         let cantidadInput = row.querySelector('input[name="cantidad[]"]');
         let stockInput = row.querySelector('input[name="stock[]"]');
-        cantidadInput.addEventListener("input", function (event) {
-            let cantidad = parseInt(cantidadInput.value);
-            let stock = parseInt(stockInput.value);
-          if (cantidad > stock) {
-              //se remueve el último caracter en caso de que la cantidad ingresada supere al stock.
-                event.target.value = cantidadInput.value.slice(0, -1);
-            } else {
-              actualizarTotal();
-            }
-        });
+        let cantidad = parseInt(cantidadInput.value);
+        let stock = parseInt(stockInput.value);
+        if (cantidad > stock) {
+            //se remueve el último caracter en caso de que la cantidad ingresada supere al stock.
+            event.target.value = cantidadInput.value.slice(0, -1);
+        } else {
+            actualizarTotal();
+        }
     });
 }
-
