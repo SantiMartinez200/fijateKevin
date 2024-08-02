@@ -12,6 +12,7 @@
     integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/logos.css') }}">
   <!-- Font Awesome JS -->
   <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
     integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous">
@@ -33,12 +34,14 @@
     <!-- Sidebar -->
     <nav id="sidebar">
       <div class="sidebar-header">
-        <h3>Sistema TribalEssence</h3>
+        <img src="{{asset('img/logo-tribal-essence-white.png')}}" alt="logo" class="logo-sidebar mx-auto d-block">
       </div>
 
       <ul class="list-unstyled components">
-        <p>Bienvenido {{ auth()->user()->name }}!</p>
-        <li class="active">
+        <div class="d-flex justify-content-center">
+          <p><b>Bienvenido {{ auth()->user()->name }}!</b></p>
+        </div>
+        <li>
           <a href="#cajaSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Caja</a>
           <ul class="collapse list-unstyled" id="cajaSubmenu">
             <li><a href="{{ route('caja.index') }}" class="">Operar</a></li>
@@ -46,7 +49,7 @@
           </ul>
         </li>
         <li></li>
-        <li class="active">
+        <li>
           <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Panel
             General</a>
           <ul class="collapse list-unstyled" id="homeSubmenu">
