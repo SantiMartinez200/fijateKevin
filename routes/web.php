@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MovimientosCajaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegistrosCajaController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\CajaController;
 use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MovimientoController;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 //use App\Http\Controllers\ProductController;
 
@@ -38,43 +40,47 @@ Route::get('/', function () {
 });
 
 //Ingresar estas rutas al middleware auth
-Route::resource('productos', ProductoController::class);
-Route::resource('clientes', ClienteController::class);
-Route::resource('aromas', AromaController::class);
-Route::resource('marcas', MarcaController::class);
-Route::resource('proveedores', ProveedorController::class)->parameters(['proveedores' => 'proveedor']); //////?????????ruta bug que requiere ser redeclarada por las convenciones.
-Route::resource('metodo_pagos', MetodoPagoController::class)->parameters(['metodo_pagos' => 'metodo_pago']);
-Route::resource('condiciones-de-ventas', CondicionVentaController::class);
-
-Route::resource('caja', CajaController::class);
-Route::post('storeMovimientoCaja', [MovimientosCajaController::class, 'store'])->name('storeMovimiento');
-
-Route::get('ingreso', [CompraDetalleController::class, 'getData'])->name('ingreso');
-Route::post('storeCompraData', [CompraDetalleController::class, 'store'])->name('storeCompraData');
-
-Route::get('getCompraData/{id}', [VentaDetalleController::class, 'getCompraData'])->name('getCompra');
-Route::get('venta', [VentaDetalleController::class,'index'])->name('venta');
-Route::post('storeVentaDetalle',[VentaDetalleController::class,'store'])->name('storeVentaDetalle');
-
-Route::get('login', [LoginController::class, 'vista']);
-Route::post('autenticacion', [LoginController::class, 'autenticacion'])->name('login.autenticacion');
 
 
-Route::get('movimientos', [MovimientosCajaController::class, 'index'])->name('movimientos');
-Route::get('caja/{id}/movimientos', [MovimientosCajaController::class, 'getMovimientos'])->name('caja.movimientos');
-Route::get('caja/{id}/monto', [MovimientosCajaController::class, 'getMonto']);
-Route::get('caja/{id}/cerrar', [CajaController::class, 'close'])->name('caja.close');
-
-Route::get('stock', [StockController::class, 'index'])->name('stock');
-
-Route::get('/dashboard', function () {
-  return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//   return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
   Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
   Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
   Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+  Route::resource('productos', ProductoController::class);
+  Route::resource('clientes', ClienteController::class);
+  Route::resource('aromas', AromaController::class);
+  Route::resource('marcas', MarcaController::class);
+  Route::resource('proveedores', ProveedorController::class)->parameters(['proveedores' => 'proveedor']); //////?????????ruta bug que requiere ser redeclarada por las convenciones.
+  Route::resource('metodo_pagos', MetodoPagoController::class)->parameters(['metodo_pagos' => 'metodo_pago']);
+  Route::resource('condiciones-de-ventas', CondicionVentaController::class);
+
+  Route::resource('caja', CajaController::class);
+  Route::post('storeMovimientoCaja', [MovimientosCajaController::class, 'store'])->name('storeMovimiento');
+
+  Route::get('ingreso', [CompraDetalleController::class, 'getData'])->name('ingreso');
+  Route::post('storeCompraData', [CompraDetalleController::class, 'store'])->name('storeCompraData');
+
+  Route::get('getCompraData/{id}', [VentaDetalleController::class, 'getCompraData'])->name('getCompra');
+  Route::get('venta', [VentaDetalleController::class, 'index'])->name('venta');
+  Route::post('storeVentaDetalle', [VentaDetalleController::class, 'store'])->name('storeVentaDetalle');
+
+  Route::get('login', [LoginController::class, 'vista']);
+  Route::post('autenticacion', [LoginController::class, 'autenticacion'])->name('login.autenticacion');
+
+
+  Route::get('movimientos', [MovimientosCajaController::class, 'index'])->name('movimientos');
+  Route::get('caja/{id}/movimientos', [MovimientosCajaController::class, 'getMovimientos'])->name('caja.movimientos');
+  Route::get('caja/{id}/monto', [MovimientosCajaController::class, 'getMonto']);
+  Route::get('caja/{id}/cerrar', [CajaController::class, 'close'])->name('caja.close');
+
+  Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+  Route::get('stock', [StockController::class, 'index'])->name('stock');
 });
 
 require __DIR__ . '/auth.php';

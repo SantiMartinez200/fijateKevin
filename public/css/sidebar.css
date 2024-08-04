@@ -1,15 +1,11 @@
-/*
-    DEMO STYLE
-*/
-
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 body {
-    font-family: 'Poppins', sans-serif;
+  font-family: 'Trebuchet MS', sans-serif;
     background: #fafafa;
 }
 
 p {
-    font-family: 'Poppins', sans-serif;
+  font-family: 'Trebuchet MS', sans-serif;
     font-size: 1.1em;
     font-weight: 300;
     line-height: 1.7em;
@@ -59,13 +55,12 @@ a:focus {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #1A5319;
+    background: #1a5319;
     color: #fff;
     transition: all 0.3s;
 
     z-index: 1000;
 }
-
 
 #sidebar.active {
     margin-left: -250px;
@@ -78,7 +73,7 @@ a:focus {
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #1A5319;
+    border-bottom: 1px solid #1a5319;
 }
 
 #sidebar ul p {
@@ -101,7 +96,7 @@ a:focus {
     background: #fff;
 }
 
-#sidebar ul li.active>a,
+#sidebar ul li.active > a,
 a[aria-expanded="true"] {
     color: #fff;
     background: #124c25;
@@ -139,7 +134,7 @@ ul.CTAs a {
 
 a.download {
     background: #fff;
-    color: #7386D5;
+    color: #7386d5;
 }
 
 a.article,
