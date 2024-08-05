@@ -52,6 +52,8 @@ Route::middleware('auth')->group(function () {
   Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
   Route::resource('productos', ProductoController::class);
+  Route::get('producto-precio/{producto}', [ProductoController::class, 'precio'])->name('producto.precio');
+
   Route::resource('clientes', ClienteController::class);
   Route::resource('aromas', AromaController::class);
   Route::resource('marcas', MarcaController::class);

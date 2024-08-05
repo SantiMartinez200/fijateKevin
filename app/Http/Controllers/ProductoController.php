@@ -77,4 +77,10 @@ class ProductoController extends Controller
     return redirect()->route('productos.index')
       ->with('warning','Has eliminado el producto.');
   }
+
+  public function precio($id)
+  {
+    $productResponse = Producto::find($id);
+    return response()->json(['productoJson' => $productResponse]);
+  }
 }

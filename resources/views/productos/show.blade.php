@@ -37,6 +37,14 @@
                     </div>
 
                     <div class="row d-flex align-items-center">
+                      <label for="precio_costo" class="col-md-4 col-form-label text-md-end text-start"><strong>Precio al Costo:</strong></label>
+                      <!-- Agregar relacion -->
+                      <div class="col-md-6" style="line-height: 35px;">
+                        {{ $producto->precio_costo }}
+                      </div>
+                    </div>
+
+                    <div class="row d-flex align-items-center">
                         <label for="descripcion" class="col-md-4 col-form-label text-md-end text-start"><strong>Descripcion:</strong></label>
                         <div class="col-md-6" style="line-height: 35px;">
                             {{ $producto->descripcion }}

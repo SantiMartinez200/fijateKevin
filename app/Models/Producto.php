@@ -13,6 +13,7 @@ class Producto extends Model
     'nombre',
     'aroma_id',
     'condicion_venta_id',
+    'precio_costo',
     'descripcion'
   ];
 

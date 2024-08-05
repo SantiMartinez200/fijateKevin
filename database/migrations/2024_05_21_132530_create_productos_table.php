@@ -15,6 +15,7 @@ return new class extends Migration {
       $table->string('nombre');
       $table->integer('aroma_id');
       $table->integer('condicion_venta_id');
+      $table->integer('precio_costo');
       $table->string('descripcion');
       $table->timestamps();
     });

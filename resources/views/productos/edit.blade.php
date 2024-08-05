@@ -51,7 +51,8 @@
             <div class="col-md-6">
               <select class="form-control @error('condicion_venta_id') is-invalid @enderror" id="condicion_venta_id"
                 name="condicion_venta_id" value="{{ old('condicion_venta_id') }}">
-                <option selected value="{{$producto->condicion_venta_id}}">{{$producto->condicion_venta_id}}</option> <!--Traer opcion cargada-->
+                <option selected value="{{$producto->condicion_venta_id}}">{{$producto->condicion_venta_id}}</option>
+                <!--Traer opcion cargada-->
                 <option value="1">Unitario</option> <!--Traer opciones de la BD-->
                 <option value="2">Suelto</option> <!--Traer opciones de la BD-->
               </select>
@@ -69,6 +70,17 @@
               @if ($errors->has('descripcion'))
           <span class="text-danger">{{ $errors->first('descripcion') }}</span>
         @endif
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label for="precio_costo" class="col-md-4 col-form-label text-md-end text-start">Precio al Costo</label>
+            <div class="col-md-6">
+              <input type="text" class="form-control @error('precio_costo') is-invalid @enderror" id="precio_costo" name="precio_costo"
+                value="{{ $producto->precio_costo }}">
+              @if ($errors->has('precio_costo'))
+          <span class="text-danger">{{ $errors->first('precio_costo') }}</span>
+      @endif
             </div>
           </div>
 
