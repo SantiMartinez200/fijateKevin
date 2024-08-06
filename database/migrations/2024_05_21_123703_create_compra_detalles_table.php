@@ -18,6 +18,8 @@ return new class extends Migration {
       $table->integer('producto_id');
       $table->integer('aroma_id');
       $table->double('precio_costo');
+      $table->integer('porcentaje_ganancia');
+      $table->double('precio_venta'); 
       $table->integer('cantidad');
       $table->timestamps();
     });

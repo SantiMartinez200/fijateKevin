@@ -18,7 +18,7 @@ class VentaController extends Controller
   {
     $total = 0;
     foreach ($detallesArray as $detalle) {
-      $total += $detalle["precio_costo"] * $detalle["cantidad"];
+      $total += $detalle["precio_venta"] * $detalle["cantidad"];
     }
     return $total;
   }

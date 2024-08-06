@@ -55,7 +55,7 @@ function fetchURL() {
                         const precio = currentRow.querySelector(
                             'input[name="precio[]"]'
                         );
-                        precio.value = compraDetails.precio_costo;
+                        precio.value = compraDetails.precio_venta;
 
                         // Cálculos
                         document

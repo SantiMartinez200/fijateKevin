@@ -44,7 +44,7 @@ class VentaDetalleController extends Controller
           'producto_id' => $ventas['producto'][$j],
           'aroma_id' => $ventas['aroma'][$j],
           'cantidad' => $ventas['cantidad'][$j],
-          'precio_costo' => $ventas['precio'][$j],
+          'precio_venta' => $ventas['precio'][$j],
         ];
       }
     }

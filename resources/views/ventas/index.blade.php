@@ -52,7 +52,7 @@
               <th scope="col">Producto</th>
               <th scope="col">Aroma</th>
               <th scope="col" class="small-width">Stock</th>
-              <th scope="col" class="small-width">Precio</th>
+              <th scope="col" class="small-width">Precio  <br> de Venta</th>
               <th scope="col" class="small-width">C/Venta</th>
             </tr>
           </thead>

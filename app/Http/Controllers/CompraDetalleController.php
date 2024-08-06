@@ -42,6 +42,8 @@ class CompraDetalleController extends Controller
         'producto_id' => $data['producto_id'],
         'aroma_id' => $data['aroma_id'],
         'precio_costo' => $data['precio_costo'],
+        'porcentaje_ganancia' => $data['porcentaje_ganancia'],
+        'precio_venta' => $data['precio_venta'],
         'cantidad' => $data['cantidad'],
       ]);
       return redirect()->route('ingreso')->with('message', 'Ingreso realizado con éxito');

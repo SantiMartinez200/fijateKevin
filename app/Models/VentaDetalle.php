@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class VentaDetalle extends Model
 {
   protected $table = "venta_detalles";
-  protected $fillable = ['compra_detalle_id','venta_id', 'marca_id', 'producto_id', 'proveedor_id', 'aroma_id', 'cantidad', 'precio_costo'];
+  protected $fillable = ['compra_detalle_id','venta_id', 'marca_id', 'producto_id', 'proveedor_id', 'aroma_id', 'cantidad', 'precio_venta'];
   use HasFactory;
   public function venta(): BelongsTo //
   {
