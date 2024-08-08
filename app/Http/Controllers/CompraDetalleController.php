@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Caja;
 use App\Models\CompraDetalle;
 use Illuminate\Http\Request;
 use App\Models\Producto;
@@ -34,6 +35,19 @@ class CompraDetalleController extends Controller
     $array = ['usuario_id' => $user, 'caja_id' => $caja, 'total' => $total];
     CompraController::store($array);
     $idCompra = CompraController::getId();
+
+    // ------------------------------------------- //
+    $cajaAbierta = Caja::where('estado', 'Abierta')->first();
+    $producto = Producto::find($data['producto_id']);
+    $request = new Request([
+      'caja_id' => $cajaAbierta->id,
+      'tipo_movimiento' => 'S',
+      'monto' => $total,
+      'descripcion' => 'Compra del producto: ' . $producto->nombre . ' por $' . $data["precio_costo"] . ' X ' . $data["cantidad"]. ' U',
+    ]);
+    MovimientosCajaController::store($request);
+    // ------------------------------------------- //
+
     try {
       CompraDetalle::create([
         'compra_id' => $idCompra,

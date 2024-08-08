@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Aroma;
+use App\Models\Caja;
 use App\Models\CompraDetalle;
 use App\Models\Marca;
 use App\Models\Producto;
@@ -89,7 +90,8 @@ class VentaDetalleController extends Controller
 
     $total = VentaController::calculateTotal($reorderedArray);
     $user_id = auth()->user()->id;
-    $caja = 1;
+    $cajaAbierta = Caja::where('estado', 'Abierta')->first();
+    $caja = $cajaAbierta->id;
     $array = [
       'usuario_id' => $user_id,
       'caja_id' => $caja,
@@ -97,6 +99,17 @@ class VentaDetalleController extends Controller
     ];
     VentaController::store($array);
     $venta_id = Venta::all()->last()->id;
+
+    // ------------------------------------------- //
+    $cajaAbierta = Caja::where('estado', 'Abierta')->first();
+    $request = new Request([
+      'caja_id' => $cajaAbierta->id,
+      'tipo_movimiento' => 'E',
+      'monto' => $total,
+      'descripcion' => 'Venta de productos',
+    ]);
+    MovimientosCajaController::store($request);
+    // ------------------------------------------- //
 
     foreach ($reorderedArray as $value) {
       $value['venta_id'] = $venta_id;
