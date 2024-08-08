@@ -8,6 +8,7 @@ use App\Models\Producto;
 use App\Models\Proveedor;
 use App\Models\Marca;
 use App\Models\Aroma;
+use App\Models\Caja;
 
 class CompraDetalleController extends Controller
 {
@@ -34,6 +35,21 @@ class CompraDetalleController extends Controller
     $array = ['usuario_id' => $user, 'caja_id' => $caja, 'total' => $total];
     CompraController::store($array);
     $idCompra = CompraController::getId();
+
+    //---------------------------------------------------------------------------------------------------
+    // caja id = caja abierta ?? false, tipo_movimiento = S, descripcion = compra mercaderia [la merca].
+    $data = $request->all();
+    $cajaAbierta = Caja::where('estado', 'Abierta')->first();
+    $producto = Producto::find($data['producto_id']);
+    $request = new Request([
+      'caja_id' => $cajaAbierta->id,
+      'tipo_movimiento' => 'S',
+      'monto' => $total,
+      'descripcion' => 'Compra del producto: ' . $producto->nombre,
+    ]);
+    MovimientosCajaController::store($request);
+    //---------------------------------------------------------------------------------------------------
+
     try {
       CompraDetalle::create([
         'compra_id' => $idCompra,

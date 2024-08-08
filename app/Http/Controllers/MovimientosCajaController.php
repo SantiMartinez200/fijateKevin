@@ -42,7 +42,7 @@ class MovimientosCajaController extends Controller
       return response()->json(['monto_final' => $movimientosSum, 'monto_inicial' => $caja->monto_inicial]);
     }
   }
-  public function store(Request $request): RedirectResponse
+  public static function store(Request $request): RedirectResponse
   {
     $registro = $request->all();
     if ($registro["tipo_movimiento"] == "S") {
