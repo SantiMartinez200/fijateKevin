@@ -18,11 +18,6 @@ class CajaController extends Controller
     $metodos = MetodoPago::all();
     $users = User::all();
     foreach ($cajas as $caja) {
-      if ($caja->metodo_pago_id == $metodos->first()->id) {
-        $caja->metodo_pago_id = $metodos->first()->nombre;
-      } else {
-        $caja->metodo_pago_id = $metodos->find($caja->metodo_pago_id)->nombre;
-      }
       if ($caja->usuario_id == $users->first()->id) {
         $caja->usuario_id = $users->first()->name;
       } else {

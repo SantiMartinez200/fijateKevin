@@ -14,7 +14,6 @@ return new class extends Migration {
       $table->id();
       $table->string('estado');
       $table->integer('usuario_id');
-      $table->integer('metodo_pago_id')->nullable();
       $table->double('monto_inicial');
       $table->string('comentario')->nullable();
       $table->double('monto_final')->nullable();

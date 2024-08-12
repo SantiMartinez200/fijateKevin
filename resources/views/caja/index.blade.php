@@ -38,14 +38,6 @@
                 </select>
               </div>
               <div class="form-group">
-                <label for="tipo">Metodo de pago:</label>
-                <select class="form-control" id="metodo_pago_id" name="metodo_pago_id" required>
-                  @foreach ($metodos as $metodo)
-            <option value="{{$metodo->id}}">{{$metodo->nombre}}</option>
-          @endforeach
-                </select>
-              </div>
-              <div class="form-group">
                 <label for="monto">Monto inicial:</label>
                 <input type="number" class="form-control" id="monto_inicial" name="monto_inicial" step="0.01" required>
               </div>
@@ -86,14 +78,6 @@
                 </select>
               </div>
               <div class="form-group">
-                <label for="tipo">Metodo de pago:</label>
-                <select class="form-control" id="metodo_pago_id" name="metodo_pago_id" required>
-                  @foreach ($metodos as $metodo)
-            <option value="{{$metodo->id}}">{{$metodo->nombre}}</option>
-          @endforeach
-                </select>
-              </div>
-              <div class="form-group">
                 <label for="monto">Monto Movimiento:</label>
                 <input type="number" class="form-control" id="monto" name="monto" step="0.01" required>
               </div>
@@ -112,7 +96,6 @@
         <thead>
           <tr>
             <th>Estado</th>
-            <th>Metodo de Pago</th>
             <th>Fecha abierta</th>
             <th>Abierta por:</th>
             <th>Fecha Cierre</th>
@@ -126,7 +109,6 @@
           @foreach ($cajas as $caja)
         <tr>
         <td>{{$caja->estado }}</td>
-        <td>{{$caja->metodo_pago_id}}</td>
         <td>{{$caja->created_at }}</td>
         <td>{{$caja->usuario_id}}</td>
         <td>{{$caja->fecha_cierre}}</td>
