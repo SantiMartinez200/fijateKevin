@@ -14,6 +14,7 @@ class CajaController extends Controller
 {
   public function index(): View
   {
+    $cajaAbierta = Caja::where("estado","abierta")->get();
     $cajas = Caja::all();
     $metodos = MetodoPago::all();
     $users = User::all();
@@ -30,7 +31,7 @@ class CajaController extends Controller
         $caja->fecha_cierre = 'N/D';
       }
     }
-    return view('caja.index', compact('cajas', 'metodos'));
+    return view('caja.index', compact('cajas', 'metodos','cajaAbierta'));
   }
 
   public function create(): View

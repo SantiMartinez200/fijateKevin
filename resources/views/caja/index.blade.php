@@ -7,7 +7,7 @@
       <h2>Cajas</h2>
     </div>
     <div class="float-left ml-3 mt-2">
-      <button type="button" class="btn btn-success btn-sm my-2 " data-toggle="modal" data-target="#modalAbrirCaja">
+      <button type="button" class="btn btn-success btn-sm my-2 btnAbrirCaja" data-toggle="modal" data-target="#modalAbrirCaja">
         <i class="bi bi-plus-circle"></i> Abrir Caja
       </button>
     </div>
@@ -137,7 +137,6 @@
 </div>
 <script>
   let botonModal = document.querySelectorAll('[data-target="#modalRegistrarMovimiento"]');
-
   
   const cajas = @json($cajas);
   cajas.forEach(caja => {
@@ -151,8 +150,12 @@
         btnEdit.disabled = true;
         btnCerrar.disabled = true;
     }
+    if(caja.estado == 'abierta'){
+      document.querySelector('.btnAbrirCaja').disabled = true;
+    }
    
   });
+  
   
   //--------------------------------------------------//
 
