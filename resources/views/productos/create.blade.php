@@ -27,40 +27,14 @@
         @endif
             </div>
           </div>
-
-          <div class="mb-3 row">
-            <label for="aroma_id" class="col-md-4 col-form-label text-md-end text-start">Aroma</label>
-            <div class="col-md-6">
-              <input type="number" class="form-control @error('aroma_id') is-invalid @enderror" id="aroma_id" name="aroma_id"
-                value="{{ old('aroma_id') }}">
-              @if ($errors->has('aroma_id'))
-          <span class="text-danger">{{ $errors->first('aroma_id') }}</span>
-      @endif
-            </div>
-          </div>
-
-          <div class="mb-3 row">
-            <label for="condicion_venta_id" class="col-md-4 col-form-label text-md-end text-start">¿Cómo se vende?</label>
-            <div class="col-md-6">
-              <select class="form-control @error('condicion_venta_id') is-invalid @enderror"
-                id="condicion_venta_id" name="condicion_venta_id" value="{{ old('condicion_venta_id') }}">
-                <option value="1">Unitario</option>
-                <option value="2">Suelto</option>
-              </select>
-              @if ($errors->has('condicion_venta_id'))
-          <span class="text-danger">{{ $errors->first('condicion_venta_id') }}</span>
-        @endif
-            </div>
-          </div>
-
           <div class="mb-3 row">
             <label for="precio_costo" class="col-md-4 col-form-label text-md-end text-start">Precio al Costo</label>
             <div class="col-md-6">
-              <input type="text" class="form-control @error('precio_costo') is-invalid @enderror" id="precio_costo" name="precio_costo"
-                value="{{ old('precio_costo') }}">
+              <input type="text" class="form-control @error('precio_costo') is-invalid @enderror" id="precio_costo"
+                name="precio_costo" value="{{ old('precio_costo') }}">
               @if ($errors->has('precio_costo'))
           <span class="text-danger">{{ $errors->first('precio_costo') }}</span>
-      @endif
+        @endif
             </div>
           </div>
 
