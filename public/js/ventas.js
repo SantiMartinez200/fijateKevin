@@ -1,84 +1,150 @@
 function fetchURL() {
     document
         .getElementById("tbody")
-        .addEventListener("change", function (event) {
+        .addEventListener("input", function (event) {
             if (
                 event.target &&
-                event.target.matches('select[name="compra-select[]"]')
+                event.target.matches('input[name="search[]"]')
             ) {
-                let id = event.target.value;
-                document
-                    .getElementById("tbody")
-                    .addEventListener("keydown", function (event) {
-                        if (event.key === "-") {
-                            event.preventDefault();
-                        }
-                    });
-                fetch(`/getCompraData/${id}`)
-                    .then((response) => {
-                        if (!response.ok) {
-                            throw new Error(
-                                `Error en la solicitud: ${response.status}`
-                            );
-                        }
-                        return response.json();
-                    })
-                    .then((data) => {
-                        const compraDetails = data.compra;
-                        const currentRow = event.target.closest("tr"); // Encuentra la fila actual
+                let search = event.target.value;
+                var row = event.target.closest("tr");
+                var bodyDiv = row.querySelector(".fetch");
+                var list = row.querySelector(".ulSuggest");
+                if (search === "") {
+                    search = 0;
+                    list.hidden = true;
+                } else {
+                    fetch(`/getCompraData/${search}`)
+                        .then((response) => {
+                            if (!response.ok) {
+                                list.hidden = true;
+                                clearList(list);
+                            }
+                            return response.json();
+                        })
+                        .then((data) => {
+                            //console.log(data);
+                            // const jsonString = JSON.stringify(data, null, 2);
+                            // const compraDetails = data.compra;
+                            clearList(list);
+                            if (data.length > 0) {
+                                data.forEach((data) => {
+                                    //console.log(data);
+                                    let suggestItem =
+                                        document.createElement("li");
+                                    suggestItem.textContent =
+                                        " ID: " +
+                                        data.compra_id +
+                                        " F: " +
+                                        data.created_at +
+                                        " M: " +
+                                        data.marca_id +
+                                        " PROD: " +
+                                        data.producto_id;
+                                    list.classList.add(
+                                        "block",
+                                        "bg-white",
+                                        "border",
+                                        "border-gray-300",
+                                        "rounded-lg",
+                                        "list-group-item"
+                                    );
+                                    suggestItem.classList.add("mt-1", "item");
+                                    list.hidden = false;
 
-                        const proveedor = currentRow.querySelector(
-                            'input[name="proveedor[]"]'
+                                    suggestItem.addEventListener(
+                                        "click",
+                                        function () {
+                                            let row = this.closest("tr");
+                                            clickList(data, row, list);
+                                            list.hidden = true;
+                                        }
+                                    );
+
+                                    list.appendChild(suggestItem);
+                                });
+                            } else {
+                                list.hidden = false;
+                                noResults(list);
+                            }
+                            bodyDiv.appendChild(list);
+                            // Cálculos
+                            document
+                                .getElementById("tbody")
+                                .addEventListener("input", function (event) {
+                                    if (
+                                        event.target &&
+                                        event.target.matches(
+                                            'input[name="cantidad[]"]'
+                                        )
+                                    ) {
+                                        verificarCantidad();
+                                    }
+                                });
+                        })
+                        .catch((error) =>
+                            console.warn("Error fetching data:", error)
                         );
-                        proveedor.value = compraDetails.proveedor_id;
-
-                        const marca = currentRow.querySelector(
-                            'input[name="marca[]"]'
-                        );
-                        marca.value = compraDetails.marca_id;
-
-                        const producto = currentRow.querySelector(
-                            'input[name="producto[]"]'
-                        );
-                        producto.value = compraDetails.producto_id;
-
-                        const aroma = currentRow.querySelector(
-                            'input[name="aroma[]"]'
-                        );
-                        aroma.value = compraDetails.aroma_id;
-
-                        const stock = currentRow.querySelector(
-                            'input[name="stock[]"]'
-                        );
-                        stock.value = compraDetails.cantidad;
-
-                        const precio = currentRow.querySelector(
-                            'input[name="precio[]"]'
-                        );
-                        precio.value = compraDetails.precio_venta;
-
-                        // Cálculos
-                        document
-                            .getElementById("tbody")
-                            .addEventListener("input", function (event) {
-                                if (
-                                    event.target &&
-                                    event.target.matches(
-                                        'input[name="cantidad[]"]'
-                                    )
-                                ) {
-                                    console.log("c");
-                                    verificarCantidad();
-                                }
-                            });
-                    })
-                    .catch((error) =>
-                        console.error("Error fetching data:", error)
-                    );
+                }
             }
         });
 }
 fetchURL();
+
+function noResults(list) {
+    let suggestItem = document.createElement("li");
+    suggestItem.textContent = "No está en existencias";
+    list.appendChild(suggestItem);
+}
+
+function clearList(list) {
+    while (list.firstChild) {
+        list.removeChild(list.firstChild);
+    }
+}
+
+function denyMinus() {
+    document
+        .getElementById("tbody")
+        .addEventListener("keydown", function (event) {
+            if (event.key === "-") {
+                event.preventDefault();
+            }
+        });
+}
+denyMinus();
+
+function clickList(data, row, list) {
+    fetch(`/calculateThisStock/${data.compra_id}`)
+        .then((response) => response.json())
+        .then((cantidad_calculada) => {
+            let compra_select = row.querySelectorAll(
+                "td input[name='compra-select[]']"
+            )[0];
+            let readInput = row.querySelectorAll(
+                "td input[name='search[]']"
+            )[0];
+            let proveedor = row.querySelectorAll(
+                "td input[name='proveedor[]']"
+            )[0];
+            let marca = row.querySelectorAll("td input[name='marca[]']")[0];
+            let producto = row.querySelectorAll(
+                "td input[name='producto[]']"
+            )[0];
+            let aroma = row.querySelectorAll("td input[name='aroma[]']")[0];
+            let cantidad = row.querySelectorAll("td input[name='stock[]']")[0];
+            let precio = row.querySelectorAll("td input[name='precio[]']")[0];
+            readInput.value = data.producto_id;
+            compra_select.value = data.compra_id;
+            proveedor.value = data.proveedor_id;
+            marca.value = data.marca_id;
+            producto.value = data.producto_id;
+            aroma.value = data.aroma_id;
+            cantidad.value = cantidad_calculada;
+            precio.value = data.precio_venta;
+            clearList(list);
+        });
+}
 
 function actualizarTotal() {
     let totalGeneral = 0;

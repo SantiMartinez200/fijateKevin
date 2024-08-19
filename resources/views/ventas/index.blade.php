@@ -40,57 +40,61 @@
 <body>
   <div class="container mt-5">
     <div class="table-responsive shadow p-3 mb-5 bg-white rounded">
-      <form action="{{route('storeVentaDetalle')}}" method="POST">
+      <div class="d-flex align-items-center">
+        <h4 class="h4 m-1">¿Cómo buscar?</h4>
+        <button class="btn btn-outline-primary m-1 p-0" style="font-size:25px;"><i class="bi bi-question"></i></button>
+      </div>
+      <form action="{{route('storeVentaDetalle')}}" method="POST" autocomplete="off">
         @csrf
         <table class="table table-striped text-center">
           <thead>
             <tr>
               <th scope="col">X</th>
-              <th scope="col" class="small-width">N° Compra</th>
+              <th scope="col" class="small-width">N° Producto</th>
               <th scope="col">Proveedor</th>
               <th scope="col">Marca</th>
               <th scope="col">Producto</th>
               <th scope="col">Aroma</th>
               <th scope="col" class="small-width">Stock</th>
-              <th scope="col" class="small-width">Precio  <br> de Venta</th>
+              <th scope="col" class="small-width">Precio <br> de Venta</th>
               <th scope="col" class="small-width">C/Venta</th>
             </tr>
           </thead>
           <tbody id="tbody">
             <tr class="template-row">
               <td>
-                <button class="btn" onclick="eliminarFila(this)">
+                <button class="btn" onclick="eliminarFila(this)" tabindex="-1">
                   <i class="bi bi-bag-x" style="font-size: 2rem; color: red;"></i>
                 </button>
               </td>
               <td class="small-width">
-                <select name="compra-select[]" id="compra-select" class="form-select form-select-sm">
-                  <option value="" selected>Seleccione</option>
-                  @foreach ($compras as $compra)
-            <option value="{{ $compra->id }}">{{ $compra->id }}</option>
-          @endforeach
-                </select>
+                <input type="text" name="search[]" id="compra-select" class="">
+                <div id="fetch" class="fetch"><ul class="text-start ulSuggest" id="ulSuggest" hidden></ul></div>
+              </td>
+              <td class="hidden">
+                <input type="text" name="compra-select[]" class="form-control form-control-sm" readonly tabindex="-1" id="compra">
               </td>
               <td class="min-width">
-                <input type="text" name="proveedor[]" class="form-control form-control-sm" readonly>
+                <input type="text" name="proveedor[]" class="form-control form-control-sm" readonly tabindex="-1" id="proveedor">
               </td>
               <td class="min-width">
-                <input type="text" name="marca[]" class="form-control form-control-sm" readonly>
+                <input type="text" name="marca[]" class="form-control form-control-sm" readonly tabindex="-1" id="marca">
               </td>
               <td class="min-width">
-                <input type="text" name="producto[]" class="form-control form-control-sm" readonly>
+                <input type="text" name="producto[]" class="form-control form-control-sm" readonly tabindex="-1" id="producto">
               </td>
               <td class="min-width">
-                <input type="text" name="aroma[]" class="form-control form-control-sm" readonly>
+                <input type="text" name="aroma[]" class="form-control form-control-sm" readonly tabindex="-1" id="aroma">
               </td>
               <td class="small-width">
-                <input type="number" name="stock[]" class="form-control form-control-sm" readonly>
+                <input type="number" name="stock[]" class="form-control form-control-sm" readonly tabindex="-1" id="stock">
               </td>
               <td class="min-width">
-                <input type="number" name="precio[]" class="form-control form-control-sm">
+                <input type="number" name="precio[]" class="form-control form-control-sm" tabindex="-1" id="precio">
               </td>
               <td class="small-width">
-                <input type="number" name="cantidad[]" class="form-control form-control-sm" pattern="^[0-9]" min="1">
+                <input type="number" name="cantidad[]" class="form-control form-control-sm" pattern="^[0-9]" min="1"
+                  tabindex="-1">
               </td>
             </tr>
           </tbody>

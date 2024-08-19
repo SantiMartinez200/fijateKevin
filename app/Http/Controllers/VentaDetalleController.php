@@ -20,22 +20,18 @@ class VentaDetalleController extends Controller
     $compras = CompraDetalle::all();
     return view('ventas.index', compact('compras'));
   }
-  public function getCompraData($id)
+  public function getCompraData($search)
   {
-    $stocksCompra = StockController::changeIdToName();
-    foreach ($stocksCompra as $stock) {
-      if ($stock->id == $id) {
-        $compra = $stock;
-        return response()->json(['compra' => $compra]);
-      }
-    }
+    $search = strval($search).'%';
+    $recomendaciones = CompraDetalle::where('producto_id','like', $search)->get();
+    $data = StockController::changeThisIdToName($recomendaciones);
+    return  $data;
   }
 
   public static function organizeVentas(Request $request)
   {
     $ventas = $request->all();
     $reorderedArray = [];
-    //dd($ventas);
     for ($j = 0; $j < count($ventas['cantidad']); $j++) {
       if ($ventas['cantidad'][$j] != 0) {
         $reorderedArray[] = [
@@ -101,7 +97,6 @@ class VentaDetalleController extends Controller
     $venta_id = Venta::all()->last()->id;
 
     // ------------------------------------------- //
-    $cajaAbierta = Caja::where('estado', 'Abierta')->first();
     $request = new Request([
       'caja_id' => $cajaAbierta->id,
       'tipo_movimiento' => 'E',
@@ -116,7 +111,7 @@ class VentaDetalleController extends Controller
       $value = VentaDetalle::create($value);
     }
 
-    return redirect()->route('venta')->withSuccess('Venta registrada');
+    return redirect()->route('vender')->withSuccess('Venta registrada');
   }
 
 }

@@ -15,27 +15,28 @@
         <div>
           <label for="marca">Marca</label>
           <select name="marca_id" id="marca" class="form-control">
-            @foreach ($marcas as $marca)         
-               <option value="{{$marca->id}}">{{$marca->nombre}}</option>
+            <option value="N/E" selected>Seleccione</option>
+            @foreach ($marcas as $marca)             <option value="{{$marca->id}}">{{$marca->nombre}}</option>
       @endforeach 
           </select>
           <label for="proveedor">Proveedor</label>
           <select name="proveedor_id" id="proveedor" class="form-control">
-            @foreach ($proveedores as $proveedor)         
-               <option value="{{$proveedor->id}}">{{$proveedor->nombre}}</option>
+            <option value="N/E" selected>Seleccione</option>
+            @foreach ($proveedores as $proveedor)           <option value="{{$proveedor->id}}">{{$proveedor->nombre}}</option>
       @endforeach 
           </select>
         </div>
         <div>
           <label for="producto">Producto</label>
           <select name="producto_id" id="producto_id" class="form-control">
+            <option value="N/E" selected>Seleccione</option>
             @foreach ($productos as $producto)            <option value="{{$producto->id}}">{{$producto->nombre}}</option>
       @endforeach 
           </select>
-
           <label for="aroma">Aroma</label>
           <select name="aroma_id" id="aroma" class="form-control">
-            @foreach ($aromas as $aroma)           <option value="{{$aroma->id}}">{{$aroma->nombre}}</option>
+            <option value="N/E" selected>Seleccione</option>
+            @foreach ($aromas as $aroma)              <option value="{{$aroma->id}}">{{$aroma->nombre}}</option>
       @endforeach 
           </select>
         </div>

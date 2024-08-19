@@ -18,8 +18,6 @@ class ProductoFactory extends Factory
   {
     return [
       'nombre' => fake()->word(),
-      'aroma_id' => fake()->randomNumber(4, false),
-      'condicion_venta_id' => fake()->randomNumber(1, true),
       'precio_costo' => fake()->randomFloat(2, 0, 3000),
       'descripcion' => fake()->text(10),
     ];

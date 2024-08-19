@@ -1,3 +1,5 @@
+
+
 .infobox {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     height: 80px;
@@ -34,4 +36,10 @@
 .bg-teal {
     background-color: #000000 !important;
     color: #fff;
+}
+
+.block{
+  width: fit-content;
+  overflow: hidden;
+  position: relative;
 }

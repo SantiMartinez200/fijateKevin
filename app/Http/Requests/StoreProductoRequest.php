@@ -23,8 +23,7 @@ class StoreProductoRequest extends FormRequest
     {
         return [
             'nombre' => 'required|string|max:50',
-            'aroma_id' => 'required|integer|min:0|max:500',
-            'condicion_venta_id' => 'required|integer|min:0|max:10', //cambiar a required
+            'codigo' => 'required|string|max:50',
             'descripcion' => 'nullable|string|max:250'
         ];
     }

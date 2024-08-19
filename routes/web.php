@@ -39,9 +39,6 @@ Route::get('/', function () {
   return view('welcome');
 });
 
-//Ingresar estas rutas al middleware auth
-
-
 // Route::get('/dashboard', function () {
 //   return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
@@ -59,7 +56,6 @@ Route::middleware('auth')->group(function () {
   Route::resource('marcas', MarcaController::class);
   Route::resource('proveedores', ProveedorController::class)->parameters(['proveedores' => 'proveedor']); //////?????????ruta bug que requiere ser redeclarada por las convenciones.
   Route::resource('metodo_pagos', MetodoPagoController::class)->parameters(['metodo_pagos' => 'metodo_pago']);
-  Route::resource('condiciones-de-ventas', CondicionVentaController::class);
 
   Route::resource('caja', CajaController::class);
   Route::post('storeMovimientoCaja', [MovimientosCajaController::class, 'store'])->name('storeMovimiento');
@@ -67,8 +63,9 @@ Route::middleware('auth')->group(function () {
   Route::get('ingreso', [CompraDetalleController::class, 'getData'])->name('ingreso');
   Route::post('storeCompraData', [CompraDetalleController::class, 'store'])->name('storeCompraData');
 
-  Route::get('getCompraData/{id}', [VentaDetalleController::class, 'getCompraData'])->name('getCompra');
-  Route::get('venta', [VentaDetalleController::class, 'index'])->name('venta');
+   Route::get('getCompraData/{search}', [VentaDetalleController::class, 'getCompraData'])->name('getCompra');
+
+  Route::get('vender', [VentaDetalleController::class, 'index'])->name('vender');
   Route::post('storeVentaDetalle', [VentaDetalleController::class, 'store'])->name('storeVentaDetalle');
 
   Route::get('login', [LoginController::class, 'vista']);
@@ -83,8 +80,11 @@ Route::middleware('auth')->group(function () {
   Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
   Route::get('stock', [StockController::class, 'index'])->name('stock');
+  Route::get('calculateThisStock/{id}', [StockController::class, 'calculateThisStock'])->name('calcuateThisStock');
 });
 
+
+// route::get('getCompraData', [VentaDetalleController::class, 'getCompraData'])->name('getCompraData');
 require __DIR__ . '/auth.php';
 
 

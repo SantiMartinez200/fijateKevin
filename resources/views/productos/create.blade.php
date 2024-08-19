@@ -27,6 +27,18 @@
         @endif
             </div>
           </div>
+
+          <div class="mb-3 row">
+            <label for="codigo" class="col-md-4 col-form-label text-md-end text-start">Codigo</label>
+            <div class="col-md-6">
+              <input type="text" class="form-control @error('codigo') is-invalid @enderror" id="codigo" name="codigo"
+                value="{{ old('codigo') }}">
+              @if ($errors->has('codigo'))
+          <span class="text-danger">{{ $errors->first('codigo') }}</span>
+        @endif
+            </div>
+          </div>
+
           <div class="mb-3 row">
             <label for="precio_costo" class="col-md-4 col-form-label text-md-end text-start">Precio al Costo</label>
             <div class="col-md-6">

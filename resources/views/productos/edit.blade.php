@@ -35,6 +35,17 @@
           </div>
 
           <div class="mb-3 row">
+            <label for="codigo" class="col-md-4 col-form-label text-md-end text-start">codigo</label>
+            <div class="col-md-6">
+              <input type="text" class="form-control @error('codigo') is-invalid @enderror" id="codigo" name="codigo"
+                value="{{ $producto->nombre }}">
+              @if ($errors->has('codigo'))
+          <span class="text-danger">{{ $errors->first('codigo') }}</span>
+        @endif
+            </div>
+          </div>
+
+          <div class="mb-3 row">
             <label for="aroma_id" class="col-md-4 col-form-label text-md-end text-start">Aroma</label>
             <div class="col-md-6">
               <input type="number" class="form-control @error('aroma_id') is-invalid @enderror" id="aroma_id"

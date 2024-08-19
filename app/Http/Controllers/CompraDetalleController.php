@@ -9,6 +9,7 @@ use App\Models\Producto;
 use App\Models\Proveedor;
 use App\Models\Marca;
 use App\Models\Aroma;
+use Illuminate\Support\Facades\Auth;
 
 class CompraDetalleController extends Controller
 {
@@ -20,27 +21,26 @@ class CompraDetalleController extends Controller
     $aromas = Aroma::all();
     return view('ingresos.index', [
       'productos' => $productos,
+      'aromas' => $aromas,
       'proveedores' => $proveedores,
       'marcas' => $marcas,
-      'aromas' => $aromas,
     ]);
   }
 
   public function store(Request $request)
   {
     $data = $request->all();
-    $user = 1;
-    $caja = 1;
+    $user = Auth::user()->id;
+    $cajaAbierta = Caja::where('estado', 'Abierta')->first()->get();
+    
     $total = $data['precio_costo'] * $data['cantidad'];
-    $array = ['usuario_id' => $user, 'caja_id' => $caja, 'total' => $total];
+    $array = ['usuario_id' => $user, 'caja_id' => $cajaAbierta[0]["id"], 'total' => $total];
     CompraController::store($array);
     $idCompra = CompraController::getId();
-
     // ------------------------------------------- //
-    $cajaAbierta = Caja::where('estado', 'Abierta')->first();
     $producto = Producto::find($data['producto_id']);
     $request = new Request([
-      'caja_id' => $cajaAbierta->id,
+      'caja_id' => $cajaAbierta[0]["id"],
       'tipo_movimiento' => 'S',
       'monto' => $total,
       'descripcion' => 'Compra del producto: ' . $producto->nombre . ' por $' . $data["precio_costo"] . ' X ' . $data["cantidad"]. ' U',

@@ -16,7 +16,7 @@ return new class extends Migration {
       $table->integer('marca_id');
       $table->integer('proveedor_id');
       $table->integer('producto_id');
-      $table->string('aroma')->nullable();
+      $table->string('aroma_id')->nullable();
       $table->double('precio_costo');
       $table->integer('porcentaje_ganancia');
       $table->double('precio_venta'); 

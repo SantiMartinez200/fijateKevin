@@ -61,7 +61,6 @@
             <li><a href="{{ route('productos.index') }}">Productos</a></li>
             <li><a href="{{ route('aromas.index') }}">Aromas</a></li>
             <li><a href="{{ route('metodo_pagos.index') }}">Métodos de Pago</a></li>
-            <li><a href="{{ route('condiciones-de-ventas.index') }}">Formas de Venta</a></li>
             <li><a href="{{ route('clientes.index') }}">Clientes</a></li>
           </ul>
         </li>
@@ -90,7 +89,7 @@
 
           <a href="{{ route('ingreso') }}"><button class="btn btn-success m-1">Ingresar Mercaderías</button></a>
 
-          <a href="{{ route('venta') }}"><button class="btn btn-danger">Vender Mercaderías</button></a>
+          <a href="{{ route('vender') }}"><button class="btn btn-danger">Vender Mercaderías</button></a>
 
           <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"

@@ -9,7 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\StoreProveedorRequest;
 use App\Http\Requests\UpdateProveedorRequest;
 
-class proveedorController extends Controller
+class ProveedorController extends Controller
 {
   public function index(): View
   {
