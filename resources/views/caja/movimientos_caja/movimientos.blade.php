@@ -24,12 +24,12 @@
     </div>
     <div class="card-footer">
       <h5 class="form-control mb-2" id="h5Monto">Monto total actualizado: <span id="monto-final"></span></h5>
-      <a href="{{route('registros-caja',1)}}" type="button" class="btn btn-danger" style="font-size: 30px;"><i class="bi bi-filetype-pdf"></i></a>
+      <a href="{{route('registros-caja',28)}}" id="link" type="button" class="btn btn-danger" style="font-size: 30px;"><i class="bi bi-filetype-pdf"></i></a>
     </div>
   </div>
 </div>
 <script>
-  let id = location.href.slice(-1);
+  let id = location.href.slice(-2);
   fetch(`caja/${id}/movimientos`).then((response) => response.json()).then(data => {
     let fecha_caja = document.getElementById("fecha-caja");
     fecha_caja.innerHTML = data.datosAdicionales.caja_fecha;
@@ -43,10 +43,14 @@
       descripcionCell.innerHTML = movimientos.descripcion;
       montoCell.innerHTML = movimientos.monto;
       tipoMovimientoCell.innerHTML = movimientos.tipo_movimiento;
+      let link = document.getElementById("link");
+      link.setAttribute('href', `route(registros-caja,${movimientos.caja_id})`)
+      console.log(data)
     })
   })
 
   fetch(`caja/${id}/monto`).then((response) => response.json()).then(data => {
+    console.log(data)
     document.getElementById("monto-inicial").innerHTML = data.monto_inicial;
     document.getElementById("monto-final").innerHTML = data.monto_final;
   })

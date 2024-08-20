@@ -26,9 +26,11 @@
           </thead>
           <tbody>
             @foreach($movimientos as $movimiento)
+            <tr>
         <td>{{$movimiento->descripcion}}</td>
         <td>{{$movimiento->monto}}</td>
         <td>{{$movimiento->tipo_movimiento}}</td>
+      </tr>
       @endforeach
           </tbody>
         </table>

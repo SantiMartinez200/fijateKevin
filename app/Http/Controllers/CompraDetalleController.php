@@ -36,7 +36,7 @@ class CompraDetalleController extends Controller
   {
     $data = $request->all();
     $user = Auth::user()->id;
-    $cajaAbierta = Caja::where('estado', 'Abierta')->first()->get();
+    $cajaAbierta = Caja::where('estado', 'Abierta')->where('usuario_id','=',$user)->first()->get();
     
     $total = $data['precio_costo'] * $data['cantidad'];
     $array = ['usuario_id' => $user, 'caja_id' => $cajaAbierta[0]["id"], 'total' => $total];

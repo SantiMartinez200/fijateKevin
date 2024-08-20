@@ -59,7 +59,7 @@ class CajaController extends Controller
     $caja = Caja::findOrFail($request->id);
     $montoFinal = MovimientosCajaController::getMonto($request->id)->getData(true);
     $caja->monto_final = $montoFinal['monto_final'];
-    $caja->fecha_cierre = Carbon::now()->format('Ym-d H:i:s');
+    $caja->fecha_cierre = Carbon::now()->format('Y-m-d H:i:s');
     $caja->estado = 'cerrada';
     $caja->save();
     return redirect(route('caja.index'));
