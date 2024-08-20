@@ -1,13 +1,20 @@
 @extends('layouts.app')
-
 @section('content')
+
+@if ($message = Session::get('error'))
+  <div class="alert alert-danger" role="alert">
+    {{ $message }}
+  </div>
+@endif
+
 <div class="container mt-4">
   <div class="card">
     <div class="card-header">
       <h2>Cajas</h2>
     </div>
     <div class="float-left ml-3 mt-2">
-      <button type="button" class="btn btn-success btn-sm my-2 btnAbrirCaja" data-toggle="modal" data-target="#modalAbrirCaja">
+      <button type="button" class="btn btn-success btn-sm my-2 btnAbrirCaja" data-toggle="modal"
+        data-target="#modalAbrirCaja">
         <i class="bi bi-plus-circle"></i> Abrir Caja
       </button>
     </div>
@@ -117,8 +124,8 @@
         <td>{{$caja->comentario }}</td>
         <td>
           <div class="btn-group " role="group" aria-label="Basic example"> <!-- basic example???? -->
-          <button id="movimiento" type="button" class="btn btn-success btn-movimiento{{$caja->id}}" data-id="{{$caja->id}}"
-            data-toggle="modal" data-target="#modalRegistrarMovimiento">
+          <button id="movimiento" type="button" class="btn btn-success btn-movimiento{{$caja->id}}"
+            data-id="{{$caja->id}}" data-toggle="modal" data-target="#modalRegistrarMovimiento">
             Movimiento
           </button>
           <a href="{{ route('caja.edit', $caja->id) }}"><button id="edit"
@@ -137,26 +144,26 @@
 </div>
 <script>
   let botonModal = document.querySelectorAll('[data-target="#modalRegistrarMovimiento"]');
-  
+
   const cajas = @json($cajas);
   cajas.forEach(caja => {
     if (caja.estado == 'cerrada') {
-        console.log(caja.estado);
-        let btnMovimiento = document.querySelector(`.btn-movimiento${caja.id}`);
-        let btnEdit = document.querySelector(`.btn-edit${caja.id}`);
-        let btnCerrar = document.querySelector(`.btn-close${caja.id}`);
+      console.log(caja.estado);
+      let btnMovimiento = document.querySelector(`.btn-movimiento${caja.id}`);
+      let btnEdit = document.querySelector(`.btn-edit${caja.id}`);
+      let btnCerrar = document.querySelector(`.btn-close${caja.id}`);
 
-        btnMovimiento.disabled = true;
-        btnEdit.disabled = true;
-        btnCerrar.disabled = true;
+      btnMovimiento.disabled = true;
+      btnEdit.disabled = true;
+      btnCerrar.disabled = true;
     }
-    if(caja.estado == 'abierta'){
+    if (caja.estado == 'abierta') {
       document.querySelector('.btnAbrirCaja').disabled = true;
     }
-   
+
   });
-  
-  
+
+
   //--------------------------------------------------//
 
 

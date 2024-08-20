@@ -12,9 +12,18 @@ use App\Models\User;
 
 class CajaController extends Controller
 {
+   public static function cajaIsOpen()
+  {
+    $caja_abierta = Caja::where('estado', 'Abierta')->first();
+    if ($caja_abierta) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   public function index(): View
   {
-    $cajaAbierta = Caja::where("estado","abierta")->get();
+    $cajaAbierta = Caja::where("estado", "abierta")->get();
     $cajas = Caja::all();
     $metodos = MetodoPago::all();
     $users = User::all();
@@ -31,7 +40,7 @@ class CajaController extends Controller
         $caja->fecha_cierre = 'N/D';
       }
     }
-    return view('caja.index', compact('cajas', 'metodos','cajaAbierta'));
+    return view('caja.index', compact('cajas', 'metodos', 'cajaAbierta'));
   }
 
   public function create(): View
@@ -50,7 +59,7 @@ class CajaController extends Controller
     $caja = Caja::findOrFail($request->id);
     $montoFinal = MovimientosCajaController::getMonto($request->id)->getData(true);
     $caja->monto_final = $montoFinal['monto_final'];
-    $caja->fecha_cierre = Carbon::now()->format('Y-m-d H:i:s');
+    $caja->fecha_cierre = Carbon::now()->format('Ym-d H:i:s');
     $caja->estado = 'cerrada';
     $caja->save();
     return redirect(route('caja.index'));

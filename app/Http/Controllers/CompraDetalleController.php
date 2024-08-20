@@ -15,16 +15,21 @@ class CompraDetalleController extends Controller
 {
   public function getData()
   {
-    $productos = Producto::all();
-    $proveedores = Proveedor::all();
-    $marcas = Marca::all();
-    $aromas = Aroma::all();
-    return view('ingresos.index', [
-      'productos' => $productos,
-      'aromas' => $aromas,
-      'proveedores' => $proveedores,
-      'marcas' => $marcas,
-    ]);
+    if (CajaController::cajaIsOpen() == true){
+
+      $productos = Producto::all();
+      $proveedores = Proveedor::all();
+      $marcas = Marca::all();
+      $aromas = Aroma::all();
+      return view('ingresos.index', [
+        'productos' => $productos,
+        'aromas' => $aromas,
+        'proveedores' => $proveedores,
+        'marcas' => $marcas,
+      ]);
+    }else{
+      return redirect()->route('caja.index')->with('error', 'Debes abrir una caja antes');
+    }
   }
 
   public function store(Request $request)

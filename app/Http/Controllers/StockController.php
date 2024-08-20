@@ -9,8 +9,6 @@ use App\Models\Producto;
 use App\Models\Proveedor;
 use App\Models\VentaDetalle;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\Queue\Failed\DatabaseUuidFailedJobProvider;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 

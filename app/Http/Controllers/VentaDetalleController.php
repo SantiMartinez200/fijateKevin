@@ -17,15 +17,19 @@ class VentaDetalleController extends Controller
 {
   public function index()
   {
-    $compras = CompraDetalle::all();
-    return view('ventas.index', compact('compras'));
+    if (CajaController::cajaIsOpen() == true) {
+      $compras = CompraDetalle::all();
+      return view('ventas.index', compact('compras'));
+    } else {
+      return redirect()->route('caja.index')->with('error', 'Debes abrir una caja antes');
+    }
   }
   public function getCompraData($search)
   {
-    $search = strval($search).'%';
-    $recomendaciones = CompraDetalle::where('producto_id','like', $search)->get();
+    $search = strval($search) . '%';
+    $recomendaciones = CompraDetalle::where('producto_id', 'like', $search)->get();
     $data = StockController::changeThisIdToName($recomendaciones);
-    return  $data;
+    return $data;
   }
 
   public static function organizeVentas(Request $request)

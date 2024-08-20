@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Caja;
 use App\Models\MovimientosCaja;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class MovimientosCajaController extends Controller
     ]);
   }
 
-  public function getMovimientos($id)
+  public function getMovimientos($id) //para api
   {
     $caja = Caja::findOrFail($id);
     $movimientos = $caja->movimientos;
@@ -30,6 +31,22 @@ class MovimientosCajaController extends Controller
     $datosAdicionales = ['caja_fecha' => date_format($caja->created_at, 'd/m/Y')];
     return response()->json(['movimientos' => $movimientosFormateados, 'datosAdicionales' => $datosAdicionales]);
   }
+
+  public function pdfMovimientos($id) //para api
+  {
+    $caja = Caja::findOrFail($id);
+    $movimientos = $caja->movimientos;
+    $movimientosFormateados = $movimientos->map(function ($movimiento) {
+      $movimiento->fecha = Carbon::parse($movimiento->created_at)->format('d/m/Y H:i:s');
+      return $movimiento;
+    });
+    $datosAdicionales = ['caja_fecha' => date_format($caja->created_at, 'd/m/Y')];
+
+    $pdf = Pdf::loadView('pdf.registroscaja', ['movimientos' => $movimientosFormateados, 'datosAdicionales' => $datosAdicionales]);
+    return $pdf->download('registros_caja.pdf');
+  }
+
+
 
   public static function getMonto($id)
   {
