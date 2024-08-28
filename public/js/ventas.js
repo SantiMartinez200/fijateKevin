@@ -27,6 +27,14 @@ function fetchURL() {
                             // const jsonString = JSON.stringify(data, null, 2);
                             // const compraDetails = data.compra;
                             clearList(list);
+                            list.classList.add(
+                                "block",
+                                "bg-white",
+                                "border",
+                                "border-gray-300",
+                                "rounded-lg",
+                                "list-group-item"
+                            );
                             if (data.length > 0) {
                                 data.forEach((data) => {
                                     //console.log(data);
@@ -44,14 +52,7 @@ function fetchURL() {
                                         data.nombre_marca +
                                         " Producto: " +
                                         data.nombre_producto;
-                                    list.classList.add(
-                                        "block",
-                                        "bg-white",
-                                        "border",
-                                        "border-gray-300",
-                                        "rounded-lg",
-                                        "list-group-item"
-                                    );
+
                                     suggestItem.classList.add("mt-1", "item");
                                     list.hidden = false;
 

@@ -14,11 +14,24 @@ use Illuminate\View\View;
 
 class StockController extends Controller
 {
-  public function index(): View
+  public function index()
   {
-    return view('stock.index', [
-      'compraDetalles' => self::changeIdToName(),
-    ]);
+    if (CajaController::cajaIsOpen() == true) {
+
+      $productos = Producto::all();
+      $proveedores = Proveedor::all();
+      $marcas = Marca::all();
+      $aromas = Aroma::all();
+      return view('ingresos.index', [
+        'productos' => $productos,
+        'aromas' => $aromas,
+        'proveedores' => $proveedores,
+        'marcas' => $marcas,
+        'compraDetalles' => self::changeIdToName(),
+      ]);
+    } else {
+      return redirect()->route('caja.index')->with('error', 'Debes abrir una caja antes');
+    }
   }
 
   public static function getThisDetalleCompras($id)

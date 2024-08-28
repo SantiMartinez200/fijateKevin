@@ -13,24 +13,6 @@ use Illuminate\Support\Facades\Auth;
 
 class CompraDetalleController extends Controller
 {
-  public function getData()
-  {
-    if (CajaController::cajaIsOpen() == true){
-
-      $productos = Producto::all();
-      $proveedores = Proveedor::all();
-      $marcas = Marca::all();
-      $aromas = Aroma::all();
-      return view('ingresos.index', [
-        'productos' => $productos,
-        'aromas' => $aromas,
-        'proveedores' => $proveedores,
-        'marcas' => $marcas,
-      ]);
-    }else{
-      return redirect()->route('caja.index')->with('error', 'Debes abrir una caja antes');
-    }
-  }
 
   public function store(Request $request)
   {
@@ -65,7 +47,7 @@ class CompraDetalleController extends Controller
         'precio_venta' => $data['precio_venta'],
         'cantidad' => $data['cantidad'],
       ]);
-      return redirect()->route('ingreso')->with('message', 'Ingreso realizado con éxito');
+      return redirect()->route('stock')->with('message', 'Ingreso realizado con éxito');
     } catch (\Throwable $e) {
       $err = $e->getMessage();
       return view('ingresos.index', ['err' => $err]);

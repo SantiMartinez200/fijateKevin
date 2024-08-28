@@ -51,37 +51,6 @@ class VentaDetalleController extends Controller
     return $reorderedArray;
   }
 
-  // public static function changeNameToId(Request $request)
-  // {
-  //   $reorderedArray = self::organizeVentas($request);
-  //   $marcas = Marca::all();
-  //   $proveedores = Proveedor::all();
-  //   $productos = Producto::all();
-  //   $aromas = Aroma::all();
-  //   for ($i = 0; $i < count($reorderedArray); $i++) {
-  //     foreach ($marcas as $marca)
-  //       if ($marca->nombre == $reorderedArray[$i]['marca_id']) {
-  //         $reorderedArray[$i]['marca_id'] = $marca->id;
-  //       }
-  //     foreach ($proveedores as $proveedor) {
-  //       if ($proveedor->nombre == $reorderedArray[$i]['proveedor_id']) {
-  //         $reorderedArray[$i]['proveedor_id'] = $proveedor->id;
-  //       }
-  //     }
-  //     foreach ($productos as $producto) {
-  //       if ($producto->nombre == $reorderedArray[$i]['producto_id']) {
-  //         $reorderedArray[$i]['producto_id'] = $producto->id;
-  //       }
-  //     }
-  //     foreach ($aromas as $aroma) {
-  //       if ($aroma->nombre == $reorderedArray[$i]['aroma_id']) {
-  //         $reorderedArray[$i]['aroma_id'] = $aroma->id;
-  //       }
-  //     }
-  //   }
-  //   return $reorderedArray;
-  // }
-
   public function store(Request $request)
   {
     $reorderedArray = self::organizeVentas($request);
@@ -112,7 +81,7 @@ class VentaDetalleController extends Controller
       $value = VentaDetalle::create($value);
     }
 
-    return redirect()->route('vender')->withSuccess('Venta registrada');
+    return redirect()->route('vender')->with('success','Venta registrada');
   }
 
 }

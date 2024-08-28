@@ -60,7 +60,6 @@ Route::middleware('auth')->group(function () {
   Route::resource('caja', CajaController::class);
   Route::post('storeMovimientoCaja', [MovimientosCajaController::class, 'store'])->name('storeMovimiento');
 
-  Route::get('ingreso', [CompraDetalleController::class, 'getData'])->name('ingreso');
   Route::post('storeCompraData', [CompraDetalleController::class, 'store'])->name('storeCompraData');
 
   Route::get('buscar-entrada/{search}', [VentaDetalleController::class, 'findEntrada'])->name('buscar-entrada');

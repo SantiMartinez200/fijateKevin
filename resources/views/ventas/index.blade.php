@@ -34,11 +34,12 @@
 
 <body>
   <div class="container mt-5">
-    <div class="table-responsive shadow p-3 mb-5 bg-white rounded">
-      <div class="d-flex align-items-center">
-        <h4 class="h4 m-1">¿Cómo buscar?</h4>
-        <button class="btn btn-outline-primary m-1 p-0" style="font-size:25px;"><i class="bi bi-question"></i></button>
+    @if ($message = Session::get('success'))
+      <div class="alert alert-success" role="alert">
+      {{ $message }}
       </div>
+    @endif
+    <div class="table-responsive shadow p-3 mb-5 bg-white rounded">
       <form action="{{route('storeVentaDetalle')}}" method="POST" autocomplete="off">
         @csrf
         <table class="table table-striped text-center">
