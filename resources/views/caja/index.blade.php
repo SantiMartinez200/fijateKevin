@@ -92,7 +92,7 @@
                 <label for="comentario">Descripcion:</label>
                 <textarea class="form-control" id="descripcion" name="descripcion"></textarea>
               </div>
-              <button type="submit" class="btn btn-primary">Aplicar y Abrir</button>
+              <button type="submit" class="btn btn-primary">Aplicar Movimiento</button>
             </form>
           </div>
         </div>
@@ -128,9 +128,6 @@
             data-id="{{$caja->id}}" data-toggle="modal" data-target="#modalRegistrarMovimiento">
             Movimiento
           </button>
-          <a href="{{ route('caja.edit', $caja->id) }}"><button id="edit"
-            class="btn btn-primary btn-edit{{$caja->id}}">Editar</button></a>
-          <a href="{{ route('caja.destroy', $caja->id) }}" class="btn btn-danger">Eliminar</a>
           <a href="{{ route('caja.close', $caja->id) }}"><button class="btn btn-warning btn-close{{$caja->id}}"
             id="close">Cerrar</button></a>
           </div>

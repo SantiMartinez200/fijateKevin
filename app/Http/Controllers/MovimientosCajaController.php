@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 class MovimientosCajaController extends Controller
 {
-  public function index(): View
+  public function index()
   {
     return view('caja.movimientos_caja.index', [
       'cajas' => Caja::latest()->paginate(3)
@@ -22,28 +22,21 @@ class MovimientosCajaController extends Controller
 
   public function getMovimientos($id) //para api
   {
-    $caja = Caja::findOrFail($id);
+    $caja = Caja::find($id);
     $movimientos = $caja->movimientos;
-    $movimientosFormateados = $movimientos->map(function ($movimiento) {
-      $movimiento->fecha = Carbon::parse($movimiento->created_at)->format('d/m/Y H:i:s');
-      return $movimiento;
-    });
+    $montos = MovimientosCajaController::getMonto($id);
     $datosAdicionales = ['caja_fecha' => date_format($caja->created_at, 'd/m/Y')];
-    return response()->json(['movimientos' => $movimientosFormateados, 'datosAdicionales' => $datosAdicionales]);
+    return view('caja.movimientos_caja.movimientos', compact('movimientos', 'datosAdicionales', 'montos','caja'));
   }
 
   public function pdfMovimientos($id) //para api
   {
     $caja = Caja::findOrFail($id);
+    $montos = MovimientosCajaController::getMonto($id);
     $movimientos = $caja->movimientos;
-    $movimientosFormateados = $movimientos->map(function ($movimiento) {
-      $movimiento->fecha = Carbon::parse($movimiento->created_at)->format('d/m/Y H:i:s');
-      return $movimiento;
-    });
     $datosAdicionales = ['caja_fecha' => date_format($caja->created_at, 'd/m/Y')];
-
-    $pdf = Pdf::loadView('pdf.registroscaja', ['movimientos' => $movimientosFormateados, 'datosAdicionales' => $datosAdicionales]);
-    return $pdf->download('registros_caja.pdf');
+    $pdf = Pdf::loadView('pdf.registroscaja', ['movimientos' => $movimientos, 'datosAdicionales' => $datosAdicionales, 'montos' => $montos,'caja' => $caja]);
+    return $pdf->stream('registros_caja.pdf');
   }
 
 
@@ -52,12 +45,12 @@ class MovimientosCajaController extends Controller
   {
     $caja = Caja::find($id);
     $movimientosSum = DB::table('movimientos_caja')->where('caja_id', $id)->sum('monto');
+    $array = [];
     if ($caja->monto_inicial > 0) {
       $movimientosSum += $caja->monto_inicial;
-      return response()->json(['monto_final' => $movimientosSum, 'monto_inicial' => $caja->monto_inicial]);
-    } else {
-      return response()->json(['monto_final' => $movimientosSum, 'monto_inicial' => $caja->monto_inicial]);
     }
+    return $array = ['monto_final' => $movimientosSum, 'monto_inicial' => $caja->monto_inicial];
+
   }
   public static function store(Request $request): RedirectResponse
   {

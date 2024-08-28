@@ -10,9 +10,7 @@
   /* CSS personalizado para ajustar los tamaños de las columnas */
   .min-width {
     min-width: 80px;
-    /* Define el ancho mínimo de las celdas */
     max-width: 130px;
-    /* Define el ancho máximo de las celdas */
   }
 
   input[type="number"]::-webkit-inner-spin-button,
@@ -23,16 +21,13 @@
 
   .small-width {
     width: 60px;
-    /* Ancho fijo para celdas pequeñas */
   }
 
   select,
   input[type="number"],
   input[type="text"] {
     max-width: 100%;
-    /* Asegura que el input no exceda el ancho de la celda */
     padding: 0.25rem;
-    /* Ajuste del padding para minimizar el tamaño */
   }
 </style>
 </head>
@@ -69,25 +64,33 @@
               </td>
               <td class="small-width">
                 <input type="text" name="search[]" id="compra-select" class="">
-                <div id="fetch" class="fetch"><ul class="text-start ulSuggest" id="ulSuggest" hidden></ul></div>
+                <div id="fetch" class="fetch block">
+                  <ul class="text-start ulSuggest" style="width:500px;" id="ulSuggest" hidden></ul>
+                </div>
               </td>
               <td class="hidden">
-                <input type="text" name="compra-select[]" class="form-control form-control-sm" readonly tabindex="-1" id="compra">
+                <input type="text" name="compra-select[]" class="form-control form-control-sm" readonly tabindex="-1"
+                  id="compra">
               </td>
               <td class="min-width">
-                <input type="text" name="proveedor[]" class="form-control form-control-sm" readonly tabindex="-1" id="proveedor">
+                <input type="text" name="proveedor[]" class="form-control form-control-sm" readonly tabindex="-1"
+                  id="proveedor">
               </td>
               <td class="min-width">
-                <input type="text" name="marca[]" class="form-control form-control-sm" readonly tabindex="-1" id="marca">
+                <input type="text" name="marca[]" class="form-control form-control-sm" readonly tabindex="-1"
+                  id="marca">
               </td>
               <td class="min-width">
-                <input type="text" name="producto[]" class="form-control form-control-sm" readonly tabindex="-1" id="producto">
+                <input type="text" name="producto[]" class="form-control form-control-sm" readonly tabindex="-1"
+                  id="producto">
               </td>
               <td class="min-width">
-                <input type="text" name="aroma[]" class="form-control form-control-sm" readonly tabindex="-1" id="aroma">
+                <input type="text" name="aroma[]" class="form-control form-control-sm" readonly tabindex="-1"
+                  id="aroma">
               </td>
               <td class="small-width">
-                <input type="number" name="stock[]" class="form-control form-control-sm" readonly tabindex="-1" id="stock">
+                <input type="number" name="stock[]" class="form-control form-control-sm" readonly tabindex="-1"
+                  id="stock">
               </td>
               <td class="min-width">
                 <input type="number" name="precio[]" class="form-control form-control-sm" tabindex="-1" id="precio">

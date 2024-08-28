@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Caja;
@@ -14,7 +15,7 @@ class CajaController extends Controller
 {
    public static function cajaIsOpen()
   {
-    $caja_abierta = Caja::where('estado', 'Abierta')->first();
+    $caja_abierta = Caja::where('estado', 'Abierta')->where('usuario_id', Auth::user()->id)->first();
     if ($caja_abierta) {
       return true;
     } else {
@@ -57,7 +58,7 @@ class CajaController extends Controller
   public function close(Request $request): RedirectResponse
   {
     $caja = Caja::findOrFail($request->id);
-    $montoFinal = MovimientosCajaController::getMonto($request->id)->getData(true);
+    $montoFinal = MovimientosCajaController::getMonto($request->id);
     $caja->monto_final = $montoFinal['monto_final'];
     $caja->fecha_cierre = Carbon::now()->format('Y-m-d H:i:s');
     $caja->estado = 'cerrada';

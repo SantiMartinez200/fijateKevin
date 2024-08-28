@@ -74,13 +74,7 @@ Route::middleware('auth')->group(function () {
 
   Route::get('movimientos', [MovimientosCajaController::class, 'index'])->name('movimientos');
 
-  Route::get('movimientos-caja', [
-    MovimientosCajaController::class,
-    function () {
-      return view('caja.movimientos_caja.movimientos');
-    }
-  ])->name('movimientos-caja');
-
+  
   Route::get('caja/{id}/movimientos', [MovimientosCajaController::class, 'getMovimientos'])->name('caja.movimientos');
   Route::get('caja/{id}/monto', [MovimientosCajaController::class, 'getMonto']);
   Route::get('caja/{id}/cerrar', [CajaController::class, 'close'])->name('caja.close');
@@ -91,7 +85,7 @@ Route::middleware('auth')->group(function () {
   Route::get('calculateThisStock/{id}', [StockController::class, 'calculateThisStock'])->name('calcuateThisStock');
 
 
-  Route::get('registros-caja/{id}', [MovimientosCajaController::class, 'pdfMovimientos'])->name('registros-caja');
+  Route::get('pdf-caja/{id}', [MovimientosCajaController::class, 'pdfMovimientos'])->name('pdf-caja');
 });
 
 

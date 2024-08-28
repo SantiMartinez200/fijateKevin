@@ -19,10 +19,10 @@
       <td>{{$caja->estado}}</td>
       <td>{{$caja->created_at}}</td>
       <td>{{$caja->fecha_cierre}}</td>
-      <td><button type="button" class="btn btn-primary"><a href="{{route('movimientos-caja',$caja->id)}}">Ver Movimientos
-        </a></button></td>
+      <td><button type="button" class="btn btn-primary"><a href="{{route('caja.movimientos',$caja->id)}}">Ver Movimientos
+      </a></button></td>
       </tr>
-    @endforeach
+  @endforeach
     </tbody>
   </table>
 </div>
