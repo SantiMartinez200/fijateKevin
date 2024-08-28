@@ -17,11 +17,12 @@
             margin: 0 auto;
         }
         .header {
+            display: flex;
+            justify-content: space-between;
             background-color: #5f6f65;
-            display: grid;
-            grid-template-columns: auto auto auto;
             text-align: center;
             border: 1px solid;
+            padding: 0.5rem;
         }
         .footer {
             background-color: #5f6f65;
@@ -32,6 +33,7 @@
             min-width: 100px;
         }
         img {
+            margin: 0 auto;
             width: 100px;
             height: 100px;
         }
@@ -39,8 +41,7 @@
         .amount-span {
             font-size: 3rem;
         }
-        .title,
-        .amount {
+        .title {
             margin-top: auto;
             margin-bottom: auto;
         }
@@ -52,7 +53,7 @@
         .amount {
             font-size: 18px;
             font-weight: 500;
-            color: #fff;
+            color: #ffffff;
         }
         .title-content,
         .amount-span {
@@ -60,12 +61,7 @@
         }
         .title,
         .title-content {
-            text-align: start;
             padding-left: 0.5rem;
-        }
-        .amount {
-            text-align: end;
-            padding-right: 0.5rem;
         }
 
         .body {
@@ -92,35 +88,39 @@
             border: 1px solid;
             word-wrap: break-word;
         }
-        .responsible{
-          margin: 2px;
+        .responsible {
+            margin: 2px;
+        }
+        .amount{
+          text-align: end;
+        }
+        .footer{
+          text-align: end;
+          padding: 0.5rem;
         }
     </style>
     <body>
-        <div class="container">
-            <div class="header">
-                <div class="title">
-                    Comprobante de la Caja <br /><span class="title-content"
-                        >N° 25</span
-                    >
-                    <br />
-                    <span class="title">Al</span> <br /><span
-                        class="title-content"
-                        >27/08/2024</span
-                    >
-                    <div class="responsible">
-                        Caja abierta por:<span class="title-content"
-                            >Brago</span
-                        >
-                    </div>
-                </div>
-                <div class="logo"><img src="public/favicon.ico" alt="" /></div>
-                <div class="amount">
-                    Monto al inicio del período: <br /><span class="amount-span"
-                        >5000</span
-                    >
+        <div class="header">
+            <div class="logo"><img src="public/favicon.ico" alt="" /></div>
+
+            <div class="title">
+                Comprobante de la Caja <br /><span class="title-content"
+                    >N° 25</span
+                >
+                <br />
+                <span class="title">Al</span> <br /><span class="title-content"
+                    >27/08/2024</span
+                >
+                <div class="responsible">
+                    Caja abierta por:<span class="title-content">Brago</span>
                 </div>
             </div>
+            <div class="amount">
+                Monto al inicio del período: <br /><span class="amount-span"
+                    >5000</span
+                >
+            </div>
+        </div>
             <div class="body">
                 <table>
                     <thead>
@@ -142,6 +142,5 @@
                     <div><h3>Monto Final: 5000</h3></div>
                 </div>
             </div>
-        </div>
     </body>
 </html>

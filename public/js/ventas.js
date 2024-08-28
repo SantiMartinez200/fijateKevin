@@ -14,7 +14,7 @@ function fetchURL() {
                     search = 0;
                     list.hidden = true;
                 } else {
-                    fetch(`/getCompraData/${search}`)
+                    fetch(`/buscar-entrada/${search}`)
                         .then((response) => {
                             if (!response.ok) {
                                 list.hidden = true;
@@ -32,15 +32,18 @@ function fetchURL() {
                                     //console.log(data);
                                     let suggestItem =
                                         document.createElement("li");
+                                    console.log(data);
                                     suggestItem.textContent =
-                                        " ID: " +
+                                        "Codigo:" +
+                                        data.producto_id +
+                                        " Entrada Numero: " +
                                         data.compra_id +
-                                        " F: " +
+                                        " Fecha de Entrada: " +
                                         data.created_at +
-                                        " M: " +
-                                        data.marca_id +
-                                        " PROD: " +
-                                        data.producto_id;
+                                        " Marca: " +
+                                        data.nombre_marca +
+                                        " Producto: " +
+                                        data.nombre_producto;
                                     list.classList.add(
                                         "block",
                                         "bg-white",
@@ -119,27 +122,48 @@ function clickList(data, row, list) {
         .then((response) => response.json())
         .then((cantidad_calculada) => {
             let compra_select = row.querySelectorAll(
-                "td input[name='compra-select[]']"
+                "td select[name='compra-select[]']"
             )[0];
             let readInput = row.querySelectorAll(
                 "td input[name='search[]']"
             )[0];
             let proveedor = row.querySelectorAll(
-                "td input[name='proveedor[]']"
+                "td select[name='proveedor[]']"
             )[0];
-            let marca = row.querySelectorAll("td input[name='marca[]']")[0];
+            let marca = row.querySelectorAll("td select[name='marca[]']")[0];
             let producto = row.querySelectorAll(
-                "td input[name='producto[]']"
+                "td select[name='producto[]']"
             )[0];
-            let aroma = row.querySelectorAll("td input[name='aroma[]']")[0];
+            let aroma = row.querySelectorAll("td select[name='aroma[]']")[0];
             let cantidad = row.querySelectorAll("td input[name='stock[]']")[0];
             let precio = row.querySelectorAll("td input[name='precio[]']")[0];
+            console.log(data);
+
+            let productoId = document.createElement("option");
+            productoId.value = data.producto_id;
+            productoId.textContent = data.nombre_producto;
+            producto.appendChild(productoId);
+
+            let compraId = document.createElement("option");
+            compraId.value = data.compra_id;
+            compra_select.appendChild(compraId);
+
+            let aromaId = document.createElement("option");
+            aromaId.value = data.aroma_id;
+            aromaId.textContent = data.nombre_aroma;
+            aroma.appendChild(aromaId);
+
+            let proveedorId = document.createElement("option");
+            proveedorId.value = data.proveedor_id;
+            proveedorId.textContent = data.nombre_proveedor;
+            proveedor.appendChild(proveedorId);
+
+            let marcaId = document.createElement("option");
+            marcaId.value = data.marca_id;
+            marcaId.textContent = data.nombre_marca;
+            marca.appendChild(marcaId);
+
             readInput.value = data.producto_id;
-            compra_select.value = data.compra_id;
-            proveedor.value = data.proveedor_id;
-            marca.value = data.marca_id;
-            producto.value = data.producto_id;
-            aroma.value = data.aroma_id;
             cantidad.value = cantidad_calculada;
             precio.value = data.precio_venta;
             clearList(list);

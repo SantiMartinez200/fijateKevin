@@ -14,12 +14,12 @@ class Proveedor extends Model
     'nombre',
   ];
  
-  public function proveedorCompra(): HasMany
+  public function compra(): HasMany
   {
     return $this->hasMany(CompraDetalle::class);
   }
 
-  public function proveedorVenta(): HasMany
+  public function venta(): HasMany
   {
     return $this->hasMany(VentaDetalle::class);
   }

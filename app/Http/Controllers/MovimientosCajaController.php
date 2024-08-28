@@ -35,8 +35,9 @@ class MovimientosCajaController extends Controller
     $montos = MovimientosCajaController::getMonto($id);
     $movimientos = $caja->movimientos;
     $datosAdicionales = ['caja_fecha' => date_format($caja->created_at, 'd/m/Y')];
+    $pdfName = date_format($caja->created_at, 'Y-m-d');
     $pdf = Pdf::loadView('pdf.registroscaja', ['movimientos' => $movimientos, 'datosAdicionales' => $datosAdicionales, 'montos' => $montos,'caja' => $caja]);
-    return $pdf->stream('registros_caja.pdf');
+    return $pdf->stream('comprobante_caja_'.$pdfName.'.pdf');
   }
 
 

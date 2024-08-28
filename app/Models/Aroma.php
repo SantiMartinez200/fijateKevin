@@ -13,11 +13,11 @@ class Aroma extends Model
     'nombre'
   ];
 
-  public function aromaCompra(): HasMany
+  public function compra(): HasMany
   {
     return $this->hasMany(CompraDetalle::class);
   }
-  public function aromaVenta(): HasMany
+  public function venta(): HasMany
   {
     return $this->hasMany(VentaDetalle::class);
   }

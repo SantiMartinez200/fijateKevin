@@ -29,7 +29,7 @@
     <!-- Sidebar -->
     <nav id="sidebar">
       <div class="sidebar-header">
-        <img src="{{asset('img/logo-tribal-essence-white.png')}}" alt="logo" class="logo-sidebar mx-auto d-block">
+        <img src="{{asset('img/logo-tribal-essence-white.jpg')}}" alt="logo" class="logo-sidebar mx-auto d-block">
       </div>
 
       <ul class="list-unstyled components">

@@ -63,7 +63,7 @@ Route::middleware('auth')->group(function () {
   Route::get('ingreso', [CompraDetalleController::class, 'getData'])->name('ingreso');
   Route::post('storeCompraData', [CompraDetalleController::class, 'store'])->name('storeCompraData');
 
-  Route::get('getCompraData/{search}', [VentaDetalleController::class, 'getCompraData'])->name('getCompra');
+  Route::get('buscar-entrada/{search}', [VentaDetalleController::class, 'findEntrada'])->name('buscar-entrada');
 
   Route::get('vender', [VentaDetalleController::class, 'index'])->name('vender');
   Route::post('storeVentaDetalle', [VentaDetalleController::class, 'store'])->name('storeVentaDetalle');

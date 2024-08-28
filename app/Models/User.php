@@ -43,15 +43,15 @@ class User extends Authenticatable
     'email_verified_at' => 'datetime',
   ];
 
-  public function usuarioCompra(): HasMany //
+  public function compra(): HasMany //
   {
     return $this->hasMany(Compra::class);
   }
-  public function usuarioVenta(): HasMany //
+  public function venta(): HasMany //
   {
     return $this->hasMany(Venta::class);
   }
-  public function usuarioCaja(): HasMany //
+  public function caja(): HasMany //
   {
     return $this->hasMany(Caja::class);
   }

@@ -46,7 +46,6 @@
             <tr>
               <th scope="col">X</th>
               <th scope="col" class="small-width">N° Producto</th>
-              <th scope="col">Proveedor</th>
               <th scope="col">Marca</th>
               <th scope="col">Producto</th>
               <th scope="col">Aroma</th>
@@ -69,34 +68,41 @@
                 </div>
               </td>
               <td class="hidden">
-                <input type="text" name="compra-select[]" class="form-control form-control-sm" readonly tabindex="-1"
+                <select type="text" name="compra-select[]" class="form-control form-control"  tabindex="-1"
                   id="compra">
+                </select>
               </td>
-              <td class="min-width">
-                <input type="text" name="proveedor[]" class="form-control form-control-sm" readonly tabindex="-1"
+              <td class="min-width" hidden>
+                <select type="text" name="proveedor[]" class="form-control form-control"  tabindex="-1"
                   id="proveedor">
+
+                </select>
               </td>
               <td class="min-width">
-                <input type="text" name="marca[]" class="form-control form-control-sm" readonly tabindex="-1"
+                <select type="text" name="marca[]" class="form-control form-control"  tabindex="-1"
                   id="marca">
+
+                </select>
               </td>
               <td class="min-width">
-                <input type="text" name="producto[]" class="form-control form-control-sm" readonly tabindex="-1"
+                <select type="text" name="producto[]" class="form-control form-control"  tabindex="-1"
                   id="producto">
+                </select>
               </td>
               <td class="min-width">
-                <input type="text" name="aroma[]" class="form-control form-control-sm" readonly tabindex="-1"
+                <select type="text" name="aroma[]" class="form-control form-control"  tabindex="-1"
                   id="aroma">
+                </select>
               </td>
               <td class="small-width">
-                <input type="number" name="stock[]" class="form-control form-control-sm" readonly tabindex="-1"
+                <input type="number" name="stock[]" class="form-control form-control"  tabindex="-1"
                   id="stock">
               </td>
               <td class="min-width">
-                <input type="number" name="precio[]" class="form-control form-control-sm" tabindex="-1" id="precio">
+                <input type="number" name="precio[]" class="form-control form-control" tabindex="-1" id="precio">
               </td>
               <td class="small-width">
-                <input type="number" name="cantidad[]" class="form-control form-control-sm" pattern="^[0-9]" min="1"
+                <input type="number" name="cantidad[]" class="form-control form-control" pattern="^[0-9]" min="1"
                   tabindex="-1">
               </td>
             </tr>
@@ -110,7 +116,7 @@
               <p id="handle" class="text text-danger" hidden></p>
               <label class="mt-2" for="total-compra" id="total-compraLabel" hidden>TOTAL: </label>
               <input type="number" name="total-compra" id="total-compra" value=""
-                class="form-control form-control-sm w-25 ml-1" readonly hidden>
+                class="form-control form-control-sm w-25 ml-1"  hidden>
             </div>
           </div>
         </div>

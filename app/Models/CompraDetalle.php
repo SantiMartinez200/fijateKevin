@@ -15,22 +15,17 @@ class CompraDetalle extends Model
   {
     return $this->belongsTo(Compra::class);
   }
-
-  public function caja(): BelongsTo
-  {
-    return $this->belongsTo(Caja::class);
-  }
-  public function productoCompraDetalle(): BelongsTo //
+  public function producto(): BelongsTo //
   {
     return $this->belongsTo(Producto::class);
   }
 
-  public function proveedorCompraDetalle(): BelongsTo //
+  public function proveedor(): BelongsTo //
   {
     return $this->belongsTo(Proveedor::class);
   }
 
-  public function aromaCompraDetalle(): BelongsTo //
+  public function aroma(): BelongsTo //
   {
     return $this->belongsTo(Aroma::class);
   }

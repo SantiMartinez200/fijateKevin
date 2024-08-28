@@ -13,7 +13,7 @@ class MetodoPago extends Model
     'nombre'
   ];
     use HasFactory;
-  public function metodoPagoEnVenta(): HasMany
+  public function venta(): HasMany
   {
     return $this->hasMany(VentaPago::class);
   }

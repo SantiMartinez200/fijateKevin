@@ -21,21 +21,21 @@ class VentaDetalle extends Model
     return $this->belongsTo(Caja::class);
   }
 
-  public function clienteVenta(): BelongsTo //
+  public function cliente(): BelongsTo //
   {
     return $this->belongsTo(Cliente::class);
   }
-  public function productoVentaDetalle(): BelongsTo //
+  public function producto(): BelongsTo //
   {
     return $this->belongsTo(Producto::class);
   }
 
-  public function proveedorVentaDetalle(): BelongsTo //
+  public function proveedor(): BelongsTo //
   {
     return $this->belongsTo(Proveedor::class);
   }
 
-  public function aromaVentaDetalle(): BelongsTo //
+  public function aroma(): BelongsTo //
   {
     return $this->belongsTo(Aroma::class);
   }

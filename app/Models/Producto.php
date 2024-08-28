@@ -16,11 +16,11 @@ class Producto extends Model
   ];
 
   use HasFactory;
-  public function productoCompra(): HasMany
+  public function compra(): HasMany
   {
     return $this->hasMany(CompraDetalle::class);
   }
-  public function productoVenta(): HasMany
+  public function venta(): HasMany
   {
     return $this->hasMany(VentaDetalle::class);
   }
