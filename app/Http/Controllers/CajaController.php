@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\MailerController;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Caja;
@@ -52,6 +54,7 @@ class CajaController extends Controller
   {
     $caja = $request->all();
     Caja::create($caja);
+    Mail::to('tribalessence@gmail.com')->send(new MailerController);
     return redirect('caja');
   }
 
