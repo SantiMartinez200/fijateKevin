@@ -85,6 +85,8 @@ Route::middleware('auth')->group(function () {
 
 
   Route::get('pdf-caja/{id}', [MovimientosCajaController::class, 'pdfMovimientos'])->name('pdf-caja');
+
+  Route::get('prueba', [CajaController::class, 'searcheable']);
 });
 
 

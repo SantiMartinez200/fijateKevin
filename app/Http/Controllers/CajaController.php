@@ -73,21 +73,10 @@ class CajaController extends Controller
   // {
   // }
 
-  public function edit(): View
-  {
 
-  }
-
-
-  public function update(): RedirectResponse
-  {
-
-  }
-
-
-  public function destroy(): RedirectResponse
-  {
-
+  public function searcheable(){
+    $caja = Caja::search()->get();
+    dd($caja);
   }
 }
 

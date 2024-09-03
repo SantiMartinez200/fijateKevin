@@ -147,11 +147,9 @@
     if (caja.estado == 'cerrada') {
       console.log(caja.estado);
       let btnMovimiento = document.querySelector(`.btn-movimiento${caja.id}`);
-      let btnEdit = document.querySelector(`.btn-edit${caja.id}`);
       let btnCerrar = document.querySelector(`.btn-close${caja.id}`);
 
       btnMovimiento.disabled = true;
-      btnEdit.disabled = true;
       btnCerrar.disabled = true;
     }
     if (caja.estado == 'abierta') {
@@ -163,7 +161,22 @@
 
   //--------------------------------------------------//
 
+  const barra = document.querySelector('#sidebarCollapse')
+  const barra2 = document.querySelector('#sidebar')
 
+  console.log(barra);
+  
+  window.onscroll = function() {
+    console.log(barra2.classList[0], 'fuera');
+  let y = window.scrollY
+  if(y > 350 && barra2.classList[0] == undefined){
+    //barra2.classList.remove('active')
+    console.log(barra2.classList[0], 'adentro');
+    barra2.classList.add('active');   
+    
+  }
+  console.log(window.scrollY);
+  }
   //Esto debería ir en una function para abrir el modal con onclick().
   //Ej: Function abrirModalMovimiento();
   botonModal.forEach(btn => {
