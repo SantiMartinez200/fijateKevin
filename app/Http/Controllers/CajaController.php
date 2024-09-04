@@ -26,9 +26,8 @@ class CajaController extends Controller
   }
   public function index(): View
   {
-    $cajaAbierta = Caja::where("estado", "abierta")->get();
+    $cajaAbierta = Caja::where("estado", "abierta")->where("usuario_id", "LIKE", Auth::user()->id)->get();
     $cajas = Caja::all();
-    $metodos = MetodoPago::all();
     $users = User::all();
     foreach ($cajas as $caja) {
       if ($caja->usuario_id == $users->first()->id) {
@@ -43,7 +42,7 @@ class CajaController extends Controller
         $caja->fecha_cierre = 'N/D';
       }
     }
-    return view('caja.index', compact('cajas', 'metodos', 'cajaAbierta'));
+    return view('caja.index', compact('cajas', 'cajaAbierta'));
   }
 
   public function create(): View

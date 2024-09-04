@@ -87,6 +87,8 @@
 
           <a href="{{ route('vender') }}"><button class="btn btn-danger">Vender Mercaderías</button></a>
 
+          <input type="text" name="searcheable" id="searcheable" placeholder="Buscar..." class="form-control rounded ml-5">
+
           <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
             aria-label="Toggle navigation">
