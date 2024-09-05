@@ -6,7 +6,7 @@
     {{ $message }}
   </div>
 @endif
-
+{{-- @dd($paginacion); --}}
 <div class="container mt-4">
   <div class="card">
     <div class="card-header">
@@ -113,7 +113,7 @@
           </tr>
         </thead>
         <tbody>
-          @foreach ($cajas as $caja)
+          @foreach ($itemsPaginados as $caja)
         <tr>
         <td>{{$caja->estado }}</td>
         <td>{{$caja->created_at }}</td>
@@ -137,9 +137,11 @@
         </tbody>
       </table>
     </div>
+   {{$itemsPaginados->links()}}
   </div>
 </div>
 <script>
+
   let botonModal = document.querySelectorAll('[data-target="#modalRegistrarMovimiento"]');
 
   const cajas = @json($cajas);

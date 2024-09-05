@@ -5,12 +5,17 @@ namespace App\Http\Controllers;
 use App\Mail\MailerController;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+
+use Illuminate\Pagination\Paginator;
+
+
 use App\Models\Caja;
-use App\Models\MetodoPago;
 use App\Models\User;
 
 class CajaController extends Controller
@@ -24,8 +29,10 @@ class CajaController extends Controller
       return false;
     }
   }
-  public function index(): View
+  public function index(Request $request): View
   {
+    
+    
     $cajaAbierta = Caja::where("estado", "abierta")->where("usuario_id", "LIKE", Auth::user()->id)->get();
     $cajas = Caja::all();
     $users = User::all();
@@ -42,8 +49,23 @@ class CajaController extends Controller
         $caja->fecha_cierre = 'N/D';
       }
     }
-    return view('caja.index', compact('cajas', 'cajaAbierta'));
+//------------------------------
+    $data = collect($cajas);
+    $paginaActual = LengthAwarePaginator::resolveCurrentPage();
+    $porPagina = 6;
+    $itemActualPagina = $data->slice(($paginaActual - 1)* $porPagina, $porPagina)->all();
+    $itemsPaginados =  new LengthAwarePaginator(
+      $itemActualPagina,
+      $data->count(),
+      $porPagina,
+      $paginaActual,
+      ['path'=> request()->url(),
+      'query'=>request()->query(),
+      ]
+    );
+    return view('caja.index', compact('itemsPaginados', 'cajaAbierta','cajas'));
   }
+
 
   public function create(): View
   {
