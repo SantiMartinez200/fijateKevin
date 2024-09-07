@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MovimientosCajaController;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegistrosCajaController;
 use App\Http\Controllers\StockController;
@@ -62,10 +63,11 @@ Route::middleware('auth')->group(function () {
 
   Route::post('storeCompraData', [CompraDetalleController::class, 'store'])->name('storeCompraData');
 
-  Route::get('buscar-entrada/{search}', [VentaDetalleController::class, 'findEntrada'])->name('buscar-entrada');
+  Route::get('buscar-entrada/{search}', [CompraDetalleController::class, 'findEntrada'])->name('buscar-entrada');
 
   Route::get('vender', [VentaDetalleController::class, 'index'])->name('vender');
   Route::post('storeVentaDetalle', [VentaDetalleController::class, 'store'])->name('storeVentaDetalle');
+  Route::get('comprobantes', [VentaDetalleController::class, 'findsalidas'])->name('comprobantes');
 
   Route::get('login', [LoginController::class, 'vista']);
   Route::post('autenticacion', [LoginController::class, 'autenticacion'])->name('login.autenticacion');
@@ -73,7 +75,7 @@ Route::middleware('auth')->group(function () {
 
   Route::get('movimientos', [MovimientosCajaController::class, 'index'])->name('movimientos');
 
-  
+
   Route::get('caja/{id}/movimientos', [MovimientosCajaController::class, 'getMovimientos'])->name('caja.movimientos');
   Route::get('caja/{id}/monto', [MovimientosCajaController::class, 'getMonto']);
   Route::get('caja/{id}/cerrar', [CajaController::class, 'close'])->name('caja.close');
@@ -84,13 +86,11 @@ Route::middleware('auth')->group(function () {
   Route::get('calculateThisStock/{id}', [StockController::class, 'calculateThisStock'])->name('calcuateThisStock');
 
 
-  Route::get('pdf-caja/{id}', [MovimientosCajaController::class, 'pdfMovimientos'])->name('pdf-caja');
+  Route::get('pdf-caja/{id}', [PdfController::class, 'pdfMovimientos'])->name('pdf-caja');
 
-  Route::get('prueba', [CajaController::class, 'searcheable']);
 });
 
 
 // route::get('getCompraData', [VentaDetalleController::class, 'getCompraData'])->name('getCompraData');
 require __DIR__ . '/auth.php';
-
 

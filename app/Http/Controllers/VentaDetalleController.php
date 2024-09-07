@@ -24,10 +24,9 @@ class VentaDetalleController extends Controller
       return redirect()->route('caja.index')->with('error', 'Debes abrir una caja antes');
     }
   }
-  public function findEntrada($search)
+  public function findSalidas()
   {
-    $search = strval($search) . '%';
-    $recomendaciones = DB::table('compra_detalles')->where('producto_id', 'like', $search)->join('productos','compra_detalles.producto_id','=','productos.id')->join('proveedores', 'compra_detalles.proveedor_id', '=', 'proveedores.id')->join('aromas', 'compra_detalles.aroma_id', '=', 'aromas.id')->join('marcas', 'compra_detalles.marca_id', '=', 'marcas.id')->select('compra_detalles.id','compra_detalles.compra_id','compra_detalles.created_at','compra_detalles.marca_id','marcas.nombre AS nombre_marca','compra_detalles.producto_id','productos.nombre AS nombre_producto','compra_detalles.proveedor_id','proveedores.nombre AS nombre_proveedor','compra_detalles.aroma_id','aromas.nombre AS nombre_aroma','compra_detalles.precio_costo','compra_detalles.porcentaje_ganancia','compra_detalles.precio_venta','compra_detalles.cantidad')->get();
+    $recomendaciones = DB::table('venta_detalles')->join('productos', 'venta_detalles.producto_id', '=', 'productos.id')->join('proveedores', 'venta_detalles.proveedor_id', '=', 'proveedores.id')->join('aromas', 'venta_detalles.aroma_id', '=', 'aromas.id')->join('marcas', 'venta_detalles.marca_id', '=', 'marcas.id')->select('venta_detalles.id', 'venta_detalles.compra_detalle_id', 'venta_detalles.created_at', 'venta_detalles.marca_id', 'marcas.nombre AS nombre_marca', 'venta_detalles.producto_id', 'productos.nombre AS nombre_producto', 'venta_detalles.proveedor_id', 'proveedores.nombre AS nombre_proveedor', 'venta_detalles.aroma_id', 'aromas.nombre AS nombre_aroma', 'venta_detalles.precio_venta', 'venta_detalles.cantidad')->orderBy('venta_detalles.created_at', 'DESC')->get();
     return $recomendaciones;
   }
 
@@ -35,7 +34,14 @@ class VentaDetalleController extends Controller
   {
     $ventas = $request->all();
     $reorderedArray = [];
-    for ($j = 0; $j < count($ventas['cantidad']); $j++) {
+    $flag = false;
+    for ($i = 0; $i < count($ventas["cantidad"]); $i++) {
+      if (empty($ventas["cantidad"][0]) || $ventas["cantidad"][0] === '') {
+        $flag = true;
+        return $flag;
+      }
+    }
+    for ($j = 0; $j < count($ventas["cantidad"]); $j++) {
       if ($ventas['cantidad'][$j] != 0) {
         $reorderedArray[] = [
           'compra_detalle_id' => $ventas['compra-select'][$j],
@@ -54,9 +60,12 @@ class VentaDetalleController extends Controller
   public function store(Request $request)
   {
     $reorderedArray = self::organizeVentas($request);
+    if (gettype($reorderedArray) == "boolean") {
+      return redirect()->route('vender')->with('error', 'No se pudo cargar la venta');
+    }
     $total = VentaController::calculateTotal($reorderedArray);
     $user_id = auth()->user()->id;
-    $cajaAbierta = Caja::where('estado', 'Abierta')->where('usuario_id',$user_id)->first();
+    $cajaAbierta = Caja::where('estado', 'Abierta')->where('usuario_id', $user_id)->first();
     $caja = $cajaAbierta->id;
     $array = [
       'usuario_id' => $user_id,
@@ -81,7 +90,7 @@ class VentaDetalleController extends Controller
       $value = VentaDetalle::create($value);
     }
 
-    return redirect()->route('vender')->with('success','Venta registrada');
+    return redirect()->route('vender')->with('success', 'Venta registrada');
   }
 
 }

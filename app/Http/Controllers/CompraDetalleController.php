@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Caja;
 use App\Models\CompraDetalle;
+use DB;
 use Illuminate\Http\Request;
 use App\Models\Producto;
 use App\Models\Proveedor;
@@ -18,8 +19,8 @@ class CompraDetalleController extends Controller
   {
     $data = $request->all();
     $user = Auth::user()->id;
-    $cajaAbierta = Caja::where('estado', 'Abierta')->where('usuario_id','=',$user)->first()->get();
-    
+    $cajaAbierta = Caja::where('estado', 'Abierta')->where('usuario_id', '=', $user)->first()->get();
+
     $total = $data['precio_costo'] * $data['cantidad'];
     $array = ['usuario_id' => $user, 'caja_id' => $cajaAbierta[0]["id"], 'total' => $total];
     CompraController::store($array);
@@ -30,7 +31,7 @@ class CompraDetalleController extends Controller
       'caja_id' => $cajaAbierta[0]["id"],
       'tipo_movimiento' => 'S',
       'monto' => $total,
-      'descripcion' => 'Compra del producto: ' . $producto->nombre . ' por $' . $data["precio_costo"] . ' X ' . $data["cantidad"]. ' U',
+      'descripcion' => 'Compra del producto: ' . $producto->nombre . ' por $' . $data["precio_costo"] . ' X ' . $data["cantidad"] . ' U',
     ]);
     MovimientosCajaController::store($request);
     // ------------------------------------------- //
@@ -52,5 +53,13 @@ class CompraDetalleController extends Controller
       $err = $e->getMessage();
       return view('ingresos.index', ['err' => $err]);
     }
+  }
+
+
+  public function findEntrada($search)
+  {
+    $search = strval($search) . '%';
+    $recomendaciones = DB::table('compra_detalles')->where('producto_id', 'like', $search)->join('productos', 'compra_detalles.producto_id', '=', 'productos.id')->join('proveedores', 'compra_detalles.proveedor_id', '=', 'proveedores.id')->join('aromas', 'compra_detalles.aroma_id', '=', 'aromas.id')->join('marcas', 'compra_detalles.marca_id', '=', 'marcas.id')->select('compra_detalles.id', 'compra_detalles.compra_id', 'compra_detalles.created_at', 'compra_detalles.marca_id', 'marcas.nombre AS nombre_marca', 'compra_detalles.producto_id', 'productos.nombre AS nombre_producto', 'compra_detalles.proveedor_id', 'proveedores.nombre AS nombre_proveedor', 'compra_detalles.aroma_id', 'aromas.nombre AS nombre_aroma', 'compra_detalles.precio_costo', 'compra_detalles.porcentaje_ganancia', 'compra_detalles.precio_venta', 'compra_detalles.cantidad')->get();
+    return $recomendaciones;
   }
 }

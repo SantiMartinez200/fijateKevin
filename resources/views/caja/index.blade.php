@@ -137,47 +137,45 @@
         </tbody>
       </table>
     </div>
-   {{$itemsPaginados->links()}}
+    {{$itemsPaginados->links()}}
   </div>
 </div>
 <script>
 
   let botonModal = document.querySelectorAll('[data-target="#modalRegistrarMovimiento"]');
+  let usuario = '<?php echo Auth::user()->abrio_caja; ?>';
+  console.log(usuario);
 
-  const cajas = @json($cajas);
-  cajas.forEach(caja => {
-    if (caja.estado == 'cerrada') {
-      console.log(caja.estado);
-      let btnMovimiento = document.querySelector(`.btn-movimiento${caja.id}`);
-      let btnCerrar = document.querySelector(`.btn-close${caja.id}`);
 
-      btnMovimiento.disabled = true;
-      btnCerrar.disabled = true;
+  const cajas = @json($itemsPaginados);
+  aux = cajas['data'];
+  var flag = false;
+  for (const key in aux) {
+    if (aux.hasOwnProperty(key)) {
+      if (aux[key]['estado'] == 'cerrada') {
+        let btnMovimiento = document.querySelector(`.btn-movimiento${aux[key]['id']}`);
+        let btnCerrar = document.querySelector(`.btn-close${aux[key]['id']}`);
+        btnMovimiento.disabled = true;
+        btnCerrar.disabled = true;
+        flag = true;
+      }
     }
-    if (caja.estado == 'abierta') {
-      document.querySelector('.btnAbrirCaja').disabled = true;
-    }
-
-  });
-
-
+  }
   //--------------------------------------------------//
 
   const barra = document.querySelector('#sidebarCollapse')
   const barra2 = document.querySelector('#sidebar')
 
-  console.log(barra);
-  
-  window.onscroll = function() {
+  window.onscroll = function () {
     console.log(barra2.classList[0], 'fuera');
-  let y = window.scrollY
-  if(y > 350 && barra2.classList[0] == undefined){
-    //barra2.classList.remove('active')
-    console.log(barra2.classList[0], 'adentro');
-    barra2.classList.add('active');   
-    
-  }
-  console.log(window.scrollY);
+    let y = window.scrollY
+    if (y > 350 && barra2.classList[0] == undefined) {
+      //barra2.classList.remove('active')
+      console.log(barra2.classList[0], 'adentro');
+      barra2.classList.add('active');
+
+    }
+    console.log(window.scrollY);
   }
   //Esto debería ir en una function para abrir el modal con onclick().
   //Ej: Function abrirModalMovimiento();

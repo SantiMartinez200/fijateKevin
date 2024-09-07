@@ -20,7 +20,7 @@ use App\Models\User;
 
 class CajaController extends Controller
 {
-   public static function cajaIsOpen()
+  public static function cajaIsOpen()
   {
     $caja_abierta = Caja::where('estado', 'Abierta')->where('usuario_id', Auth::user()->id)->first();
     if ($caja_abierta) {
@@ -31,17 +31,12 @@ class CajaController extends Controller
   }
   public function index(Request $request): View
   {
-    
-    
+
+
     $cajaAbierta = Caja::where("estado", "abierta")->where("usuario_id", "LIKE", Auth::user()->id)->get();
-    $cajas = Caja::all();
+    $cajas = Caja::select('*')->orderBy('estado', 'ASC')->orderBy('created_at', 'DESC')->get();
     $users = User::all();
     foreach ($cajas as $caja) {
-      if ($caja->usuario_id == $users->first()->id) {
-        $caja->usuario_id = $users->first()->name;
-      } else {
-        $caja->usuario_id = $users->find($caja->usuario_id)->name;
-      }
       if ($caja->monto_final == 0) {
         $caja->monto_final = 'N/D';
       }
@@ -49,21 +44,22 @@ class CajaController extends Controller
         $caja->fecha_cierre = 'N/D';
       }
     }
-//------------------------------
+    //------------------------------
     $data = collect($cajas);
     $paginaActual = LengthAwarePaginator::resolveCurrentPage();
     $porPagina = 6;
-    $itemActualPagina = $data->slice(($paginaActual - 1)* $porPagina, $porPagina)->all();
-    $itemsPaginados =  new LengthAwarePaginator(
+    $itemActualPagina = $data->slice(($paginaActual - 1) * $porPagina, $porPagina)->all();
+    $itemsPaginados = new LengthAwarePaginator(
       $itemActualPagina,
       $data->count(),
       $porPagina,
       $paginaActual,
-      ['path'=> request()->url(),
-      'query'=>request()->query(),
+      [
+        'path' => request()->url(),
+        'query' => request()->query(),
       ]
     );
-    return view('caja.index', compact('itemsPaginados', 'cajaAbierta','cajas'));
+    return view('caja.index', compact('itemsPaginados', 'cajaAbierta', 'cajas'));
   }
 
 
@@ -75,7 +71,7 @@ class CajaController extends Controller
   {
     $caja = $request->all();
     Caja::create($caja);
-    Mail::to('tribalessence@gmail.com')->send(new MailerController);
+    //Mail::to('tribalessence@gmail.com')->send(new MailerController);
     return redirect('caja');
   }
 
@@ -95,7 +91,8 @@ class CajaController extends Controller
   // }
 
 
-  public function searcheable(){
+  public function searcheable()
+  {
     $caja = Caja::search()->get();
     dd($caja);
   }
