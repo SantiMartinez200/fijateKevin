@@ -1,11 +1,6 @@
 @extends('layouts.app')
 @section('content')
-
-@if ($message = Session::get('error'))
-  <div class="alert alert-danger" role="alert">
-    {{ $message }}
-  </div>
-@endif
+@include('alerts.defaults')
 {{-- @dd($paginacion); --}}
 <div class="container mt-4">
   <div class="card">
@@ -145,7 +140,7 @@
   let botonModal = document.querySelectorAll('[data-target="#modalRegistrarMovimiento"]');
   let usuario_abrio_caja = '<?php echo Auth::user()->abrio_caja; ?>';
   let btnAbrirCaja = document.querySelector(".btnAbrirCaja");
-  
+
   if (usuario_abrio_caja == 1) {
     btnAbrirCaja.disabled = true;
   } else {
@@ -155,7 +150,7 @@
   const cajas = @json($itemsPaginados);
   aux = cajas['data'];
   var flag = false;
-  var auth_user = '<?php echo(Auth::user()->id) ?>'
+  var auth_user = '<?php echo (Auth::user()->id) ?>'
   for (const key in aux) {
     if (aux.hasOwnProperty(key)) {
       //console.log(aux);
@@ -197,7 +192,7 @@
       //document.querySelector('#estudiante').value = nombre;
       //document.querySelector('#cedula').value = cedula;
       console.log();
-      
+
       //console.log('abrir modal');
       $('#modalRegistrarMovimiento').modal();
     });

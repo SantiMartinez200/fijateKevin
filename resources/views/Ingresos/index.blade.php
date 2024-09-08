@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-
+@include('alerts.defaults')
 <!-- Modal Structure -->
 <div class="modal fade" id="modalRegistrarMovimiento" tabindex="-1" role="dialog"
   aria-labelledby="modalRegistrarMovimientoLabel" aria-hidden="true">
@@ -100,11 +100,6 @@
   </div>
 </div>
 <div class="container">
-  @if ($message = Session::get('message'))
-    <div class="alert alert-success" role="alert">
-    {{ $message }}
-    </div>
-  @endif
   <button id="movimiento" type="button" class="mb-4 btn btn-success btn-movimiento" data-toggle="modal"
     data-target="#modalRegistrarMovimiento">
     Ingreso Nuevo
@@ -114,7 +109,6 @@
       <h3>Stock</h3>
     </div>
     <div class="card-body">
-      @dd($compraDetalles)
       <table class="table table-striped text-center">
         <thead>
           <tr>
@@ -140,7 +134,8 @@
         <td>{{$compraDetalle->precio_costo}}</td>
         <td>{{$compraDetalle->cantidad}}</td>
         <td>{{$compraDetalle->updated_at}}</td>
-        <td><button type="button" class="btn btn-outline-primary"><i class="h3 bi bi-plus-circle-fill"></i></button></td>
+        <td><button type="button" class="btn btn-outline-primary"><i class="h3 bi bi-plus-circle-fill"></i></button>
+        </td>
         </tr>
       @endforeach
         </tbody>

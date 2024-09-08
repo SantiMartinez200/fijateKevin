@@ -27,7 +27,7 @@ class StockController extends Controller
         'aromas' => $aromas,
         'proveedores' => $proveedores,
         'marcas' => $marcas,
-        'compraDetalles' => self::calculateStock(),
+        'compraDetalles' => self::changeIdToName(),
       ]);
     } else {
       return redirect()->route('caja.index')->with('error', 'Debes abrir una caja antes');

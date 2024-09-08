@@ -1,20 +1,11 @@
 @extends('layouts.app')
 @section('content')
+@include('alerts.defaults')
 
 <div class="row justify-content-center mt-3">
   <div class="col-md-12">
 
-    @if ($message = Session::get('success'))
-    <div class="alert alert-success" role="alert">
-      {{ $message }}
-    </div>
-  @endif
 
-    @if ($message = Session::get('warning'))
-    <div class="alert alert-warning" role="alert">
-      {{ $message }}
-    </div>
-  @endif
 
     <div class="card">
       <div class="card-header">Listado de Aromas</div>
@@ -38,22 +29,23 @@
           <td>{{ $aroma->updated_at }}</td>
           <td>
           <form action="{{ route('aromas.destroy', $aroma->id) }}" method="post">
-          @csrf
-          @method('DELETE')
+            @csrf
+            @method('DELETE')
 
-          <a href="{{ route('aromas.show', $aroma->id) }}" class="btn btn-warning btn-sm"><i
-            class="bi bi-eye"></i> Ver</a>
+            <a href="{{ route('aromas.show', $aroma->id) }}" class="btn btn-warning btn-sm"><i
+              class="bi bi-eye"></i> Ver</a>
 
-          <a href="{{ route('aromas.edit', $aroma->id) }}" class="btn btn-primary btn-sm"><i
-            class="bi bi-pencil-square"></i> Editar</a>
+            <a href="{{ route('aromas.edit', $aroma->id) }}" class="btn btn-primary btn-sm"><i
+              class="bi bi-pencil-square"></i> Editar</a>
 
-          <button type="submit" class="btn btn-danger btn-sm"
-          onclick="return confirm('¿Querés eliminar este aroma? No hay vuelta atrás.');"><i class="bi bi-trash"></i>
-          Eliminar</button>
+            <button type="submit" class="btn btn-danger btn-sm"
+            onclick="return confirm('¿Querés eliminar este aroma? No hay vuelta atrás.');"><i
+              class="bi bi-trash"></i>
+            Eliminar</button>
           </form>
           </td>
         </tr>
-        @empty
+      @empty
     <td colspan="6">
       <span class="text-danger">
       <strong>No hay aromas!</strong>

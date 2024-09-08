@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-
+@include('alerts.defaults')
 
 <style>
   /* CSS personalizado para ajustar los tamaños de las columnas */
@@ -150,21 +150,6 @@
   </div>
 </div>
 <script src="{{asset('js/ventas.js')}}"></script>
-@if ($message = Session::get('error'))
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-    showAlert('error', '{{ $message }}');
-    });
-  </script>
-@endif
-
-@if ($message = Session::get('success'))
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-    showAlert('success', '{{ $message }}');
-    });
-  </script>
-@endif
 
 
 @endsection

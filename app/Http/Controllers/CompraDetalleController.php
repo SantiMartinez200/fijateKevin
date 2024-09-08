@@ -17,6 +17,7 @@ class CompraDetalleController extends Controller
 
   public function store(Request $request)
   {
+    //----MOVIMIENTO DE CAJA-----//
     $data = $request->all();
     $user = Auth::user()->id;
     $cajaAbierta = Caja::where('estado', 'Abierta')->where('usuario_id', '=', $user)->first()->get();
@@ -36,6 +37,7 @@ class CompraDetalleController extends Controller
     MovimientosCajaController::store($request);
     // ------------------------------------------- //
 
+    //----MOVIMIENTO DE DETALLE------//
     try {
       CompraDetalle::create([
         'compra_id' => $idCompra,

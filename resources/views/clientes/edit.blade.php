@@ -1,14 +1,10 @@
 @extends('layouts.app')
 @section('content')
+@include('alerts.defaults')
 
 <div class="row justify-content-center mt-3">
   <div class="col-md-8">
 
-    @if ($message = Session::get('success'))
-    <div class="alert alert-success" role="alert">
-      {{ $message }}
-    </div>
-  @endif
 
     <div class="card">
       <div class="card-header">
