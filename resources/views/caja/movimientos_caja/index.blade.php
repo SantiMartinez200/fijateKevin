@@ -3,9 +3,10 @@
 
 <div class="card">
   <div class="card-header">
-    <h3></h3>
+    <h2>Cajas</h2>
   </div>
   <div class="card-body">
+    
     <div class="container">
       <table class="table table-bordered mt-4 text-center">
         <thead>
@@ -20,16 +21,21 @@
         </thead>
         <tbody>
           @foreach ($cajas as $caja)
-        <tr>
-        <td>{{$caja->id}}</td>
-        <td>{{$caja->estado}}</td>
-        <td>{{$caja->usuario_id}}</td>
-        <td>{{$caja->created_at}}</td>
-        <td>{{$caja->fecha_cierre}}</td>
-        <td><a href="{{route('caja.movimientos', $caja->id)}}"><button type="button" class="btn btn-primary">Ver
-            Movimientos
-          </button></a></td>
-        </tr>
+      <tr>
+      <td>{{$caja->id}}</td>
+      <td>{{$caja->estado}}</td>
+      <td>{{$caja->usuario_id}}</td>
+      <td>{{$caja->created_at}}</td>
+      <td>@if(!$caja->fecha_cierre)
+          N/D
+        @else
+        {{$caja->fecha_cierre}}
+    @endif
+      </td>
+      <td><a href="{{route('caja.movimientos', $caja->id)}}"><button type="button" class="btn btn-primary">Ver
+        Movimientos
+        </button></a></td>
+      </tr>
       @endforeach
         </tbody>
       </table>

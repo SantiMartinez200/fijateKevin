@@ -24,11 +24,18 @@
         </div>
 
         <div>
+          <x-input-label for="paginado" class="text-dark" :value="__('Paginado')" />
+          <x-text-input id="paginado" name="paginado" type="number" class="mt-1 block w-full" :value="old('paginado', $user->paginado)" required
+            autofocus autocomplete="paginado" />
+          <x-input-error class="mt-2" :messages="$errors->get('paginado')" />
+        </div>
+
+        <div>
             <x-input-label for="email" class="text-dark" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
-            @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
+            @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !$user->hasVerifiedEmail())
                 <div>
                     <p class="text-sm mt-2 text-gray-800 light:text-gray-200">
                         {{ __('Tu dirección de Email no ha sido verificada.') }}
