@@ -143,9 +143,14 @@
 <script>
 
   let botonModal = document.querySelectorAll('[data-target="#modalRegistrarMovimiento"]');
-  let usuario = '<?php echo Auth::user()->abrio_caja; ?>';
-  console.log(usuario);
-
+  let usuario_abrio_caja = '<?php echo Auth::user()->abrio_caja; ?>';
+  let btnAbrirCaja = document.querySelector(".btnAbrirCaja");
+  
+  if (usuario_abrio_caja == 1) {
+    btnAbrirCaja.disabled = true;
+  } else {
+    btnAbrirCaja.disabled = false;
+  }
 
   const cajas = @json($itemsPaginados);
   aux = cajas['data'];

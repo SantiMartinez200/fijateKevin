@@ -67,7 +67,8 @@ Route::middleware('auth')->group(function () {
 
   Route::get('vender', [VentaDetalleController::class, 'index'])->name('vender');
   Route::post('storeVentaDetalle', [VentaDetalleController::class, 'store'])->name('storeVentaDetalle');
-  Route::get('comprobantes', [VentaDetalleController::class, 'findsalidas'])->name('comprobantes');
+  Route::get('ventas', [VentaDetalleController::class, 'getVentas'])->name('ventas');
+  Route::get('comprobantes/{id}', [VentaDetalleController::class, 'findsalidas'])->name('comprobantes');
 
   Route::get('login', [LoginController::class, 'vista']);
   Route::post('autenticacion', [LoginController::class, 'autenticacion'])->name('login.autenticacion');

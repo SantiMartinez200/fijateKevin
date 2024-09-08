@@ -10,6 +10,7 @@ function fetchURL() {
                 var row = event.target.closest("tr");
                 var bodyDiv = row.querySelector(".fetch");
                 var list = row.querySelector(".ulSuggest");
+
                 if (search === "") {
                     search = 0;
                     list.hidden = true;
@@ -23,9 +24,6 @@ function fetchURL() {
                             return response.json();
                         })
                         .then((data) => {
-                            //console.log(data);
-                            // const jsonString = JSON.stringify(data, null, 2);
-                            // const compraDetails = data.compra;
                             clearList(list);
                             list.classList.add(
                                 "block",
@@ -37,10 +35,8 @@ function fetchURL() {
                             );
                             if (data.length > 0) {
                                 data.forEach((data) => {
-                                    //console.log(data);
                                     let suggestItem =
                                         document.createElement("li");
-                                    console.log(data);
                                     suggestItem.textContent =
                                         "Codigo:" +
                                         data.producto_id +
@@ -72,6 +68,7 @@ function fetchURL() {
                                 noResults(list);
                             }
                             bodyDiv.appendChild(list);
+
                             // Cálculos
                             document
                                 .getElementById("tbody")
@@ -138,7 +135,7 @@ function clickList(data, row, list) {
             let aroma = row.querySelectorAll("td select[name='aroma[]']")[0];
             let cantidad = row.querySelectorAll("td input[name='stock[]']")[0];
             let precio = row.querySelectorAll("td input[name='precio[]']")[0];
-            console.log(data);
+            //console.log(data);
 
             let productoId = document.createElement("option");
             productoId.value = data.producto_id;
@@ -178,7 +175,7 @@ function actualizarTotal() {
         const cantidad = row.querySelector('input[name="cantidad[]"]').value;
         const precio = row.querySelector('input[name="precio[]"]').value;
         const subtotal = cantidad * precio;
-        totalGeneral += subtotal;
+        totalGeneral += Math.ceil(subtotal);
     });
     // Muestra el total general
     if (totalGeneral > 0) {
@@ -199,9 +196,11 @@ function agregarFila() {
     var newRow = templateRow.cloneNode(true);
     // Limpiar fila nueva
     newRow.querySelectorAll("input").forEach((input) => (input.value = ""));
-    newRow
-        .querySelectorAll("select")
-        .forEach((select) => (select.selectedIndex = 0));
+    newRow.querySelectorAll("select").forEach((select) => {
+        while (select.firstChild) {
+            select.removeChild(select.firstChild); // Eliminar todas las opciones del select
+        }
+    });
     // Añadir fila a la tabla
     document.getElementById("tbody").appendChild(newRow);
 }
@@ -209,7 +208,7 @@ function agregarFila() {
 function eliminarFila(button) {
     let rowCount = document.querySelectorAll("#tbody tr").length;
     if (rowCount == 1) {
-        console.log(rowCount);
+        //console.log(rowCount);
         alert("No se puede eliminar la última fila.");
     } else {
         // Elimina la fila correspondiente al botón de eliminar

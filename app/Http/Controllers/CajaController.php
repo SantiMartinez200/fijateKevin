@@ -71,12 +71,18 @@ class CajaController extends Controller
   {
     $caja = $request->all();
     Caja::create($caja);
+    $user = User::find(Auth::user()->id);
+    $user->abrio_caja = 1;
+    $user->save();
     //Mail::to('tribalessence@gmail.com')->send(new MailerController);
     return redirect('caja');
   }
 
   public function close(Request $request): RedirectResponse
   {
+    $user = User::find(Auth::user()->id);
+    $user->abrio_caja = 0;
+    $user->save();
     $caja = Caja::findOrFail($request->id);
     $montoFinal = MovimientosCajaController::getMonto($request->id);
     $caja->monto_final = $montoFinal['monto_final'];

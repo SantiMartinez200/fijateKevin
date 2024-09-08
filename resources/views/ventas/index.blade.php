@@ -51,7 +51,7 @@
         <tbody id="tbody">
           <tr class="template-row">
             <td>
-              <button class="btn" onclick="eliminarFila(this)" tabindex="-1">
+              <button type="button" class="btn" onclick="eliminarFila(this)" tabindex="-1">
                 <i class="bi bi-bag-x" style="font-size: 2rem; color: red;"></i>
               </button>
             </td>
@@ -91,8 +91,7 @@
               <input type="number" name="precio[]" class="form-control form-control" tabindex="-1" id="precio" readonly>
             </td>
             <td class="small-width">
-              <input type="number" name="cantidad[]" class="form-control form-control" pattern="^[0-9]" min="1"
-                tabindex="-1">
+              <input type="number" name="cantidad[]" class="form-control form-control" pattern="^[0-9]" min="1">
             </td>
           </tr>
         </tbody>
@@ -114,27 +113,42 @@
 
   <div class="card shadow p-3 rounded">
     <div class="card-header rounded">
-      <h3 class="h3">Facturas Realizadas</h3>
+      <h3 class="h3">Ventas Realizadas</h3>
     </div>
     <div class="card-body">
       <table class="table table-responsive">
         <thead>
-          <th>Código Compra</th>
+          <th>Caja Afectada</th>
           <th>Fecha Venta</th>
-          <th>Marca</th>
-          <th>Producto</th>
-          <th>Total Venta</th>
-          <th>Total Cantidades</th>
+          <th>Usuario</th>
+          <th>Total $</th>
           <th>Acción</th>
         </thead>
         <tbody id="bodyTabla">
-
+          @forelse($ventas as $venta)
+        <tr>
+        <td>{{$venta->caja_id}}</td>
+        <td>{{$venta->created_at}}</td>
+        <td>{{$venta->name}}</td>
+        <td>{{$venta->total}}</td>
+        <td>
+          <a href="{{route('comprobantes', $venta->id)}}">
+          <button class="btn btn-primary">
+            <i class="bi bi-filetype-pdf h2"></i>
+          </button>
+          </a>
+        </td>
+        </tr>
+      @empty
+      <tr>
+      <td colspan="5">No hay ventas registradas</td>
+      </tr>
+    @endforelse
         </tbody>
       </table>
     </div>
   </div>
 </div>
-<script src="{{asset('js/comprobantes.js')}}"></script>
 <script src="{{asset('js/ventas.js')}}"></script>
 @if ($message = Session::get('error'))
   <script>
