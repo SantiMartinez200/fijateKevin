@@ -48,10 +48,10 @@ class CompraDetalleController extends Controller
         'precio_venta' => $data['precio_venta'],
         'cantidad' => $data['cantidad'],
       ]);
-      return redirect()->route('stock')->with('message', 'Ingreso realizado con éxito');
+      return redirect()->route('stock')->with('success', 'Ingreso realizado con éxito');
     } catch (\Throwable $e) {
       $err = $e->getMessage();
-      return view('ingresos.index', ['err' => $err]);
+      return redirect()->route('stock')->with('error', 'No se pudo generar el ingreso');
     }
   }
 

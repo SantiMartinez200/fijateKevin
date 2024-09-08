@@ -98,7 +98,7 @@
       </table>
       <div class="form-group">
         <button type="button" class="btn btn-primary mr-2" onclick="agregarFila()" id="agregar">Agregar Fila</button>
-        <input type="submit" value="Guardar" class="btn btn-success" id="guardar">
+        <input type="submit" value="Venta Nueva" class="btn btn-success" id="guardar">
         <div class="container" id="">
           <div class="d-flex align-items-center mt-2">
             <p id="handle" class="text text-danger" hidden></p>
@@ -116,13 +116,13 @@
       <h3 class="h3">Ventas Realizadas</h3>
     </div>
     <div class="card-body">
-      <table class="table table-responsive">
+      <table class="table table-responsive text-center">
         <thead>
           <th>Caja Afectada</th>
           <th>Fecha Venta</th>
           <th>Usuario</th>
           <th>Total $</th>
-          <th>Acción</th>
+          <th>Comprobante</th>
         </thead>
         <tbody id="bodyTabla">
           @forelse($ventas as $venta)
@@ -133,7 +133,7 @@
         <td>{{$venta->total}}</td>
         <td>
           <a href="{{route('comprobantes', $venta->id)}}">
-          <button class="btn btn-primary">
+          <button class="btn btn-danger">
             <i class="bi bi-filetype-pdf h2"></i>
           </button>
           </a>

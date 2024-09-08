@@ -155,9 +155,11 @@
   const cajas = @json($itemsPaginados);
   aux = cajas['data'];
   var flag = false;
+  var auth_user = '<?php echo(Auth::user()->id) ?>'
   for (const key in aux) {
     if (aux.hasOwnProperty(key)) {
-      if (aux[key]['estado'] == 'cerrada') {
+      //console.log(aux);
+      if (aux[key]['estado'] == 'cerrada' || aux[key]['usuario_id'] != auth_user) {
         let btnMovimiento = document.querySelector(`.btn-movimiento${aux[key]['id']}`);
         let btnCerrar = document.querySelector(`.btn-close${aux[key]['id']}`);
         btnMovimiento.disabled = true;
@@ -172,15 +174,15 @@
   const barra2 = document.querySelector('#sidebar')
 
   window.onscroll = function () {
-    console.log(barra2.classList[0], 'fuera');
+    //console.log(barra2.classList[0], 'fuera');
     let y = window.scrollY
     if (y > 350 && barra2.classList[0] == undefined) {
       //barra2.classList.remove('active')
-      console.log(barra2.classList[0], 'adentro');
+      //console.log(barra2.classList[0], 'adentro');
       barra2.classList.add('active');
 
     }
-    console.log(window.scrollY);
+    //console.log(window.scrollY);
   }
   //Esto debería ir en una function para abrir el modal con onclick().
   //Ej: Function abrirModalMovimiento();
@@ -193,8 +195,10 @@
       // Asignar datos a ventana modal:
       document.querySelector('#caja_id').value = id;
       //document.querySelector('#estudiante').value = nombre;
-      document.querySelector('#cedula').value = cedula;
-      console.log('abrir modal');
+      //document.querySelector('#cedula').value = cedula;
+      console.log();
+      
+      //console.log('abrir modal');
       $('#modalRegistrarMovimiento').modal();
     });
   });

@@ -119,6 +119,7 @@ function clickList(data, row, list) {
     fetch(`/calculateThisStock/${data.compra_id}`)
         .then((response) => response.json())
         .then((cantidad_calculada) => {
+            console.log(data);
             let compra_select = row.querySelectorAll(
                 "td select[name='compra-select[]']"
             )[0];
@@ -209,7 +210,7 @@ function eliminarFila(button) {
     let rowCount = document.querySelectorAll("#tbody tr").length;
     if (rowCount == 1) {
         //console.log(rowCount);
-        alert("No se puede eliminar la última fila.");
+        showAlert("info", "No se puede eliminar la ultima fila");
     } else {
         // Elimina la fila correspondiente al botón de eliminar
         button.closest("tr").remove();

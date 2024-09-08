@@ -1,29 +1,40 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="container">
-  <table class="table table-bordered mt-4">
-    <thead >
-      <tr>
-        <th>ID de caja</th>
-        <th>Estado</th>
-        <th>Fecha abierta</th>
-        <th>Fecha Cierre</th>
-        <th>Movimientos</th>
-      </tr>
-    </thead>
-    <tbody>
-      @foreach ($cajas as $caja)
-      <tr>
-      <td>{{$caja->id}}</td>
-      <td>{{$caja->estado}}</td>
-      <td>{{$caja->created_at}}</td>
-      <td>{{$caja->fecha_cierre}}</td>
-      <td><button type="button" class="btn btn-primary"><a href="{{route('caja.movimientos',$caja->id)}}">Ver Movimientos
-      </a></button></td>
-      </tr>
-  @endforeach
-    </tbody>
-  </table>
+<div class="card">
+  <div class="card-header">
+    <h3></h3>
+  </div>
+  <div class="card-body">
+    <div class="container">
+      <table class="table table-bordered mt-4 text-center">
+        <thead>
+          <tr>
+            <th>ID de caja</th>
+            <th>Estado</th>
+            <th>Abierta Por</th>
+            <th>Fecha abierta</th>
+            <th>Fecha Cierre</th>
+            <th>Movimientos</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach ($cajas as $caja)
+        <tr>
+        <td>{{$caja->id}}</td>
+        <td>{{$caja->estado}}</td>
+        <td>{{$caja->usuario_id}}</td>
+        <td>{{$caja->created_at}}</td>
+        <td>{{$caja->fecha_cierre}}</td>
+        <td><a href="{{route('caja.movimientos', $caja->id)}}"><button type="button" class="btn btn-primary">Ver
+            Movimientos
+          </button></a></td>
+        </tr>
+      @endforeach
+        </tbody>
+      </table>
+    </div>
+    {{$cajas->links()}}
+  </div>
 </div>
 @endsection

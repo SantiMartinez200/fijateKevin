@@ -16,7 +16,7 @@ class MovimientosCajaController extends Controller
   public function index()
   {
     return view('caja.movimientos_caja.index', [
-      'cajas' => Caja::latest()->paginate(3)
+      'cajas' => Caja::latest()->paginate(5)
     ]);
   }
 

@@ -27,12 +27,46 @@ class StockController extends Controller
         'aromas' => $aromas,
         'proveedores' => $proveedores,
         'marcas' => $marcas,
-        'compraDetalles' => self::changeIdToName(),
+        'compraDetalles' => self::calculateStock(),
       ]);
     } else {
       return redirect()->route('caja.index')->with('error', 'Debes abrir una caja antes');
     }
   }
+
+  /*  //View de stock
+      +"id": 1
+      +"compra_id": 1
+      +"marca_id": "dolor"
+      +"proveedor_id": "Justus Spinka Sr."
+      +"producto_id": "aspernatur"
+      +"aroma_id": "laudantium"
+      +"precio_costo": 670.0
+      +"porcentaje_ganancia": 100
+      +"precio_venta": 1340.0
+      +"cantidad": 0
+      +"created_at": "2024-09-07 19:20:58"
+      +"updated_at: "2024-09-07 19:20:58"
+  */
+
+  /* //JS fetch en ventas
+    {
+    "id": 2,
+    "compra_id": 2,
+    "marca_id": 2,
+    "nombre_marca": "dolor",
+    "producto_id": 1,
+    "nombre_producto": "reiciendis",
+    "proveedor_id": 1,
+    "nombre_proveedor": "Justus Spinka Sr.",
+    "aroma_id": "1",
+    "nombre_aroma": "nobis",
+    "precio_costo": 2480,
+    "porcentaje_ganancia": 1000,
+    "precio_venta": 27280,
+    "cantidad": 1000  
+    "created_at": "2024-09-07 19:54:33",
+  */
 
   public static function getThisDetalleCompras($id)
   {
@@ -72,12 +106,12 @@ class StockController extends Controller
       $recomendacion->proveedor_id = $proveedor->nombre;
       $recomendacion->marca_id = $marca->nombre;
       $recomendacion->producto_id = $producto->nombre;
-      if($recomendacion->aroma_id == "N/E"){
+      if ($recomendacion->aroma_id == "N/E") {
         $recomendacion->aroma_id = "N/E";
-      }else{
+      } else {
         $recomendacion->aroma_id = $aroma->nombre;
       }
-      
+
     }
     return $recomendaciones;
   }

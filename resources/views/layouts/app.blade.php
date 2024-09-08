@@ -20,6 +20,15 @@
   <!-- Scripts -->
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
+<style>
+  .margin button {
+    margin: 0 5px;
+  }
+
+  .color-navbar {
+    background: #124c25;
+  }
+</style>
 
 <body class="">
   <div class="wrapper">
@@ -67,6 +76,7 @@
             <form id="logout-form" action="{{ route('logout') }}" method="post" style="display: none;">
               @csrf
             </form>
+            <li><a href="{{route('profile.edit')}}">Perfil</a></li>
             <li><a href="#" onclick="document.getElementById('logout-form').submit(); return false;">
                 Cerrar Sesión</a></li>
           </ul>
@@ -76,16 +86,18 @@
 
     <!-- Page Content -->
     <div id="content">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="d-flex align-items-center justify-content-start">
+      <nav class="navbar navbar-expand-lg navbar-light color-navbar rounded">
+        <div class="d-flex align-items-center justify-content-start margin">
           <button type="button" id="sidebarCollapse" class="btn btn-primary">
             <i class="bi bi-layout-sidebar"></i>
             <span>Barra Lateral</span>
           </button>
 
-          <a href="{{ route('stock') }}"><button class="btn btn-success m-1">Ingresar Mercaderías</button></a>
+          <a href="{{ route('stock') }}"><button class="d-flex align-items-center btn btn-primary"><i
+                class="mx-1 bi bi-bag-plus-fill"></i>Ingresar Mercaderías</button></a>
 
-          <a href="{{ route('vender') }}"><button class="btn btn-danger">Vender Mercaderías</button></a>
+          <a href="{{ route('vender') }}"><button class="d-flex align-items-center btn btn-primary"><i
+                class="bi bi-currency-dollar"></i>Vender Mercaderías</button></a>
 
           <input type="text" name="searcheable" id="searcheable" placeholder="Buscar..."
             class="form-control rounded ml-5">

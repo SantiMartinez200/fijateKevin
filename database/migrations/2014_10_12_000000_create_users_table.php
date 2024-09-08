@@ -15,7 +15,8 @@ return new class extends Migration {
       $table->string('name');
       $table->string('email')->unique();
       $table->timestamp('email_verified_at')->nullable();
-      $table->tinyInteger('abrio_caja');
+      $table->tinyInteger('abrio_caja')->default(0);
+      $table->tinyInteger('paginado')->default(0);
       $table->string('password');
       $table->rememberToken();
       $table->timestamps();

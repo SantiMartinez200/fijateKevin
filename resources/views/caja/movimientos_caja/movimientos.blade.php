@@ -1,12 +1,16 @@
 @extends('layouts.app')
 @section('content')
-
+<style>
+  .bolder{
+    font-size: 14px;
+  }
+</style>
 <div class="card w-100" id="card" tabindex="-1" role="dialog">
   <div class="">
     <div class="card-header">
       <h5 class="h5">Movimientos de Caja <span id="fecha-caja">{{$datosAdicionales["caja_fecha"]}}</span></h5>
       <br>
-      <h5 class="form-control" id="h5Inicial">Monto Inicial: <span
+      <h5 class="form-control bolder" id="h5Inicial"><b>Monto Inicial: </b><span
           id="monto-inicial"></span>{{$montos["monto_inicial"]}}</h5>
     </div>
     <div class="card-body">
@@ -33,7 +37,7 @@
       </table>
     </div>
     <div class="card-footer">
-      <h5 class="form-control mb-2" id="h5Monto">Monto total actualizado: <span
+      <h5 class="form-control mb-2 bolder" id="h5Monto"><b>Monto total actualizado: </b><span
           id="monto-final">{{$montos["monto_final"]}}</span></h5>
       @if(count($movimientos) > 0)
       <a href="{{route('pdf-caja', $movimientos[0]->caja_id)}}" id="link" type="button" class="btn btn-danger"

@@ -93,7 +93,7 @@
               </div>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary mt-2">Ingresar</button>
+          <button type="submit" class="btn btn-primary mt-2">Aplicar</button>
         </form>
       </div>
     </div>
@@ -105,16 +105,17 @@
     {{ $message }}
     </div>
   @endif
-  <button id="movimiento" type="button" class="m-1 btn btn-success btn-movimiento" data-toggle="modal"
+  <button id="movimiento" type="button" class="mb-4 btn btn-success btn-movimiento" data-toggle="modal"
     data-target="#modalRegistrarMovimiento">
-    Realizar un Ingreso
+    Ingreso Nuevo
   </button>
-  <div class="card">
+  <div class="card ">
     <div class="card-header">
       <h3>Stock</h3>
     </div>
     <div class="card-body">
-      <table class="table table-striped">
+      @dd($compraDetalles)
+      <table class="table table-striped text-center">
         <thead>
           <tr>
             <th>Código Compra</th>
@@ -125,6 +126,7 @@
             <th>Precio</th>
             <th>Cantidad STOCK</th>
             <th>Ult. Actualiz.</th>
+            <th>X</th>
           </tr>
         </thead>
         <tbody>
@@ -138,6 +140,7 @@
         <td>{{$compraDetalle->precio_costo}}</td>
         <td>{{$compraDetalle->cantidad}}</td>
         <td>{{$compraDetalle->updated_at}}</td>
+        <td><button type="button" class="btn btn-outline-primary"><i class="h3 bi bi-plus-circle-fill"></i></button></td>
         </tr>
       @endforeach
         </tbody>
