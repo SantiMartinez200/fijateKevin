@@ -2,6 +2,14 @@
     @dd($message);
     <script>
     document.addEventListener('DOMContentLoaded', function () {
+    showAlert('info', '{{ $message }}');
+    });
+    </script>
+@endif
+
+@if ($message = Session::get('success'))
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
     showAlert('success', '{{ $message }}');
     });
     </script>

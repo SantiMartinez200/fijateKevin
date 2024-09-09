@@ -43,14 +43,14 @@ function calcularPrecioVenta(precio) {
             ) {
                 let porcentaje_ganancia = parseInt(event.target.value);
                 let calculo =
-                    precio_producto +
+                precio_producto +
                     (porcentaje_ganancia * precio_producto) / 100;
                 let precio_venta = document.getElementById("precio_venta");
                 precio_venta.textContent = "";
                 if (isNaN(calculo)) {
                     precio_venta.value = 0;
                 } else {
-                    precio_venta.value = calculo;
+                    precio_venta.value = Math.ceil(calculo);
                 }
             }
         });

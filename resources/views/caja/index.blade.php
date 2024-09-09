@@ -108,7 +108,7 @@
           </tr>
         </thead>
         <tbody>
-          @foreach ($itemsPaginados as $caja)
+          @forelse ($itemsPaginados as $caja)
         <tr>
         <td>{{$caja->estado }}</td>
         <td>{{$caja->created_at }}</td>
@@ -128,7 +128,11 @@
           </div>
         </td>
         </tr>
-      @endforeach
+      @empty
+        <tr>
+          <td colspan="8" class="text-danger">No hay cajas abiertas</td>
+        </tr>
+      @endforelse
         </tbody>
       </table>
     </div>

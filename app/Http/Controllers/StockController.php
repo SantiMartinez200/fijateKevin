@@ -9,7 +9,9 @@ use App\Models\Producto;
 use App\Models\Proveedor;
 use App\Models\VentaDetalle;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class StockController extends Controller
@@ -175,5 +177,21 @@ class StockController extends Controller
       }
     }
     return $compraDetalles;
+  }
+
+  public function stock_increment(Request $request){
+    $data = $request->all();
+    if($data["new_stock"] < $data["old_stock"]){
+      return redirect()->back()->with('error','El stock a ingresar no puede ser menor al existente.');
+    }else{
+      try {
+        $compra_detalle = DB::table('compra_detalles')
+              ->where('id', $data["id"])
+              ->update(['cantidad' => $data["new_stock"]]);  
+      return redirect()->back()->with('success','Stock actualizado exitosamente');
+      } catch (Exception $e) {
+        return redirect()->back()->with('error','Hubo un error al cargar la consulta.');
+      }
+    }
   }
 }

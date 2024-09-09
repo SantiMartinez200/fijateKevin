@@ -89,6 +89,8 @@ Route::middleware('auth')->group(function () {
 
   Route::get('pdf-caja/{id}', [PdfController::class, 'pdfMovimientos'])->name('pdf-caja');
 
+
+  Route::POST('incrementar-stock',[StockController::class,'stock_increment'])->name('incrementar-stock');
 });
 
 

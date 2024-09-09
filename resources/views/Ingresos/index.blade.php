@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
 @include('alerts.defaults')
+@include('modals.increment-stock')
 <!-- Modal Structure -->
 <div class="modal fade" id="modalRegistrarMovimiento" tabindex="-1" role="dialog"
   aria-labelledby="modalRegistrarMovimientoLabel" aria-hidden="true">
@@ -124,7 +125,7 @@
           </tr>
         </thead>
         <tbody>
-          @foreach ($compraDetalles as $compraDetalle)
+          @forelse ($compraDetalles as $compraDetalle)
         <tr>
         <td>{{$compraDetalle->id}}</td>
         <td>{{$compraDetalle->marca_id}}</td>
@@ -134,17 +135,22 @@
         <td>{{$compraDetalle->precio_costo}}</td>
         <td>{{$compraDetalle->cantidad}}</td>
         <td>{{$compraDetalle->updated_at}}</td>
-        <td><button type="button" class="btn btn-outline-primary"><i class="h3 bi bi-plus-circle-fill"></i></button>
+        <td>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#incrementar-stock" onclick="enviarMonto({{$compraDetalle->cantidad}},{{$compraDetalle->id}})">
+            <i class="h3 bi bi-plus-circle-fill"></i>
+          </button>
         </td>
         </tr>
-      @endforeach
+        @empty
+        <tr>
+          <td colspan="9" class="text-danger">No hay ingresos realizados</td>
+        </tr>
+      @endforelse
         </tbody>
       </table>
     </div>
   </div>
 </div>
-
-
 
 
 @endsection
@@ -159,10 +165,12 @@
       // Asignar datos a ventana modal:
       document.querySelector('#caja_id').value = id;
       //document.querySelector('#estudiante').value = nombre;
-      document.querySelector('#cedula').value = cedula;
+      //document.querySelector('#cedula').value = cedula;
       console.log('abrir modal');
       $('#modalGenerarMovimiento').modal();
     });
   });
 </script>
+
+
 <script src="{{asset('js/compras.js')}}"></script>
