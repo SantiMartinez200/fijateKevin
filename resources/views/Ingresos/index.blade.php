@@ -136,7 +136,7 @@
         <td>{{$compraDetalle->cantidad}}</td>
         <td>{{$compraDetalle->updated_at}}</td>
         <td>
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#incrementar-stock" onclick="enviarMonto({{$compraDetalle->cantidad}},{{$compraDetalle->id}})">
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#incrementar-stock" onclick="enviarMonto({{$compraDetalle->cantidad}},{{$compraDetalle->id}},{{$compraDetalle->precio_costo}})">
             <i class="h3 bi bi-plus-circle-fill"></i>
           </button>
         </td>

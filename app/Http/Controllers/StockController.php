@@ -181,9 +181,8 @@ class StockController extends Controller
 
   public function stock_increment(Request $request){
     $data = $request->all();
-    if($data["new_stock"] < $data["old_stock"]){
-      return redirect()->back()->with('error','El stock a ingresar no puede ser menor al existente.');
-    }else{
+    $sum = intVal($data["new_stock"]) + intVal($data["old_stock"]);
+    dd($sum);
       try {
         $compra_detalle = DB::table('compra_detalles')
               ->where('id', $data["id"])
@@ -194,4 +193,3 @@ class StockController extends Controller
       }
     }
   }
-}
